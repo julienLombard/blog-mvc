@@ -1,0 +1,19 @@
+{
+    "name": "jlombard/blog-mvc",
+    "description": "Concevoir un Blog PHP MVC POO",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "jlombard",
+            "email": "julienlombard.fr@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "App\\": "app",
+            "": "src"
+        }
+    }
+}
