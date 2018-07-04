@@ -14,3 +14,7 @@ $router = new Router($request);
 // Router Test
 $router->add(new Route("blog_show", "/blog/:id", ["id" => "\d+"], "blog", "show"));
 var_dump($router->find());
+
+$route = $router->find();
+$response = $route->call($request, $router); 
+var_dump($response);

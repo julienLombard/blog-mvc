@@ -2,6 +2,8 @@
 namespace App\Router;
 
 use App\Request;
+use App\Controller;
+use App\Response\ResponseInterface;
 
 /**
 * Class Route
@@ -81,11 +83,16 @@ class Route
      	}
      }
     /**
+    * @param Request $request
+    * @param Router $router
 	* @return ResponseInterface
 	*/
-	public function call($request)
+	public function call(Request $request, Router $router)
 	{
+		$controller = $this->controller;
+		$controller = new Controller($request, $router);
 
+		return call_user_func_array([$controller, $this->action], $this->args);
 	}
 	/**
 	* @param array $args
