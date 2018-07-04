@@ -88,6 +88,17 @@ class Route
 
 	}
 	/**
+	* @param array $args
+	* @return string $url
+	*/
+	public function generateUrl($arg)
+	{
+		$url = str_replace(array_keys($args), $args, $this->path);
+		$url = str_replace(":", "", $url);
+		
+		return $url;
+	}
+	/**
 	 * @return string
 	 */
 	public function getName()

@@ -50,4 +50,15 @@ class Router
     		}
     	}
     }
+    /**
+    * @param string $routeName
+    * @return Route
+    */
+    public function getRoute($routeName)
+    {
+        if (isset($this->routes[$routeName]))
+        {
+            return $this->routes[$routeName];
+        }
+    }
 }
