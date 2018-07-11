@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Router\Router;
+use App\Response\Response;
 use App\Response\RedirectResponse;
 
 /**
