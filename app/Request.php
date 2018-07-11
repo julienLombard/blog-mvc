@@ -54,7 +54,7 @@ class Request
     public static function createFromGlobals()
     {
         session_start();
-        return new Request($_POST, $_GET, $_FILES, $_COOKIE, $_SESSION, $_REQUEST, $_SERVER);
+        return new Request($_POST, $_GET, $_COOKIE, $_SESSION, $_REQUEST, $_SERVER);
     }
     /**
      * @return array
