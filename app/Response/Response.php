@@ -20,11 +20,9 @@ class Response implements ResponseInterface
 	{
 		$this->content = $content;
 	}
-	/**
-	* @return $content
-	*/
+
 	public function send()
 	{
-		return $this->content;
+		echo $this->content;
 	}
 }
