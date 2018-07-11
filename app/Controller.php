@@ -20,6 +20,10 @@ class Controller
 	*/
 	private $router;
 	/**
+	 * @var \Twig_Environment
+	 */
+	private $twig;
+	/**
 	* Controller constructor.
 	* @param Request $request
 	* @param Router $router
@@ -28,6 +32,10 @@ class Controller
 	{
 		$this->request = $request;
 		$this->router = $router;
+
+		$loader = new \Twig_Loader_Filesystem('../src/view');
+		$twig = new \Twig_Environment($loader, array('cache' => false,));
+
 	}
 	/**
 	* @param string $routeName
@@ -41,5 +49,17 @@ class Controller
 		$url = $route->generateUrl($args);
 
 		return new RedirectResponse($url);
+	}
+	/**
+	* @param string $filename
+	* @param array $data
+	* @return Response
+	*/
+	protected function render($filename, $data = [])
+	{
+		$view = $this->twig->load($filename);
+		$content = $view->render($data);
+
+		return new Response($content);
 	}
 }
