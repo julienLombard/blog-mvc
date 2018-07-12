@@ -1,0 +1,14 @@
+{% extends'template.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-12">
+            <h1>Home</h1>
+            <ul>
+                {% for foo in foos %}
+                    <li>{{ foo.name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

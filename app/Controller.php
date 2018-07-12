@@ -34,7 +34,7 @@ class Controller
 		$this->request = $request;
 		$this->router = $router;
 
-		$loader = new \Twig_Loader_Filesystem('../src/view');
+		$loader = new \Twig_Loader_Filesystem('../src/View');
 		$this->twig = new \Twig_Environment($loader, array('cache' => false,));
 
 	}

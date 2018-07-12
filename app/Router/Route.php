@@ -90,7 +90,7 @@ class Route
 	public function call(Request $request, Router $router)
 	{
 		$controller = $this->controller;
-		$controller = new Controller($request, $router);
+		$controller = new $controller($request, $router);
 
 		return call_user_func_array([$controller, $this->action], $this->args);
 	}
