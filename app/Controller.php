@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\ORM\Database;
 use App\Router\Router;
 use App\Response\Response;
 use App\Response\RedirectResponse;
@@ -21,9 +22,14 @@ class Controller
 	*/
 	private $router;
 	/**
-	 * @var \Twig_Environment
-	 */
+	* @var \Twig_Environment
+	*/
 	private $twig;
+	/**
+	* @var Database
+	*/
+	private $database;
+
 	/**
 	* Controller constructor.
 	* @param Request $request
@@ -33,11 +39,13 @@ class Controller
 	{
 		$this->request = $request;
 		$this->router = $router;
+		$this->database = Database::getInstance($request);
 
 		$loader = new \Twig_Loader_Filesystem('../src/View');
 		$this->twig = new \Twig_Environment($loader, array('cache' => false,));
 
 	}
+
 	/**
 	* @param string $routeName
 	* @param array $args
@@ -51,6 +59,7 @@ class Controller
 
 		return new RedirectResponse($url);
 	}
+
 	/**
 	* @param string $filename
 	* @param array $data
@@ -62,5 +71,13 @@ class Controller
 		$content = $view->render($data);
 
 		return new Response($content);
+	}
+	
+	/**
+	* @return Database
+	*/
+	protected function getDatabase()
+	{
+		return $this->database;
 	}
 }
