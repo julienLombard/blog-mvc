@@ -11,9 +11,9 @@ use App\ORM\Database;
 class Manager
 {
     /**
-    * @var \PDO
+    * @var Database
     */
-    protected $pdo;
+    protected $database;
     /**
     * @var string
     */
@@ -25,18 +25,88 @@ class Manager
 
     /**
     * Manager constructor.
-    * @param \PDO $pdo
+    * @param Database $database
     * @param $model
     */
-    public function __construct(\PDO $pdo, $model)
+    public function __construct(Database $database, $model)
     {
-        $this->pdo = $pdo;
+        $this->database = $database;
         $reflectionClass = new \ReflectionClass($model);
         if($reflectionClass->getParentClass()->getName() == Model::class) {
             $this->model = $model;
-            $this->metadata = $this->model->metadata();
+            $this->metadata = $this->model::metadata();
         }
         $this->model = $model;
+    }
+
+    public function find($pkValue)
+    {
+        $query = sprintf("SELECT * FROM %s WHERE %s = :pkValue", $this->model::metadata()["table"], $this->model::metadata()["primaryKey"]);
+        $statement = $this->database->getPdo()->prepare($query);
+        $statement->execute([
+            "pkValue" => $pkValue
+        ]);
+
+        $result = $statement->fetch(\PDO::FETCH_ASSOC);
+        if ($result) 
+        {
+            $obj = new $this->model();
+            $columns = $this->model::metadata()["columns"];
+            foreach ($result as $column => $value) 
+            {
+                switch ($columns[$column]["type"]) 
+                {
+                    case 'integer':
+                        $value = (int) $value;                
+                        break;                                      
+                    case 'datetime':
+                        if ($value) 
+                        {
+                            $value = \DateTime::createFromFormat("Y-m-d H:i:s", $value);
+                            break;
+                        }
+                        break;
+                }
+                $obj->{sprintf("set%s", ucfirst($columns[$column]["property"]))}($value);
+                // var_dump($column . " => " . $value);
+            }
+            return $obj;
+        }
+        return null;
+    }
+
+    public function findAll()
+    {
+        $query = sprintf("SELECT * FROM %s", $this->model::metadata()["table"]);
+        $statement = $this->database->getPdo()->prepare($query);
+        $statement->execute();
+
+        $results = $statement->fetchAll(\PDO::FETCH_ASSOC);
+        $data = [];
+        foreach($results as $result) 
+        {
+            $obj = new $this->model();
+            $columns = $this->model::metadata()["columns"];
+            foreach($result as $column => $value) 
+            {
+                switch ($columns[$column]["type"]) 
+                {
+                    case 'integer':
+                        $value = (int) $value;                     
+                        break;                                      
+                    case 'datetime':
+                        if ($value) 
+                        {
+                            $value = \DateTime::createFromFormat("Y-m-d H:i:s", $value);
+                            break;
+                        }
+                        break;
+                }
+                $obj->{sprintf("set%s", ucfirst($columns[$column]["property"]))}($value);
+            }
+            $data[] = $obj;
+        }
+        return $data;
     }
 
     /**
@@ -88,7 +158,7 @@ class Manager
                 );
         var_dump($query, $data);
 
-        $statement = $this->pdo->prepare($query);
+        $statement = $this->database->getPdo()->prepare($query);
         $statement->execute($data);
     }
 
@@ -140,9 +210,9 @@ class Manager
                 implode(",", $sets),
                 $modelMetadata["primaryKey"]
                 );
-        var_dump($query, $data);
+        // var_dump($query, $data);
 
-        $statement = $this->pdo->prepare($query);
+        $statement = $this->database->getPdo()->prepare($query);
         $statement->execute($data);
     }
 
@@ -166,7 +236,7 @@ class Manager
                 $modelMetadata["primaryKey"]
                 );
 
-        $statement = $this->pdo->prepare($query);
+        $statement = $this->database->getPdo()->prepare($query);
         $statement->execute($data);
     }
 }

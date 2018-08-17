@@ -98,7 +98,7 @@ class Post extends Model
 	* @param integer $id
 	* @return void
 	*/
-	public function setId(string $id)
+	public function setId(int $id)
 	{
 		$this->id = $id;
 	}
@@ -183,7 +183,7 @@ class Post extends Model
 	* @param \DateTime $ModificationDate
 	* @return void
 	*/
-	public function setModificationDate(\DateTime $modificationDate)
+	public function setModificationDate(?\DateTime $modificationDate)
 	{
 		$this->modificationDate = $modificationDate;
 	}

@@ -66,7 +66,7 @@ class Database
     public function getManager($model)
     {
         $managerClass = $model::getManager();
-        $this->managers[$managerClass] = $this->managers[$managerClass] ?? new $managerClass($this->pdo, $model);
+        $this->managers[$managerClass] = $this->managers[$managerClass] ?? new $managerClass($this, $model);
         return $this->managers[$managerClass];
     }
 }

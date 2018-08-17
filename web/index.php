@@ -23,14 +23,22 @@ $response = $route->call($request, $router);
 $response->send();
 
 $database = new Database("localhost","dev_blog", "root","");
-$post = new Post();
-$post->setId(1);
-$post->setTitle("mon titre remis à jour");
-$post->setPicture("ma picture mis à jour");
-$post->setContent("mon contenu mis à jour");
+// $post = new Post();
+// $post->setId(1);
+// $post->setTitle("mon titre remis à jour");
+// $post->setPicture("ma picture mis à jour");
+// $post->setContent("mon contenu mis à jour");
 // $post->setPublicationDate( new \DateTime());
-$post->setModificationDate( new \DateTime());
+// $post->setModificationDate( new \DateTime());
 
-$manager = $database->getManager($post);
+$manager = $database->getManager(Post::class);
 echo "<pre>";
 // $manager->update($post);
+
+// $post = $manager->find(1);
+// $post->setTitle("wwwTest");
+// $post->setModificationDate(new \DateTime());
+// $manager->update($post);
+
+$posts = $manager->findAll();
+var_dump($posts);
