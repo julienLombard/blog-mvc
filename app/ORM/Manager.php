@@ -75,9 +75,30 @@ class Manager
         return null;
     }
 
-    public function findAll()
+    public function findAll(?int $offset, ?int $length, ?string $property, ?string $order)
     {
-        $query = sprintf("SELECT * FROM %s", $this->model::metadata()["table"]);
+        if($offset !== null && $length !== null) 
+        {
+            $limit = sprintf("LIMIT %s, %s", $offset, $length);
+        } else 
+        {
+            $limit = "";
+        }
+
+        $orderBy = "";
+        if($property !== null && $order !== null) 
+        {
+            $columns = $this->model::metadata()["columns"];
+            foreach($columns as $column => $definition)
+            {
+                if($definition["property"] == $property)
+                {
+                    $orderBy = sprintf("ORDER BY %s %s", $column, $order);
+                }
+            } 
+        }
+        $query = sprintf("SELECT * FROM %s %s %s",  $this->model::metadata()["table"], $orderBy , $limit);
+        
         $statement = $this->database->getPdo()->prepare($query);
         $statement->execute();
 

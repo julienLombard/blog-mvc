@@ -40,5 +40,5 @@ echo "<pre>";
 // $post->setModificationDate(new \DateTime());
 // $manager->update($post);
 
-$posts = $manager->findAll();
+$posts = $manager->findAll(0,2, "publicationDate", "DESC");
 var_dump($posts);
