@@ -73,7 +73,7 @@ hr {
 	width: 70px;
 	text-align: center;
 	position: relative;
-	background: #7bc3d1;
+	background: #da5f57;
 	margin: 0 auto;
 	margin-bottom: 30px;
 	border: 0;
@@ -159,8 +159,8 @@ hr {
 }
 .btn-primary:hover, .btn-primary:focus, .btn-primary.focus, .btn-primary:active, .btn-primary.active {
 	color: #fff;
-	background-color: #7bc3d1;
-	border-color: #7bc3d1;
+	background-color: #da5f57;
+	border-color: #da5f57;
 }
 .btn-primary i.fa {
 	margin-right: 10px;
@@ -174,7 +174,7 @@ hr {
 	text-align: center;
 	color: #fff;
 	background: url(../img/intro-bg.jpg) no-repeat center top;
-	background-color: #7bc3d1;
+	background-color: #2ec13e;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	background-size: cover;
@@ -204,7 +204,7 @@ hr {
 /* Skills Section */
 #skills {
 	padding: 100px 0;
-	background: #7bc3d1;
+	background: #da5f57;
 }
 #skills h2 {
 	color: #fff;
@@ -382,7 +382,7 @@ ol.type li a:hover {
 /* Achivements Section */
 #achievements {
 	padding: 100px 0;
-	background: #7bc3d1;
+	background: #da5f57;
 }
 #achievements h2 {
 	color: #fff;
@@ -403,6 +403,23 @@ ol.type li a:hover {
 	color: #121d1f;
 	padding: 0;
 	margin: 0;
+}
+/* article Section */
+#article {
+	padding: 100px 0;
+	background: #f6f6f6;
+}
+#article .article-text {
+	margin-left: 10px;
+}
+#article img {
+	width: 335px;
+	height: 210px;
+	display: inline-block;
+}
+#article p {
+	margin-top: 20px;
+	margin-bottom: 30px;
 }
 /* Resume Section */
 #resume {
@@ -502,7 +519,7 @@ ol.type li a:hover {
 }
 .timeline .timeline-heading h4.subheading {
 	text-transform: none;
-	color: #629ca7;
+	color: #ce5a52;
 	font-size: 20px;
 }
 .timeline .timeline-body>p, .timeline .timeline-body>ul {
@@ -512,7 +529,7 @@ ol.type li a:hover {
 #contact {
 	padding: 100px 0 40px 0;
 	color: #121d1f;
-	background: #7bc3d1;
+	background: #da5f57;
 }
 #contact h2 {
 	color: #fff;
@@ -534,7 +551,7 @@ ol.type li a:hover {
 	margin-bottom: 10px;
 }
 #contact .text-danger {
-	color: #E87E04;
+	color: #000;
 	text-align: left;
 }
 label {

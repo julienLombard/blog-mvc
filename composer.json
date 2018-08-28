@@ -10,7 +10,9 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "twig/twig": "1.x-dev"
+        "twig/twig": "1.x-dev",
+        "symfony/asset": "^4.2@dev",
+        "symfony/twig-bridge": "^4.2@dev"
     },
     "autoload": {
         "psr-4": {
