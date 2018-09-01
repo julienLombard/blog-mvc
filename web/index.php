@@ -17,6 +17,15 @@ $router = new Router($request);
 // Router Test
 $router->add(new Route("show_post", "/post/:id", ["id" => "\d+"], "Controller\PostController", "showPost"));
 $router->add(new Route("home", "/", [], "Controller\HomeController", "index"));
+$router->add(new Route("admin", "/admin", [], "Controller\AdminController", "showData"));
+$router->add(new Route("admin_posts", "/admin/posts\?page=:page", ["page" => "\d+"], "Controller\AdminController", "postsList"));
+$router->add(new Route("admin_post", "/admin/post/:id", ["id" => "\d+"], "Controller\AdminController", "showAdminPost"));
+$router->add(new Route("admin_create_post_form", "/admin/create-post-form", [], "Controller\AdminController", "createPostForm"));
+$router->add(new Route("admin_create_post", "/admin/create-post", [], "Controller\AdminController", "createPost"));
+$router->add(new Route("admin_edit_post", "/admin/edit-post/:id", ["id" => "\d+"], "Controller\AdminController", "showEditPost"));
+$router->add(new Route("admin_update_post", "/admin/update-post/:id", ["id" => "\d+"], "Controller\AdminController", "updatePost"));
+$router->add(new Route("admin_confirm_delete_post", "/admin/confirm-delete-post/:id", ["id" => "\d+"], "Controller\AdminController", "confirmDeletePost"));
+$router->add(new Route("admin_delete_post", "/admin/delete-post/:id", ["id" => "\d+"], "Controller\AdminController", "deletePost"));
 
 $route = $router->find();
 $response = $route->call($request, $router);

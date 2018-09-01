@@ -10,7 +10,7 @@
           <hr>
         </div>
         <div class="row">
-          <div class="col-md-12 text-center"><img src="img/about.jpg" class="img-responsive"></div>
+          <div class="col-md-12 text-center"><img src="{{ app.request.basepath }}/img/about.jpg" class="img-responsive"></div>
           <div class="col-md-8 col-md-offset-2">
             <div class="about-text">
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo nibh ante facilisis bibendum dolor feugiat at. Duis sed dapibus leo nec ornare diam commodo nibh.</p>
@@ -69,7 +69,7 @@
                 <div class="col-sm-6 col-md-3 col-lg-3 web">
                     <div class="portfolio-item">
                         <div class="hover-bg">
-                            <a href="/post/{{ post.id }}#article">
+                            <a href="/post/{{ post.id }}#post">
                                 <div class="hover-text">
                                   <h4>{{ post.title }}</h4>
                                 </div>

@@ -80,4 +80,12 @@ class Controller
 	{
 		return $this->database;
 	}
+
+	/**
+	* @return Request
+	*/
+	protected function getRequest()
+	{
+		return $this->request;
+	}
 }

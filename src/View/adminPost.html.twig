@@ -1,4 +1,4 @@
-{% extends 'template.html.twig' %}
+{% extends 'adminInterface.html.twig' %}
 
 {% block body %}
 
@@ -14,11 +14,16 @@
         <div class="col-md-8 col-md-offset-2">
           <div class="post-text">
             <p>{{ post.content }}</p>
-            <p class="text-center"><a class="btn btn-primary" href="#"><i class="fa fa-link"></i> Lien vers le site</a> <a class="btn btn-primary" href="/#portfolio"><i class="fa fa-home"></i> Retour Portfolio</a></p>
+            <p class="text-center">
+              <a class="btn btn-primary" href="/admin/confirm-delete-post/{{ post.id }}"><i class="fa fa-trash"></i> Effacer</a> 
+              <a class="btn btn-primary" href="/admin/edit-post/{{ post.id }}#post"><i class="fa fa-edit"></i> Modifier</a> 
+              <a class="btn btn-primary" href="#"><i class="fa fa-link"></i> Lien vers le site</a> 
+              <a class="btn btn-primary" href="/admin/posts?page=1"><i class="fa fa-newspaper-o"></i> Retour articles</a>
+            </p>
           </div>
         </div>
       </div>
     </div>
   </div> 
-
+    
 {% endblock %}
