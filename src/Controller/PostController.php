@@ -7,20 +7,20 @@ use App\ORM\Database;
 use Model\Post;
 
 /**
- * Class DefaultController
+ * Class PostController
  * @package Controller
  */
-class HomeController extends Controller
+class PostController extends Controller
 {
     /**
     * @return \App\Response\Response
     */
-    public function index()
+    public function showPost($id)
     {
     	$database = new Database("localhost","dev_blog", "root","");
     	$manager = $database->getManager(Post::class);
-    	$posts = $manager->findAll(0,8, "publicationDate", "DESC");
+    	$post = $manager->find($id);
 
-        return $this->render("home.html.twig", ["posts" => $posts]);
+        return $this->render("post.html.twig", ["post" => $post]);
     }
 }
