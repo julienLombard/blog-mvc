@@ -7,10 +7,11 @@
   <div class="container">
 
     <div class="section-title text-center center">
-      <h2>Liste des articles</h2>
+      <h2>Liste des commentaires par article</h2>
       <hr>
         <p class="text-center">
-          <a class="btn btn-primary" href="/admin/create-post-form"><i class="fa fa-plus"></i>Ajouter article</a> 
+          <a class="btn btn-primary" href="/admin/create-post-form"><i class="fa fa-plus"></i>Commentaires non validés</a> 
+          <a class="btn btn-primary" href="/admin/create-post-form"><i class="fa fa-plus"></i>Commentaires signalés</a> 
         </p>
     </div>
 
@@ -22,7 +23,7 @@
           <div class="col-sm-6 col-md-3 col-lg-3 web">
               <div class="posts-item">
                   <div class="hover-bg">
-                      <a href="/admin/post/{{ post.id }}#post">
+                      <a href="/admin/comments-post/{{ post.id }}?page=1">
                           <div class="hover-text">
                             <h4>{{ post.title }}</h4>
                           </div>
@@ -36,21 +37,21 @@
         {% endfor %}
       </div>
     </div>
-    {# Pagination #}
+
     <div class="row">
       <nav aria-label="Page navigation example">
         <ul class="pagination">
           <li class="page-item">
-            <a class="page-link" href="/admin/posts?page={{ page -1 }}" aria-label="Previous">
+            <a class="page-link" href="/admin/comments?page={{ page -1 }}" aria-label="Previous">
               <span aria-hidden="true">&laquo;</span>
               <span class="sr-only">Previous</span>
             </a>
           </li>
           {% for i in 1..pageCount %}
-            <li class="page-item"><a class="page-link" href="/admin/posts?page={{ i }}">{{ i }}</a></li>
+            <li class="page-item"><a class="page-link" href="/admin/comments?page={{ i }}">{{ i }}</a></li>
           {% endfor %}
           <li class="page-item">
-            <a class="page-link" href="/admin/posts?page={{ page +1 }}" aria-label="Next">
+            <a class="page-link" href="/admin/comments?page={{ page +1 }}" aria-label="Next">
               <span aria-hidden="true">&raquo;</span>
               <span class="sr-only">Next</span>
             </a>

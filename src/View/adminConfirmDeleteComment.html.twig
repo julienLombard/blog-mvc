@@ -1,0 +1,24 @@
+{% extends 'adminInterface.html.twig' %}
+
+{% block body %}
+
+<!-- Post Section -->
+<div id="post">
+  <div class="container">
+    <div class="row section-title text-center center">
+      <h2>Suppression</h2>
+      <hr>
+      <div class="col-md-8 col-md-offset-2">
+        <div class="post-text">
+          <p>"{{ comment.content }}"</p>
+          <p>Etes-vous sûr de vouloir supprimer le commentaire de "{{ comment.author }}" ?</p>
+          <p class="text-center">
+            <a class="btn btn-primary" href="/admin/delete-comment/{{ comment.id }}"><i class="fa fa-trash"></i> Effacer</a> 
+            <a class="btn btn-primary" href="/admin/comments?page=1"><i class="fa fa-newspaper-o"></i> Retour article</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
+    
+{% endblock %}

@@ -75,7 +75,7 @@ class Manager
         return null;
     }
 
-    public function findAll(?int $offset, ?int $length, ?string $property, ?string $order)
+    public function findAll(?int $offset, ?int $length, ?string $property, ?string $order, ?string $property2, ?int $id)
     {
         if($offset !== null && $length !== null) 
         {
@@ -97,8 +97,21 @@ class Manager
                 }
             } 
         }
-        $query = sprintf("SELECT * FROM %s %s %s",  $this->model::metadata()["table"], $orderBy , $limit);
-        
+
+        $where = "";
+        if($property2 !== null && $id !== null) 
+        {
+            $columns = $this->model::metadata()["columns"];
+            foreach($columns as $column => $definition)
+            {
+                if($definition["property"] == $property2)
+                {
+                    $where = sprintf("WHERE %s = %s", $column, $id);
+                }
+            } 
+        }
+        $query = sprintf("SELECT * FROM %s %s %s %s",  $this->model::metadata()["table"], $where, $orderBy , $limit);
+
         $statement = $this->database->getPdo()->prepare($query);
         $statement->execute();
 

@@ -12,6 +12,11 @@ h1 {
 h1 strong {
 	font-weight: 900;
 }
+
+/* header .intro-text h1{
+ color: #4bdda6;
+} */
+
 h2 {
 	line-height: 20px;
 	margin: 0;
@@ -138,8 +143,8 @@ hr {
 }
 .btn-default {
 	color: #fff;
-	background-color: #121d1f;
-	border-color: #121d1f;
+	background-color: #1c2c2f;
+	border-color: #1c2c2f;
 	padding: 10px 20px;
 	margin: 0;
 	font-size: 16px;
@@ -439,6 +444,15 @@ ol.type li a:hover {
 	margin-bottom: 30px;
 }
 /* comment Section */
+
+.green {
+	color: green;
+}
+
+.red {
+	color: red;
+}
+
 #comment {
 	padding: 100px 0;
 	background: #f6f6f6;
