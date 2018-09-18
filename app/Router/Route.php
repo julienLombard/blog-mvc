@@ -55,12 +55,19 @@ class Route
 	*/
 	public function match($requestUri)
 	{
+		// echo '<pre>';
+		// var_dump($requestUri);
+		// exit;
 		$pattern = preg_replace_callback("/:(\w+)/", array($this, "checkParameters"), $this->path);
-
+		// var_dump($pattern);
+		// var_dump($this);
+		// exit;
 		$pattern = preg_replace("~/~", "\/", $pattern);
 
 		if(!preg_match("/^$pattern$/i", $requestUri, $matches))
 		{
+		// var_dump('ici');
+		// exit;
 			return false;
 		}
 		$this->args = array_combine(array_keys($this->parameters), array_slice($matches, 1));
@@ -79,6 +86,8 @@ class Route
      	} 
      	else 
      	{
+			// var_dump('ici');
+			// exit;
      		return '([^/]+)';
      	}
      }
@@ -98,7 +107,7 @@ class Route
 	* @param array $args
 	* @return string $url
 	*/
-	public function generateUrl($arg)
+	public function generateUrl($args)
 	{
 		$url = str_replace(array_keys($args), $args, $this->path);
 		$url = str_replace(":", "", $url);

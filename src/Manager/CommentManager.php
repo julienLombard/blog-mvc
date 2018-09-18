@@ -19,4 +19,12 @@ class CommentManager extends Manager
 
         return $results;
     }
+
+    public function countByPost($id)
+    {
+        $statement = $this->database->getPdo()->prepare("SELECT COUNT(*) as total FROM comment WHERE post_id = :post_id" );
+        $statement->execute(["post_id" => $id]);
+
+        return $statement->fetch(\PDO::FETCH_ASSOC)["total"];
+    }
 }

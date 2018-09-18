@@ -19,4 +19,12 @@ class PostManager extends Manager
 
         return $results;
     }
+
+    public function countAllPost()
+    {
+        $statement = $this->database->getPdo()->prepare("SELECT COUNT(*) as total FROM post" );
+        $statement->execute();
+
+        return $statement->fetch(\PDO::FETCH_ASSOC)["total"];
+    }
 }

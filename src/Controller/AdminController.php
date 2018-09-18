@@ -4,6 +4,7 @@ namespace Controller;
 
 use App\Controller;
 use App\ORM\Database;
+use Model\User;
 use Model\Post;
 use Model\Comment;
 
@@ -13,43 +14,116 @@ use Model\Comment;
  */
 class AdminController extends Controller
 {
+
     /**
-    * @param $id
     * @return \App\Response\Response
     */
-    public function showData($id = null)
+    public function connection() 
     {
-    	$database = new Database("localhost","dev_blog", "root","");
-    	$manager = $database->getManager(Post::class);
+        // get $_SESSION
+        session_start();
+        $session = $this->getRequest()->getSession();
 
-    	$post = $manager->find($id);
-        $posts = $manager->findAll(0,8, "publicationDate", "DESC", "", null);
+        if (isset($session['login'])) 
+        {   
+            // Redirect Route
+            return $this->redirect("admin");
+        } else {
+            // View
+            return $this->render("adminConnection.html.twig");
+        }
+    }
 
-        return $this->render("adminHome.html.twig", ["post" => $post, "posts" => $posts]);
+    public function logout() 
+    {
+        // get $_SESSION
+        session_start();
+        $session = $this->getRequest()->getSession();
+
+        // if User is already logged
+        if (isset($session['login'])) {
+
+            session_destroy();
+            // Redirect Route
+            return $this->redirect("home");
+        } else {
+            // Redirect Route
+            return $this->redirect("admin_connection");
+        }
+    }
+
+    /**
+    * @return \App\Response\Response
+    */
+    public function showData()
+    {   
+        // get $_SESSION
+        session_start();
+        $session = $this->getRequest()->getSession();
+        
+        // get $_POST
+        $post = $this->getRequest()->getPost();
+        // get Database ad UserManager
+        $database = $this->getDatabase();
+        $userManager = $database->getManager(User::class);
+
+        // Data Form treatment
+        if (isset($post['login'])) {
+            $connection = $userManager->getConnection($post['login'],$post['password']);
+            // Match login & password
+            if (($post['login'] === $connection['login']) &&
+                ($post['password'] === $connection['password'])){
+                $_SESSION['login'] = $session['login'] ?? $post['login'];
+
+                // View
+                return $this->render("adminHome.html.twig");
+            } else {
+                // Redirect Route
+                return $this->redirect("admin_connection");
+            }
+        } elseif (isset($session['login'])) // elseif User is already logged
+        {
+            // View
+            return $this->render("adminHome.html.twig");
+        } else {
+            // Redirect Route
+            return $this->redirect("admin_connection");
+        }
     }
 
     /**
     * @param $page = 1
     * @return \App\Response\Response
     */
-    public function postsList($page = 1)
+    public function postsList()
     {
-        $request = $this->getRequest();
-        $getPage = $request->getGet();
-        $page = $getPage['page'];
+        // get $_SESSION
+        session_start();
+        $session = $this->getRequest()->getSession();
 
-        $database = new Database("localhost","dev_blog", "root","");
-        $manager = $database->getManager(Post::class);
+        // if User is already logged
+        if (isset($session['login'])) {
+            
+            // get $_GET for page's number
+            $page = $this->getRequest()->getGet()['page'] ?? 1;
 
-        $posts = $manager->getPagination($page, 0, 4, "publicationDate", "DESC", "", null);
+            // get Database and PostManager
+            $database = $this->getDatabase();
+            $manager = $database->getManager(Post::class);
+            
+            // Pagination
+            $posts = $manager->getPagination($page, 0, 4, "publicationDate", "DESC", "", null);
+            
+            // View
+            return $this->render("adminPosts.html.twig", [
+                "posts" => $posts, 
+                "page" => $page, 
+                "pageCount" => ceil($manager->countAllPost()/4)]);
+        } else {
+            // Redirect Route
+            return $this->redirect("admin_connection");
+        }
 
-        $rows = $manager->findAll(0, 1000, "publicationDate", "DESC", "", null);
-        $pageCount = ceil(count($rows)/4);
-        // echo "<pre>";
-        // print_r($pageCount);
-        // exit;
-
-        return $this->render("adminPosts.html.twig", ["posts" => $posts, "page" => $page, "pageCount" => $pageCount]);
     }
 
     /**
@@ -58,11 +132,21 @@ class AdminController extends Controller
     */
     public function showAdminPost($id)
     {
-        $database = new Database("localhost","dev_blog", "root","");
-        $manager = $database->getManager(Post::class);
-        $post = $manager->find($id);
+        // get $_SESSION
+        session_start();
+        $session = $this->getRequest()->getSession();
 
-        return $this->render("adminPost.html.twig", ["post" => $post]);
+        // if User is already logged
+        if (isset($session['login'])) {
+            $database = $this->getDatabase();
+            $manager = $database->getManager(Post::class);
+            $post = $manager->find($id);
+    
+            return $this->render("adminPost.html.twig", ["post" => $post]);
+        } else {
+            // Redirect Route
+            return $this->redirect("admin_connection");
+        }
     }
 
     /**
@@ -70,8 +154,19 @@ class AdminController extends Controller
     */
     public function createPostForm() 
     {
-        // to create form
-        return $this->render("adminCreatePostForm.html.twig");
+        // get $_SESSION
+        session_start();
+        $session = $this->getRequest()->getSession();
+
+        // if User is already logged
+        if (isset($session['login'])) {
+
+            // View: to create form
+            return $this->render("adminCreatePostForm.html.twig");
+        } else {
+            // Redirect Route
+            return $this->redirect("admin_connection");
+        }
     }
 
     /**
@@ -79,19 +174,34 @@ class AdminController extends Controller
     */
     public function createPost() 
     {
-        $request = $this->getRequest();
-        $formPost = $request->getPost();
+        // get $_SESSION
+        session_start();
+        $session = $this->getRequest()->getSession();
 
-        $database = new Database("localhost","dev_blog", "root","");
-        $manager = $database->getManager(Post::class);
+        // if User is already logged
+        if (isset($session['login'])) {
+            // get $_POST
+            $request = $this->getRequest();
+            $formPost = $request->getPost();
+            // get Database and Manager
+            $database = $this->getDatabase();
+            $manager = $database->getManager(Post::class);
+            
+            // set Post and insert it in database
+            $post = new Post();
+            $post->setTitle($formPost['title']);
+            $post->setContent($formPost['content']);
+            $post->setPublicationDate(new \DateTime());
+            $manager->insert($post);
+            
+            // Redirect route
+            return $this->redirect("admin_posts");
+            // header("Location: http://localhost:8080/admin/posts");
+        } else {
+            // Redirect Route
+            return $this->redirect("admin_connection");
+        }
 
-        $post = new Post();
-        $post->setTitle($formPost['title']);
-        $post->setContent($formPost['content']);
-        $post->setPublicationDate(new \DateTime());
-        $manager->insert($post);
-
-        header("Location: http://localhost:8080/admin/posts");
     }
 
     /**
@@ -100,12 +210,25 @@ class AdminController extends Controller
     */
     public function showEditPost($id)
     {
+        // get $_SESSION
+        session_start();
+        $session = $this->getRequest()->getSession();
 
-        $database = new Database("localhost","dev_blog", "root","");
-        $manager = $database->getManager(Post::class);
-        $post = $manager->find($id);
+        // if User is already logged
+        if (isset($session['login'])) {
 
-        return $this->render("adminEditPost.html.twig", ["post" => $post]);
+            // Get Database, Manager and find Post
+            $database = $this->getDatabase();
+            $manager = $database->getManager(Post::class);
+            $post = $manager->find($id);
+            
+            // View
+            return $this->render("adminEditPost.html.twig", ["post" => $post]);
+        } else {
+            // Redirect Route
+            return $this->redirect("admin_connection");
+        }
+
     }
 
     /**
@@ -114,19 +237,33 @@ class AdminController extends Controller
      */
     public function updatePost($id)
     {
-        $request = $this->getRequest();
-        $formPost = $request->getPost();
+        // get $_SESSION
+        session_start();
+        $session = $this->getRequest()->getSession();
 
-        $database = new Database("localhost","dev_blog", "root","");
-        $manager = $database->getManager(Post::class);
-        $post = $manager->find($id);
-
-        $post->setTitle($formPost['title']);
-        $post->setContent($formPost['content']);
-        $post->setModificationDate(new \DateTime());
-        $manager->update($post);
-
-        return $this->render("adminPost.html.twig", ["post" => $post]);
+        // if User is already logged
+        if (isset($session['login'])) {
+            // get $_POST
+            $request = $this->getRequest();
+            $formPost = $request->getPost();
+            
+            // Get Database, Manager and find Post
+            $database = $this->getDatabase();
+            $manager = $database->getManager(Post::class);
+            $post = $manager->find($id);
+            
+            // Set and update Post
+            $post->setTitle($formPost['title']);
+            $post->setContent($formPost['content']);
+            $post->setModificationDate(new \DateTime());
+            $manager->update($post);
+            
+            // View
+            return $this->render("adminPost.html.twig", ["post" => $post]);
+        } else {
+            // Redirect Route
+            return $this->redirect("admin_connection");
+        }
     }
 
     /**
@@ -135,11 +272,24 @@ class AdminController extends Controller
      */
     public function confirmDeletePost($id)
     {
-        $database = new Database("localhost","dev_blog", "root","");
-        $manager = $database->getManager(Post::class);
-        $post = $manager->find($id);
+        // get $_SESSION
+        session_start();
+        $session = $this->getRequest()->getSession();
 
-        return $this->render("adminConfirmDeletePost.html.twig", ["post" => $post]);
+        // if User is already logged
+        if (isset($session['login'])) {
+
+            // Get Database, Manager and find Post
+            $database = $this->getDatabase();
+            $manager = $database->getManager(Post::class);
+            $post = $manager->find($id);
+            
+            // View
+            return $this->render("adminConfirmDeletePost.html.twig", ["post" => $post]);
+        } else {
+            // Redirect Route
+            return $this->redirect("admin_connection");
+        }
     }
 
     /**
@@ -148,37 +298,61 @@ class AdminController extends Controller
      */
     public function deletePost($id)
     {
-        $database = new Database("localhost","dev_blog", "root","");
-        $manager = $database->getManager(Post::class);
-        $post = $manager->find($id);
-        $manager->delete($post);
+        // get $_SESSION
+        session_start();
+        $session = $this->getRequest()->getSession();
 
-        header("Location: http://localhost:8080/admin/posts");
+        // if User is already logged
+        if (isset($session['login'])) {
+
+            // Get Database, Manager and find Post
+            $database = $this->getDatabase();
+            $manager = $database->getManager(Post::class);
+            $post = $manager->find($id);
+
+            // Delete Post
+            $manager->delete($post);
+            
+            // Redirect route
+            return $this->redirect("admin_posts");
+            // header("Location: http://localhost:8080/admin/posts");
+        } else {
+            // Redirect Route
+            return $this->redirect("admin_connection");
+        }
     }
 
     /**
     * @param $page = 1
     * @return \App\Response\Response
     */
-    public function commentsList($page = 1)
+    public function commentsList()
     {
-        // Get $_REQUEST for page's number
-        $request = $this->getRequest();
-        $getPage = $request->getGet();
-        $page = $getPage['page'];
+        // get $_SESSION
+        session_start();
+        $session = $this->getRequest()->getSession();
 
-        // Database
-        $database = new Database("localhost","dev_blog", "root","");
-        // Posts SQL request
-        $manager = $database->getManager(Post::class);
-        $posts = $manager->getPagination($page, 0, 4, "publicationDate", "ASC", "", null);
+        // if User is already logged
+        if (isset($session['login'])) {
 
-        // Pagination
-        $rows = $manager->findAll(0, 1000, "publicationDate", "ASC", "", null);
-        $pageCount = ceil(count($rows)/4);
+            // get $_GET for page's number
+            $page = $this->getRequest()->getGet()['page'] ?? 1;
 
-        // View
-        return $this->render("adminCommentsList.html.twig", ["posts" => $posts, "page" => $page, "pageCount" => $pageCount]);
+            // Database
+            $database = $this->getDatabase();
+            // Posts SQL request
+            $manager = $database->getManager(Post::class);
+            $posts = $manager->getPagination($page, 0, 4, "publicationDate", "ASC", "", null);
+
+            // View
+            return $this->render("adminCommentsList.html.twig", [
+                "posts" => $posts,
+                "page" => $page, 
+                "pageCount" => ceil($manager->countAllPost()/4)]);
+        } else {
+            // Redirect Route
+            return $this->redirect("admin_connection");
+        }
     }
 
     /**
@@ -186,29 +360,38 @@ class AdminController extends Controller
     * @param $page =1
     * @return \App\Response\Response
     */
-    public function showComments($id, $page = 1)
+    public function showComments($id)
     {
-        // Get $_REQUEST for page's number
-        $request = $this->getRequest();
-        $getPage = $request->getGet();
-        $page = $getPage['page'];
+        // get $_SESSION
+        session_start();
+        $session = $this->getRequest()->getSession();
 
-        // Database
-        $database = new Database("localhost","dev_blog", "root","");
-        // Post SQL request
-    	$postManager = $database->getManager(Post::class);
-    	$post = $postManager->find($id);
+        // if User is already logged
+        if (isset($session['login'])) {
 
-        // Comments SQL request
-        $commentManager = $database->getManager(Comment::class);      
-        $comments = $commentManager->getPagination($page, 0, 8, "publicationDate", "ASC", "postID", $id);
+            // get $_GET for page's number
+            $page = $this->getRequest()->getGet()['page'] ?? 1;
 
-        // Pagination
-        $rows = $commentManager->findAll(0, 1000, "publicationDate", "ASC", "postID", $id);
-        $pageCount = ceil(count($rows)/4);
+            // Database
+            $database = $this->getDatabase();
+            // find Post
+            $postManager = $database->getManager(Post::class);
+            $post = $postManager->find($id);
 
-        // View
-        return $this->render("adminShowComments.html.twig", ["post" => $post, "comments" => $comments, "page" => $page, "pageCount" => $pageCount]);
+            // get Comment Manager and get pagination
+            $commentManager = $database->getManager(Comment::class);      
+            $comments = $commentManager->getPagination($page, 0, 8, "publicationDate", "ASC", "postID", $id);
+
+            // View
+            return $this->render("adminShowComments.html.twig", [
+                "post" => $post,
+                "comments" => $comments,
+                "page" => $page,
+                "pageCount" => ceil($commentManager->countByPost($id)/4)]);
+        } else {
+            // Redirect Route
+            return $this->redirect("admin_connection");
+        }
     }
 
     /**
@@ -217,6 +400,13 @@ class AdminController extends Controller
     */
     public function validateComment($id) 
     {
+        // get $_SESSION
+        session_start();
+        $session = $this->getRequest()->getSession();
+
+        // if User is already logged
+        if (isset($session['login'])) {
+
         // Get $_REQUEST
         // $request = $this->getRequest();
         // // Post's number     
@@ -225,18 +415,25 @@ class AdminController extends Controller
         // // Page's number
         // $getPage = $request->getGet();
         // $page = $getPage['page'];
-
-        $database = new Database("localhost","dev_blog", "root","");
+        
+        // Get Database, Manager and find Comment
+        $database = $this->getDatabase();
         $manager = $database->getManager(Comment::class);
-
         $comment = $manager->find($id);
-
+        
+        // Set and update Comment to Validate
         $comment->setValidate(1);
         $manager->update($comment);
-
+        
+        // Redirect Route
         // header("Location: http://localhost:8080/admin/comments-post/$post?page=$page#comment$id");
         // header("Location: http://localhost:8080/admin/comments-post/$post?page=1");
-        header("Location: http://localhost:8080/admin/comments?page=1");
+        // header("Location: http://localhost:8080/admin/comments?page=1");
+        return $this->redirect("admin_comments_list");
+        } else {
+            // Redirect Route
+            return $this->redirect("admin_connection");
+        }
     }
 
     /**
@@ -245,12 +442,24 @@ class AdminController extends Controller
     */
     public function showEditComment($id)
     {
+        // get $_SESSION
+        session_start();
+        $session = $this->getRequest()->getSession();
 
-        $database = new Database("localhost","dev_blog", "root","");
-        $manager = $database->getManager(Comment::class);
-        $comment = $manager->find($id);
+        // if User is already logged
+        if (isset($session['login'])) {
 
-        return $this->render("adminEditComment.html.twig", ["comment" => $comment]);
+            // Get Database, Manager and find Comment
+            $database = $this->getDatabase();
+            $manager = $database->getManager(Comment::class);
+            $comment = $manager->find($id);
+            
+            // View
+            return $this->render("adminEditComment.html.twig", ["comment" => $comment]);
+        } else {
+            // Redirect Route
+            return $this->redirect("admin_connection");
+        }
     }
 
     /**
@@ -259,19 +468,35 @@ class AdminController extends Controller
     */
     public function updateComment($id)
     {
-        $request = $this->getRequest();
-        $formPost = $request->getPost();
+        // get $_SESSION
+        session_start();
+        $session = $this->getRequest()->getSession();
 
-        $database = new Database("localhost","dev_blog", "root","");
-        $manager = $database->getManager(Comment::class);
-        $comment = $manager->find($id);
+        // if User is already logged
+        if (isset($session['login'])) {
 
-        $comment->setAuthor($formPost['author']);
-        $comment->setContent($formPost['content']);
-        $comment->setModificationDate(new \DateTime());
-        $manager->update($comment);
-
-        header("Location: http://localhost:8080/admin/comments?page=1");
+            // get $_POST data
+            $request = $this->getRequest();
+            $formPost = $request->getPost();
+            
+            // Get Database, Manager and find Comment
+            $database = $this->getDatabase();
+            $manager = $database->getManager(Comment::class);
+            $comment = $manager->find($id);
+            
+            // Set and update Comment
+            $comment->setAuthor($formPost['author']);
+            $comment->setContent($formPost['content']);
+            $comment->setModificationDate(new \DateTime());
+            $manager->update($comment);
+            
+            // Redirect route
+            return $this->redirect("admin_comments_list");
+            // header("Location: http://localhost:8080/admin/comments?page=1");
+        } else {
+            // Redirect Route
+            return $this->redirect("admin_connection");
+        }
     }
 
     /**
@@ -280,11 +505,24 @@ class AdminController extends Controller
     */
     public function confirmDeleteComment($id)
     {
-        $database = new Database("localhost","dev_blog", "root","");
-        $manager = $database->getManager(Comment::class);
-        $comment = $manager->find($id);
+        // get $_SESSION
+        session_start();
+        $session = $this->getRequest()->getSession();
 
-        return $this->render("adminConfirmDeleteComment.html.twig", ["comment" => $comment]);
+        // if User is already logged
+        if (isset($session['login'])) {
+
+            // Get Database, Manager and find Comment
+            $database = $this->getDatabase();
+            $manager = $database->getManager(Comment::class);
+            $comment = $manager->find($id);
+            
+            // View
+            return $this->render("adminConfirmDeleteComment.html.twig", ["comment" => $comment]);
+        } else {
+            // Redirect Route
+            return $this->redirect("admin_connection");
+        }
     }
 
     /**
@@ -293,12 +531,28 @@ class AdminController extends Controller
     */
     public function deleteComment($id)
     {
-        $database = new Database("localhost","dev_blog", "root","");
-        $manager = $database->getManager(Comment::class);
-        $comment = $manager->find($id);
-        $manager->delete($comment);
+        // get $_SESSION
+        session_start();
+        $session = $this->getRequest()->getSession();
 
-        header("Location: http://localhost:8080/admin/comments?page=1");
+        // if User is already logged
+        if (isset($session['login'])) {
+
+            // Get Database, Manager and find Comment
+            $database = $this->getDatabase();
+            $manager = $database->getManager(Comment::class);
+            $comment = $manager->find($id);
+
+            // Delete Comment
+            $manager->delete($comment);
+            
+            // Redirect route
+            return $this->redirect("admin_comments_list");
+            // header("Location: http://localhost:8080/admin/comments?page=1");
+        } else {
+            // Redirect Route
+            return $this->redirect("admin_connection");
+        }
     }
 
     /**
@@ -307,14 +561,28 @@ class AdminController extends Controller
     */
     public function moderateComment($id) 
     {
-        $database = new Database("localhost","dev_blog", "root","");
-        $manager = $database->getManager(Comment::class);
+        // get $_SESSION
+        session_start();
+        $session = $this->getRequest()->getSession();
 
-        $comment = $manager->find($id);
+        // if User is already logged
+        if (isset($session['login'])) {
 
-        $comment->setReported(0);
-        $manager->update($comment);
-
-        header("Location: http://localhost:8080/admin/comments?page=1");
+            // Get Database, Manager and find Comment
+            $database = $this->getDatabase();
+            $manager = $database->getManager(Comment::class);
+            $comment = $manager->find($id);
+            
+            // Set and update Comment to Report = false
+            $comment->setReported(0);
+            $manager->update($comment);
+            
+            // Redirect route
+            return $this->redirect("admin_comments_list");
+            // header("Location: http://localhost:8080/admin/comments?page=1");
+        } else {
+            // Redirect Route
+            return $this->redirect("admin_connection");
+        }
     }
 }

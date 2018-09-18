@@ -18,27 +18,86 @@ class HomeController extends Controller
     */
     public function index()
     {
-    	$database = new Database("localhost","dev_blog", "root","");
-    	$manager = $database->getManager(Post::class);
+        // Get Database, Manager and find all Post
+        $database = $this->getDatabase();
+        $manager = $database->getManager(Post::class);
         $posts = $manager->findAll(0,8, "publicationDate", "DESC","", null);
 
+        // View
         return $this->render("home.html.twig", ["posts" => $posts]);
     }
 
     /**
     * @param $id
+    * @param $param
     * @return \App\Response\Response
+    */
+    public function showPost($id)
+    {
+        // Get Database
+        $database = $this->getDatabase();
+        // Get Post Manager and find Post
+        $postManager = $database->getManager(Post::class);
+    	$post = $postManager->find($id);
+
+        // Get Comments Manager and pagination
+        $commentManager = $database->getManager(Comment::class);      
+        $comments = $commentManager->getPagination($page, 0, 8, "publicationDate", "ASC", "postID", $id);
+
+        // View
+        return $this->render("post.html.twig", [
+            "id" => $id, 
+            "post" => $post, 
+            "comments" => $comments, 
+            "page" => $this->getRequest()->getGet()['page'] ?? 1, 
+            "pageCount" => ceil($commentManager->countByPost($id)/4)]);
+    }
+
+    /**
+    * @param $id
+    * @return \App\Response\RedirectResponse
+    */
+    public function createComment($id) 
+    {
+        // Get $_REQUEST for page's number
+        $request = $this->getRequest();
+        $formPost = $request->getPost();
+        $page = $formPost['pageNb'] ?? 1;
+
+        // Get Database and Manager
+        $database = $this->getDatabase();
+        $manager = $database->getManager(Comment::class);
+
+        // Set new Comment and insert it in database
+        $comment = new Comment();
+        $comment->setPostId($formPost['postId']);
+        $comment->setAuthor($formPost['author']);
+        $comment->setContent($formPost['content']);
+        $comment->setPublicationDate(new \DateTime());
+        $manager->insert($comment);
+        
+        // View
+        // return $this->redirect("home_show_post", ["id" => $id, "page" => $page]);
+        header("Location: http://localhost:8080/post/$id?page=$page");
+    }
+
+    /**
+    * @param $id
+    * @return \App\Response\RedirectResponse
     */
     public function reportedComment($id) 
     {
-        $database = new Database("localhost","dev_blog", "root","");
+        // Get Database, Manager and find Comment
+        $database = $this->getDatabase();
         $manager = $database->getManager(Comment::class);
-
         $comment = $manager->find($id);
 
+        // Set and update Comment to reported
         $comment->setReported(1);
         $manager->update($comment);
 
-        header("Location: http://localhost:8080/#portfolio");
+        // View
+        return $this->redirect("home_portfolio");
+        // header("Location: http://localhost:8080/#portfolio");
     }
 }
