@@ -16,6 +16,7 @@ $router = new Router($request);
 
 // Router Test
 $router->add(new Route("home", "/", [], "Controller\HomeController", "index"));
+$router->add(new Route("home_send_mail", "/send-mail", [], "Controller\HomeController", "sendMail"));
 $router->add(new Route("home_portfolio", "/#portfolio", [], "Controller\HomeController", "index"));
 $router->add(new Route("home_show_post", "/post/:id\?page=:page", ["id" => "\d+", "page" => "\d+"], "Controller\HomeController", "showPost"));
 $router->add(new Route("home_create_comment", "/create-comment-post/:id", ["id" => "\d+"], "Controller\HomeController", "createComment"));

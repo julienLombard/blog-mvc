@@ -28,6 +28,36 @@ class HomeController extends Controller
     }
 
     /**
+    * @return \App\Response\Response
+    */
+    public function sendMail()
+    {
+        // get $_POST
+        $post = $this->getRequest()->getPost();
+
+        // Contact Form
+        if (!empty($post['name'])    &&
+            !empty($post['email'])   &&
+            !empty($post['message'])) 
+        {
+            $name = $post['name'];
+            $email= $post['email'];
+            $message = $post['message'];
+
+            // Create the email and send the message
+            $to = 'julienlombard.Fr@gmail.com'; // Add your email address inbetween the '' replacing yourname@yourdomain.com - This is where the form will send a message to.
+            $email_subject = "Formulaire de contact du site web:  $name";
+            $email_body = "Vous avez reçu un nouveau message à partir du formulaire de contact de votre site Web.\n\n"."Here are the details:\n\nName: $name\n\nEmail: $email\n\nMessage:\n$message";
+            $headers = "De: noreply@yourdomain.com\n"; // This is the email address the generated message will be from. We recommend using something like noreply@yourdomain.com.
+            $headers .= "Répondre à: $email";	
+            mail($to,$email_subject,$email_body,$headers);
+        }
+
+        // Redirect Route
+        return $this->redirect("home");
+    }
+
+    /**
     * @param $id
     * @param $param
     * @return \App\Response\Response
