@@ -409,6 +409,24 @@ ol.type li a:hover {
 	padding: 0;
 	margin: 0;
 }
+/* Admin Section */
+#admin {
+	padding: 100px 0;
+	background: #f6f6f6;
+}
+#admin .admin-text {
+	margin-left: 10px;
+}
+#admin img {
+	border-radius: 50%;
+	width: 200px;
+	height: 200px;
+	display: inline-block;
+}
+#admin p {
+	margin-top: 20px;
+	margin-bottom: 30px;
+}
 /* posts Section */
 #posts {
 	padding: 100px 0;
@@ -444,15 +462,12 @@ ol.type li a:hover {
 	margin-bottom: 30px;
 }
 /* comment Section */
-
 .green {
 	color: green;
 }
-
 .red {
 	color: red;
 }
-
 #comment {
 	padding: 100px 0;
 	background: #f6f6f6;

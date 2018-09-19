@@ -2,20 +2,18 @@
 
 {% block body %}
 
-    <!-- comment Section -->
-    <div id="comment">
+    <!-- Admin Section -->
+    <div id="admin">
       <div class="container">
+        <!-- Title -->
         <div class="row section-title text-center center">
           <h2>Bienvenue sur l'espace d'administration</h2>
           <hr>
-          <h3>Nouveau commentaire de (name) !</h3>
-          <img src="{{ app.request.basepath }}/img/portfolio/post-1.jpg" class="img-responsive">
+          <h3>Accès aux listes</h3>          
         </div>
-        <div class="col-md-8 col-md-offset-2">
-          <div class="comment-text">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo nibh ante facilisis bibendum dolor feugiat at. Duis sed dapibus leo nec ornare diam commodo nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo nibh ante facilisis bibendum dolor feugiat at. Duis sed dapibus leo nec ornare.</p>
-            <p class="text-center"><a class="btn btn-primary" href="#"><i class="fa fa-trash"></i> Effacer</a> <a class="btn btn-primary" href="#"><i class="fa fa-check"></i> Valider</a></p>
-          </div>
+        <!-- Buttons -->
+        <div class="row text-center center">
+          <p class="text-center"><a class="btn btn-primary" href="/admin/posts?page=1">Articles</a> <a class="btn btn-primary" href="/admin/comments?page=1"> Commentaires</a></p>
         </div>
       </div>
     </div>
