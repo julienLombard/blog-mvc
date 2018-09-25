@@ -1,0 +1,25 @@
+{% extends 'adminTemplate.html.twig' %}
+
+{% block body %}
+
+<!-- Post Section -->
+<div id="post">
+  <div class="container">
+    <div class="row section-title text-center center">
+      <h2>Suppression</h2>
+      <hr>
+      <div class="col-md-12 text-center"><img src="{{ app.request.basepath }}/img/portfolio/post-{{ post.id }}.jpg" class="img-responsive">
+      </div>
+      <div class="col-md-8 col-md-offset-2">
+        <div class="post-text">
+          <p>Etes-vous sûr de vouloir supprimer l'article "{{ post.title }}" ?</p>
+          <p class="text-center">
+            <a class="btn btn-primary" href="/admin/delete-post/{{ post.id }}"><i class="fa fa-trash"></i> Effacer</a> 
+            <a class="btn btn-primary" href="/admin/post/{{ post.id }}"><i class="fa fa-newspaper-o"></i> Retour article</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
+    
+{% endblock %}

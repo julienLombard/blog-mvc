@@ -16,7 +16,7 @@
 		options: {
 			prependExistingHelpBlock: false,
 			sniffHtml: true, // sniff for 'required', 'maxlength', etc
-			preventSubmit: true, // stop the form submit event from firing if validation fails
+			preventSubmit: false, // stop the form submit event from firing if validation fails (**default = true**)
 			submitError: false, // function called if there is an error when trying to submit
 			submitSuccess: false, // function called just before a successful submit event is sent to the server
             semanticallyStrict: false, // set to true to tidy up generated HTML output
@@ -43,40 +43,40 @@
           }).toArray()
         );
 
-        $(uniqueForms).bind("submit", function (e) {
-          var $form = $(this);
-          var warningsFound = 0;
-          var $inputs = $form.find("input,textarea,select").not("[type=submit],[type=image]").filter(settings.options.filter);
-          $inputs.trigger("submit.validation").trigger("validationLostFocus.validation");
+        // $(uniqueForms).bind("submit", function (e) {
+        //   var $form = $(this);
+        //   var warningsFound = 0;
+        //   var $inputs = $form.find("input,textarea,select").not("[type=submit],[type=image]").filter(settings.options.filter);
+        //   $inputs.trigger("submit.validation").trigger("validationLostFocus.validation");
 
-          $inputs.each(function (i, el) {
-            var $this = $(el),
-              $controlGroup = $this.parents(".form-group").first();
-            if (
-              $controlGroup.hasClass("warning")
-            ) {
-              $controlGroup.removeClass("warning").addClass("error");
-              warningsFound++;
-            }
-          });
+        //   $inputs.each(function (i, el) {
+        //     var $this = $(el),
+        //       $controlGroup = $this.parents(".form-group").first();
+        //     if (
+        //       $controlGroup.hasClass("warning")
+        //     ) {
+        //       $controlGroup.removeClass("warning").addClass("error");
+        //       warningsFound++;
+        //     }
+        //   });
 
-          $inputs.trigger("validationLostFocus.validation");
+        //   $inputs.trigger("validationLostFocus.validation");
 
-          if (warningsFound) {
-            if (settings.options.preventSubmit) {
-              e.preventDefault();
-            }
-            $form.addClass("error");
-            if ($.isFunction(settings.options.submitError)) {
-              settings.options.submitError($form, e, $inputs.jqBootstrapValidation("collectErrors", true));
-            }
-          } else {
-            $form.removeClass("error");
-            if ($.isFunction(settings.options.submitSuccess)) {
-              settings.options.submitSuccess($form, e);
-            }
-          }
-        });
+        //   if (warningsFound) {
+        //     if (settings.options.preventSubmit) {
+        //       e.preventDefault();
+        //     }
+        //     $form.addClass("error");
+        //     if ($.isFunction(settings.options.submitError)) {
+        //       settings.options.submitError($form, e, $inputs.jqBootstrapValidation("collectErrors", true));
+        //     }
+        //   } else {
+        //     $form.removeClass("error");
+        //     if ($.isFunction(settings.options.submitSuccess)) {
+        //       settings.options.submitSuccess($form, e);
+        //     }
+        //   }
+        // });
 
         return this.each(function(){
 
@@ -183,7 +183,7 @@
             //                                                     EMAIL
             // ---------------------------------------------------------
             if ($this.attr("type") !== undefined && $this.attr("type").toLowerCase() === "email") {
-              message = "Email non valide<!-- data-validator-validemail-message to override -->";
+              message = "Not a valid email address<!-- data-validator-validemail-message to override -->";
               if ($this.data("validationValidemailMessage")) {
                 message = $this.data("validationValidemailMessage");
               } else if ($this.data("validationEmailMessage")) {
@@ -791,7 +791,7 @@
 				name: "Validemail",
 				type: "regex",
 				regex: "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\\.[A-Za-z]{2,4}",
-				message: "Email non valide<!-- data-validator-validemail-message to override -->"
+				message: "Not a valid email address<!-- data-validator-validemail-message to override -->"
 			},
 			passwordagain: {
 				name: "Passwordagain",
@@ -836,7 +836,7 @@
 			required: {
 				name: "Required",
 				type: "required",
-				message: "Champs requis<!-- data-validator-required-message to override -->"
+				message: "This is required<!-- data-validator-required-message to override -->"
 			},
 			checkone: {
 				name: "Checkone",

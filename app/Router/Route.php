@@ -32,6 +32,10 @@ class Route
 	*/
 	private $action;
 	/**
+	* @var boolean
+	*/
+	private $security;
+	/**
 	* @var array|string|mixed
 	*/
 	private $args;
@@ -41,22 +45,25 @@ class Route
 	 * @param array $parameters
 	 * @param string $controller
 	 * @param string $action
+	 * @param string $security
 	 */
-	public function __construct($name, $path, array $parameters, $controller, $action)
+	public function __construct($name, $path, array $parameters, $controller, $action, $security)
 	{
 		$this->name = $name;
 		$this->path = $path;
 		$this->parameters = $parameters;
 		$this->controller = $controller;
 		$this->action = $action;
+		$this->security = $security;
+		$this->args = [];
 	}
 	/**
 	* @return boolean
 	*/
 	public function match($requestUri)
 	{
-		$pattern = preg_replace_callback("/:(\w+)/", array($this, "checkParameters"), $this->path);
 
+		$pattern = preg_replace_callback("/:(\w+)/", array($this, "checkParameters"), $this->path);
 		$pattern = preg_replace("~/~", "\/", $pattern);
 
 		if(!preg_match("/^$pattern$/i", $requestUri, $matches))
@@ -98,7 +105,7 @@ class Route
 	* @param array $args
 	* @return string $url
 	*/
-	public function generateUrl($arg)
+	public function generateUrl($args)
 	{
 		$url = str_replace(array_keys($args), $args, $this->path);
 		$url = str_replace(":", "", $url);
@@ -140,4 +147,28 @@ class Route
 	{
 	    return $this->action;
 	}
+	/**
+	 * @return boolean
+	 */
+	public function getSecurity()
+	{
+	    return $this->security;
+	}
+
+	/**
+	* @return boolean
+	*/
+	public function isLogged(Request $request) {
+
+        if ($this->getSecurity() == true) {
+
+            if (isset($request->getSession()['login'])) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return true;
+        }
+    }
 }

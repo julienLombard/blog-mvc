@@ -1,0 +1,64 @@
+{% extends 'adminTemplate.html.twig' %}
+
+{% block body %}
+
+<!-- Posts Section -->
+<div id="posts">
+  <div class="container">
+
+    <div class="section-title text-center center">
+      <h2>Liste des commentaires par article</h2>
+      <hr>
+      <a class="btn btn-primary" href="/admin/show-invalidated"><i class="fa fa-check"></i>Commentaires non validés</a> 
+      <a class="btn btn-primary" href="/admin/show-reported"><i class="fa fa-exclamation-triangle"></i>Commentaires signalés</a>
+    </div>
+
+    <div class="row">
+      <div class="posts-items">
+
+        {% for post in posts %}
+
+          <div class="col-sm-6 col-md-3 col-lg-3 web">
+              <div class="posts-item">
+                  <div class="hover-bg">
+                      <a href="/admin/comments-post/{{ post.id }}">
+                          <div class="hover-text">
+                            <h4>{{ post.title }}</h4>
+                          </div>
+                          <img src="{{ app.request.basepath }}/img/portfolio/post-{{ post.id }}.jpg" class="img-responsive" alt="Project Title"> 
+                      </a> 
+                  </div>
+              </div>
+          </div>
+
+        {% else %}
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="row">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item">
+            <a class="page-link" href="/admin/comments?page=1" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+              <span class="sr-only">Previous</span>
+            </a>
+          </li>
+          {% for i in 1..pageCount %}
+            <li class="page-item"><a class="page-link" href="/admin/comments?page={{ i }}">{{ i }}</a></li>
+          {% endfor %}
+          <li class="page-item">
+            <a class="page-link" href="/admin/comments?page={{ pageCount }}" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+              <span class="sr-only">Next</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    
+  </div>
+</div>
+    
+{% endblock %}

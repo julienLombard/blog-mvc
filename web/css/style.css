@@ -12,6 +12,11 @@ h1 {
 h1 strong {
 	font-weight: 900;
 }
+
+/* header .intro-text h1{
+ color: #4bdda6;
+} */
+
 h2 {
 	line-height: 20px;
 	margin: 0;
@@ -41,7 +46,7 @@ a {
 }
 a:hover, a:focus {
 	text-decoration: none;
-	color: #7bc3d1;
+	color: #da5f57;
 }
 ul, ol {
 	list-style: none;
@@ -119,7 +124,7 @@ hr {
 }
 .navbar-custom .nav li a:hover {
 	outline: 0;
-	color: #7bc3d1;
+	color: #da5f57;
 	background-color: transparent;
 }
 .navbar-custom .nav li a:focus, .navbar-custom .nav li a:active {
@@ -138,8 +143,8 @@ hr {
 }
 .btn-default {
 	color: #fff;
-	background-color: transparent;
-	border-color: #fff;
+	background-color: #1c2c2f;
+	border-color: #1c2c2f;
 	padding: 10px 20px;
 	margin: 0;
 	font-size: 16px;
@@ -147,8 +152,8 @@ hr {
 }
 .btn-default:hover, .btn-default:focus, .btn-default.focus, .btn-default:active, .btn-default.active {
 	color: #fff;
-	background-color: #121d1f;
-	border-color: #121d1f;
+	background-color: #da5f57;
+	border-color: #da5f57;
 }
 .btn-primary {
 	color: #fff;
@@ -404,20 +409,78 @@ ol.type li a:hover {
 	padding: 0;
 	margin: 0;
 }
-/* article Section */
-#article {
+/* Admin Section */
+#admin {
 	padding: 100px 0;
 	background: #f6f6f6;
 }
-#article .article-text {
+#admin .admin-text {
 	margin-left: 10px;
 }
-#article img {
+#admin img {
+	border-radius: 50%;
+	width: 200px;
+	height: 200px;
+	display: inline-block;
+}
+#admin p {
+	margin-top: 20px;
+	margin-bottom: 30px;
+}
+/* posts Section */
+#posts {
+	padding: 100px 0;
+	background: #f6f6f6;
+}
+#posts .posts-text {
+	margin-left: 10px;
+}
+#posts img {
 	width: 335px;
 	height: 210px;
 	display: inline-block;
 }
-#article p {
+#posts p {
+	margin-top: 20px;
+	margin-bottom: 30px;
+}
+/* Post Section */
+#post {
+	padding: 100px 0;
+	background: #f6f6f6;
+}
+#post .post-text {
+	margin-left: 10px;
+}
+#post img {
+	width: 335px;
+	height: 210px;
+	display: inline-block;
+}
+#post p {
+	margin-top: 20px;
+	margin-bottom: 30px;
+}
+/* comment Section */
+.green {
+	color: green;
+}
+.red {
+	color: red;
+}
+#comment {
+	padding: 100px 0;
+	background: #f6f6f6;
+}
+#comment .comment-text {
+	margin-left: 10px;
+}
+#comment img {
+	width: 335px;
+	height: 210px;
+	display: inline-block;
+}
+#comment p {
 	margin-top: 20px;
 	margin-bottom: 30px;
 }
@@ -646,7 +709,7 @@ a:focus, .btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn:acti
 	color: #a0a5a5;
 }
 #footer a:hover {
-	color: #7bc3d1;
+	color: #da5f57;
 }
 
 /* Media Queries */

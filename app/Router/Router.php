@@ -37,19 +37,51 @@ class Router
 			return $this->routes[$route->getName()] = $route;
 	    }
     }
+    // /**
+    // * @return Route
+    // */
+    // public function find()
+    // {
+    // 	foreach ($this->routes as $route) 
+    // 	{
+    // 		if ($route->match($this->request->getPath())) 
+    // 		{
+    // 			return $route;
+    // 		}
+    // 	}
+    // }
+
     /**
+    * @param Request $request
     * @return Route
     */
-    public function find()
+    public function find(Request $request)
     {
     	foreach ($this->routes as $route) 
     	{
-    		if ($route->match($this->request->getUri())) 
+
+            if ($route->match($this->request->getPath())) 
     		{
-    			return $route;
+                if ($route->getSecurity() == true) 
+                {
+                    if ($route->isLogged($request) == true) {
+
+                        return $route;
+
+                    } else {
+
+                        return $this->routes["admin_user_connection"];
+
+                    }
+                    
+                } else {
+
+                    return $route;
+                }
     		}
     	}
     }
+
     /**
     * @param string $routeName
     * @return Route

@@ -3,13 +3,13 @@
 namespace Model;
 
 use App\ORM\Model;
-use Manager\PostManager;
+use Manager\CommentManager;
 
 /**
 * Class Post
 * @package Model
 */
-class Post extends Model
+class Comment extends Model
 {
 
 	/**
@@ -17,13 +17,13 @@ class Post extends Model
 	*/
 	private $id;
 	/**
-	* @var string
+	* @var integer
 	*/
-	private $title;
+	private $postId;
 	/**
 	* @var string
 	*/
-	private $picture;
+	private $author;
 	/**
 	* @var string
 	*/
@@ -36,14 +36,22 @@ class Post extends Model
 	* @var \DateTime
 	*/
 	private $modificationDate;
+    /**
+	* @var integer
+	*/
+	private $validate;
+    /**
+	* @var integer
+	*/
+	private $reported;
 
 	/**
 	* @return inheritdoc
 	*/
 	public static function getManager()
 	{
-		return PostManager::class;
-	}
+		return CommentManager::class;
+    }
 
 	/**
 	* @return array
@@ -51,7 +59,7 @@ class Post extends Model
 	public static function metadata()
 	{
 		return [
-			"table" => "post",
+			"table" => "comment",
 			"primaryKey" => "id",
 			"columns" => 
 			[
@@ -60,18 +68,18 @@ class Post extends Model
 					"type" => "integer",
 					"property" => "id"
 				],
-
-				"title" => 
+				
+				"post_id" => 
 				[
-					"type" => "string",
-					"property" => "title"
+					"type" => "integer",
+					"property" => "postId"
 				],
 
-				"picture" => 
+				"author" => 
 				[
 					"type" => "string",
-					"property" => "picture"
-				],				
+					"property" => "author"
+				],			
 
 				"content" => 
 				[
@@ -89,6 +97,18 @@ class Post extends Model
 				[
 					"type" => "datetime",
 					"property" => "modificationDate"
+                ],
+                
+                "validate" => 
+				[
+					"type" => "integer",
+					"property" => "validate"
+				],
+
+                "reported" => 
+				[
+					"type" => "integer",
+					"property" => "reported"
 				]
 			]
 		];
@@ -112,37 +132,37 @@ class Post extends Model
 	}
 
 	/**
-	* @param string $title
+	* @param integer $id
 	* @return void
 	*/
-	public function setTitle(string $title)
+	public function setPostId(int $postId)
 	{
-		$this->title = $title;
+		$this->postId = $postId;
+	}
+
+	/**
+	* @return integer
+	*/
+	public function getPostId()
+	{
+		return $this->postId;
+	}
+
+	/**
+	* @param string $author
+	* @return void
+	*/
+	public function setAuthor(string $author)
+	{
+		$this->author = $author;
 	}
 
 	/**
 	* @return string
 	*/
-	public function getTitle()
+	public function getAuthor()
 	{
-		return $this->title;
-	}
-
-	/**
-	* @param string $picture
-	* @return void
-	*/
-	public function setPicture(string $picture)
-	{
-		$this->picture = $picture;
-	}
-
-	/**
-	* @return string
-	*/
-	public function getPicture()
-	{
-		return $this->picture;
+		return $this->author;
 	}
 
 	/**
@@ -194,5 +214,39 @@ class Post extends Model
 	public function getModificationDate()
 	{
 		return $this->modificationDate;
+    }
+    
+    /**
+	* @param integer $validate
+	* @return void
+	*/
+	public function setValidate(int $validate)
+	{
+		$this->validate = $validate;
+	}
+
+	/**
+	* @return integer
+	*/
+	public function getValidate()
+	{
+		return $this->validate;
+	}
+
+    /**
+	* @param integer $reported
+	* @return void
+	*/
+	public function setReported(int $reported)
+	{
+		$this->reported = $reported;
+	}
+
+	/**
+	* @return integer
+	*/
+	public function getReported()
+	{
+		return $this->reported;
 	}
 }
