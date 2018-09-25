@@ -75,7 +75,7 @@ class Manager
         return null;
     }
 
-    public function findAll(?int $offset, ?int $length, ?string $property, ?string $order, ?string $property2, ?int $id)
+    public function findAll(?int $offset, ?int $length, ?string $property, ?string $order, ?string $property2, ?string $var, ?string $property3, ?string $var2)
     {
         if($offset !== null && $length !== null) 
         {
@@ -99,18 +99,32 @@ class Manager
         }
 
         $where = "";
-        if($property2 !== null && $id !== null) 
+        if($property2 !== null && $var !== null) 
         {
             $columns = $this->model::metadata()["columns"];
             foreach($columns as $column => $definition)
             {
                 if($definition["property"] == $property2)
                 {
-                    $where = sprintf("WHERE %s = %s", $column, $id);
+                    $where = sprintf("WHERE %s = %s", $column, $var);
                 }
             } 
         }
-        $query = sprintf("SELECT * FROM %s %s %s %s",  $this->model::metadata()["table"], $where, $orderBy , $limit);
+
+        $and = "";
+        if($property3 !== null && $var2 !== null) 
+        {
+            $columns = $this->model::metadata()["columns"];
+            foreach($columns as $column => $definition)
+            {
+                if($definition["property"] == $property3)
+                {
+                    $and = sprintf("AND %s = %s", $column, $var2);
+                }
+            } 
+        }
+
+        $query = sprintf("SELECT * FROM %s %s %s %s %s",  $this->model::metadata()["table"], $where, $and, $orderBy , $limit);
 
         $statement = $this->database->getPdo()->prepare($query);
         $statement->execute();

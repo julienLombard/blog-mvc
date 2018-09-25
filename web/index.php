@@ -15,33 +15,40 @@ $request = Request::createFromGlobals();
 $router = new Router($request);
 
 // Router Test
-$router->add(new Route("home", "/", [], "Controller\HomeController", "index"));
+$router->add(new Route("home", "/home", [], "Controller\HomeController", "index", false));
+$router->add(new Route("home_portfolio", "/home#portfolio", [], "Controller\HomeController", "index", false));
+$router->add(new Route("home_post_show", "/post/:id", ["id" => "\d+"], "Controller\HomeController", "showPost", false));
+$router->add(new Route("home_comment_create", "/create-comment-post/:id", ["id" => "\d+"], "Controller\HomeController", "createComment", false));
+$router->add(new Route("home_comment_reported", "/reported-comment/:post/:id", ["post" => "\d+", "id" => "\d+"], "Controller\HomeController", "reportedComment", false));
 $router->add(new Route("home_send_mail", "/send-mail", [], "Controller\HomeController", "sendMail"));
-$router->add(new Route("home_portfolio", "/#portfolio", [], "Controller\HomeController", "index"));
-$router->add(new Route("home_show_post", "/post/:id\?page=:page", ["id" => "\d+", "page" => "\d+"], "Controller\HomeController", "showPost"));
-$router->add(new Route("home_create_comment", "/create-comment-post/:id", ["id" => "\d+"], "Controller\HomeController", "createComment"));
-$router->add(new Route("admin_connection", "/connection", [], "Controller\AdminController", "connection"));
-$router->add(new Route("admin_logout", "/logout", [], "Controller\AdminController", "logout"));
-$router->add(new Route("admin", "/admin", [], "Controller\AdminController", "showData"));
-$router->add(new Route("admin_posts", "/admin/posts\?page=:page", ["page" => "\d+"], "Controller\AdminController", "postsList"));
-$router->add(new Route("admin_post", "/admin/post/:id", ["id" => "\d+"], "Controller\AdminController", "showAdminPost"));
-$router->add(new Route("admin_create_post_form", "/admin/create-post-form", [], "Controller\AdminController", "createPostForm"));
-$router->add(new Route("admin_create_post", "/admin/create-post", [], "Controller\AdminController", "createPost"));
-$router->add(new Route("admin_edit_post", "/admin/edit-post/:id", ["id" => "\d+"], "Controller\AdminController", "showEditPost"));
-$router->add(new Route("admin_update_post", "/admin/update-post/:id", ["id" => "\d+"], "Controller\AdminController", "updatePost"));
-$router->add(new Route("admin_confirm_delete_post", "/admin/confirm-delete-post/:id", ["id" => "\d+"], "Controller\AdminController", "confirmDeletePost"));
-$router->add(new Route("admin_delete_post", "/admin/delete-post/:id", ["id" => "\d+"], "Controller\AdminController", "deletePost"));
-$router->add(new Route("admin_comments_list", "/admin/comments\?page=:page", ["page" => "\d+"], "Controller\AdminController", "commentsList"));
-$router->add(new Route("admin_show_comments", "/admin/comments-post/:id\?page=:page", ["id" => "\d+", "page" => "\d+"], "Controller\AdminController", "showComments"));
-// $router->add(new Route("admin_validate_comment", "/admin/validate-comment/:id\?post=:post&page=:page", ["id" => "\d+"], "Controller\AdminController", "validateComment"));
-$router->add(new Route("admin_validate_comment", "/admin/validate-comment/:id", ["id" => "\d+"], "Controller\AdminController", "validateComment"));
-$router->add(new Route("admin_edit_comment", "/admin/edit-comment/:id", ["id" => "\d+"], "Controller\AdminController", "showEditComment"));
-$router->add(new Route("admin_update_comment", "/admin/update-comment/:id", ["id" => "\d+"], "Controller\AdminController", "updateComment"));
-$router->add(new Route("admin_confirm_delete_comment", "/admin/confirm-delete-comment/:id", ["id" => "\d+"], "Controller\AdminController", "confirmDeleteComment"));
-$router->add(new Route("admin_delete_comment", "/admin/delete-comment/:id", ["id" => "\d+"], "Controller\AdminController", "deleteComment"));
-$router->add(new Route("reported_comment", "/reported-comment/:id", ["id" => "\d+"], "Controller\HomeController", "reportedComment"));
-$router->add(new Route("admin_moderate_comment", "/admin/moderate-comment/:id", ["id" => "\d+"], "Controller\AdminController", "moderateComment"));
 
-$route = $router->find();
+$router->add(new Route("admin", "/admin", [], "Controller\AdminController", "showData", false));
+$router->add(new Route("admin_user_connection", "/connection", [], "Controller\AdminController", "connection", false));
+$router->add(new Route("admin_user_logout", "/logout", [], "Controller\AdminController", "logout", true));
+
+$router->add(new Route("admin_posts_list", "/admin/posts", [], "Controller\AdminController", "postsList", true));
+$router->add(new Route("admin_post_show", "/admin/post/:id", ["id" => "\d+"], "Controller\AdminController", "showAdminPost", true));
+$router->add(new Route("admin_post_create_form", "/admin/create-post-form", [], "Controller\AdminController", "createPostForm", true));
+$router->add(new Route("admin_post_create", "/admin/create-post", [], "Controller\AdminController", "createPost", true));
+$router->add(new Route("admin_post_edit", "/admin/edit-post/:id", ["id" => "\d+"], "Controller\AdminController", "showEditPost", true));
+$router->add(new Route("admin_post_update", "/admin/update-post/:id", ["id" => "\d+"], "Controller\AdminController", "updatePost", true));
+$router->add(new Route("admin_post_confirm_delete", "/admin/confirm-delete-post/:id", ["id" => "\d+"], "Controller\AdminController", "confirmDeletePost", true));
+$router->add(new Route("admin_post_delete", "/admin/delete-post/:id", ["id" => "\d+"], "Controller\AdminController", "deletePost", true));
+
+$router->add(new Route("admin_comments_list", "/admin/comments", [], "Controller\AdminController", "commentsList", true));
+$router->add(new Route("admin_comments_show", "/admin/comments-post/:id", ["id" => "\d+"], "Controller\AdminController", "showComments", true));
+$router->add(new Route("admin_comments_show_invalidated", "/admin/show-invalidated", [], "Controller\AdminController", "showInvalidated", true));
+$router->add(new Route("admin_comments_show_reported", "/admin/show-reported", [], "Controller\AdminController", "showReported", true));
+$router->add(new Route("admin_comment_validate", "/admin/validate-comment/:post/:id", ["post" => "\d+", "id" => "\d+"], "Controller\AdminController", "validateComment", true));
+$router->add(new Route("admin_comment_moderate", "/admin/moderate-comment/:id", ["id" => "\d+"], "Controller\AdminController", "moderateComment", true));
+$router->add(new Route("admin_comment_edit", "/admin/edit-comment/:post/:id", ["post" => "\d+", "id" => "\d+"], "Controller\AdminController", "showEditComment", true));
+$router->add(new Route("admin_comment_update", "/admin/update-comment/:post/:id", ["post" => "\d+", "id" => "\d+"], "Controller\AdminController", "updateComment", true));
+$router->add(new Route("admin_comment_confirm_delete", "/admin/confirm-delete-comment/:post/:id", ["post" => "\d+", "id" => "\d+"], "Controller\AdminController", "confirmDeleteComment", true));
+$router->add(new Route("admin_comment_delete", "/admin/delete-comment/:post/:id", ["post" => "\d+", "id" => "\d+"], "Controller\AdminController", "deleteComment", true));
+
+
+$route = $router->find($request);
+// $route = $router->find();
+
 $response = $route->call($request, $router);
 $response->send();

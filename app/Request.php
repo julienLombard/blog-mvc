@@ -109,8 +109,9 @@ class Request
     /**
      * @return string
      */
-    public function getUri()
+    public function getPath()
     {
-        return $this->server["REQUEST_URI"];
+        // return $this->server["REQUEST_URI"];
+        return $this->server["PATH_INFO"];
     }
 }
