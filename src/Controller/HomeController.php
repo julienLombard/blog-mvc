@@ -21,7 +21,7 @@ class HomeController extends Controller
         // Get Database, Manager and find all Post
         $database = $this->getDatabase();
         $manager = $database->getManager(Post::class);
-        $posts = $manager->findAll(0,8, "publicationDate", "DESC","", null);
+        $posts = $manager->findAll(0,8, "publicationDate", "DESC","", null, null, null);
 
         // View
         return $this->render("home.html.twig", ["posts" => $posts]);
@@ -29,11 +29,13 @@ class HomeController extends Controller
 
     /**
     * @param $id
-    * @param $param
     * @return \App\Response\Response
     */
     public function showPost($id)
     {
+        // get $_GET for page's number
+        $page = $this->getRequest()->getGet()['page'] ?? 1;
+
         // Get Database
         $database = $this->getDatabase();
         // Get Post Manager and find Post
@@ -42,15 +44,15 @@ class HomeController extends Controller
 
         // Get Comments Manager and pagination
         $commentManager = $database->getManager(Comment::class);      
-        $comments = $commentManager->getPagination($page, 0, 8, "publicationDate", "ASC", "postID", $id);
+        $comments = $commentManager->getPagination($page, 0, 8, "publicationDate", "ASC", "postId", $id, "validate", "1", null, null);
 
         // View
-        return $this->render("post.html.twig", [
+        return $this->render("homePostShow.html.twig", [
             "id" => $id, 
             "post" => $post, 
             "comments" => $comments, 
             "page" => $this->getRequest()->getGet()['page'] ?? 1, 
-            "pageCount" => ceil($commentManager->countByPost($id)/4)]);
+            "pageCount" => ceil($commentManager->countAllComment("validate",1)/8)]);
     }
 
     /**
@@ -77,15 +79,15 @@ class HomeController extends Controller
         $manager->insert($comment);
         
         // View
-        // return $this->redirect("home_show_post", ["id" => $id, "page" => $page]);
-        header("Location: http://localhost:8080/post/$id?page=$page");
+        return $this->redirect("home_post_show", ["id" => $id]);
     }
 
     /**
+    * @param $post
     * @param $id
     * @return \App\Response\RedirectResponse
     */
-    public function reportedComment($id) 
+    public function reportedComment($post, $id) 
     {
         // Get Database, Manager and find Comment
         $database = $this->getDatabase();
@@ -97,7 +99,6 @@ class HomeController extends Controller
         $manager->update($comment);
 
         // View
-        return $this->redirect("home_portfolio");
-        // header("Location: http://localhost:8080/#portfolio");
+        return $this->redirect("home_post_show", ["id" => $post]);
     }
 }

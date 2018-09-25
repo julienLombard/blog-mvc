@@ -1,4 +1,4 @@
-{% extends 'adminInterface.html.twig' %}
+{% extends 'adminTemplate.html.twig' %}
 
 {% block body %}
 
@@ -12,11 +12,10 @@
 
     <div class="col-md-8 col-md-offset-2">
 
-      <form action="/admin/update-comment/{{ comment.id }}" method="post">
+      <form action="/admin/update-comment/{{ post }}/{{ comment.id }}" method="post">
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
-              {# <input type="hidden" name="id" value="{{ post.id }}"> #}
               <label for"author">Titre :</label>
               <input type="text" name="author" id="author" class="form-control" value="{{ comment.author}}">
             </div>
@@ -28,7 +27,7 @@
           <textarea name="content" id="content" class="form-control" rows="4">{{ comment.content }}</textarea>
         </div>
         <input type="submit" class="btn btn-default" value="Modifier"> 
-        <a class="btn btn-primary" href="/admin/comments?page=1"><i class="fa fa-newspaper-o"></i> Retour Liste</a></p>
+        <a class="btn btn-primary" href="/admin/comments-post/{{ post }}"><i class="fa fa-newspaper-o"></i> Retour Liste</a></p>
       </form>
     </div>
   </div>

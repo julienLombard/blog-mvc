@@ -1,4 +1,4 @@
-{% extends 'adminInterface.html.twig' %}
+{% extends 'adminTemplate.html.twig' %}
 
 {% block body %}
 
@@ -6,30 +6,31 @@
 <div id="post" class="text-center">
   <div class="container">
     <div class="section-title center">
-      <h2>Modification</h2>
+      <h2>Nouvel article</h2>
       <hr>
     </div>
 
     <div class="col-md-8 col-md-offset-2">
 
-      <form action="/admin/update-post/{{ post.id }}" method="post">
+      <form action="/admin/create-post" method="post">
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
               {# <input type="hidden" name="id" value="{{ post.id }}"> #}
               <label for"title">Titre :</label>
-              <input type="text" name="title" id="title" class="form-control" value="{{ post.title }}">
+              <input type="text" name="title" id="title" class="form-control">
             </div>
           </div>
 
         </div>
         <div class="form-group">
           <label for"content">Contenu :</label>
-          <textarea name="content" id="content" class="form-control" rows="4">{{ post.content }}</textarea>
+          <textarea name="content" id="content" class="form-control" rows="4"></textarea>
         </div>
-        <input type="submit" class="btn btn-default" value="Modifier"> 
-        <a class="btn btn-primary" href="/admin/post/{{ post.id }}"><i class="fa fa-newspaper-o"></i> Retour article</a></p>
+        <input type="submit" class="btn btn-default" value="Ajouter">
+        <a class="btn btn-primary" href="/admin/posts?page=1"><i class="fa fa-newspaper-o"></i> Retour articles</a></p>
       </form>
+
     </div>
   </div>
 </div>

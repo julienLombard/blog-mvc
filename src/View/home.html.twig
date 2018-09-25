@@ -1,287 +1,287 @@
-{% extends 'template.html.twig' %}
+{% extends 'homeTemplate.html.twig' %}
 
 {% block body %}
 
-    <!-- About Section -->
-    <div id="about">
-      <div class="container">
-        <div class="section-title text-center center">
-          <h2>Présentation</h2>
-          <hr>
-        </div>
-        <div class="row">
-          <div class="col-md-12 text-center"><img src="{{ app.request.basepath }}/img/about.jpg" class="img-responsive"></div>
-          <div class="col-md-8 col-md-offset-2">
-            <div class="about-text">
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo nibh ante facilisis bibendum dolor feugiat at. Duis sed dapibus leo nec ornare diam commodo nibh.</p>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo nibh ante facilisis bibendum dolor feugiat at. Duis sed dapibus leo nec ornare.</p>
-              <p class="text-center"><a class="btn btn-primary" href="img/CV_Julien_Lombard.pdf" download="CV_Julien_Lombard.pdf"><i class="fa fa-download"></i> Télécharger mon CV</a></p>
-            </div>
+  <!-- About Section -->
+  <section id="about">
+    <div class="container-fluid">
+      <div class="section-title text-center center">
+        <h2>Présentation</h2>
+        <hr>
+      </div>
+      <!-- About Text -->
+      <div class="row">
+        <div class="col-md-12 text-center"><img src="{{ app.request.basepath }}/img/about.jpg" class="img-responsive"></div>
+        <div class="col-md-8 col-md-offset-2">
+          <div class="about-text">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo nibh ante facilisis bibendum dolor feugiat at. Duis sed dapibus leo nec ornare diam commodo nibh.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo nibh ante facilisis bibendum dolor feugiat at. Duis sed dapibus leo nec ornare.</p>
+            <p class="text-center"><a class="btn btn-primary" href="img/CV_Julien_Lombard.pdf" download="CV_Julien_Lombard.pdf"><i class="fa fa-download"></i> Télécharger mon CV</a></p>
           </div>
         </div>
       </div>
     </div>
+  </section>
 
-    <!-- Skills Section -->
-    <div id="skills" class="text-center">
-      <div class="container">
-        <div class="section-title center">
-          <h2>Compétences</h2>
-          <hr>
+  <!-- Skills Section -->
+  <section id="skills" class="text-center">
+    <div class="container">
+      <div class="section-title center">
+        <h2>Compétences</h2>
+        <hr>
+      </div>
+      <div class="row">
+        <div class="col-md-4 col-sm-6 skill"> <span class="chart" data-percent="60"> <span class="percent">60</span> </span>
+          <h4>HTML5</h4>
         </div>
-        <div class="row">
-          <div class="col-md-4 col-sm-6 skill"> <span class="chart" data-percent="60"> <span class="percent">60</span> </span>
-            <h4>HTML5</h4>
+        <div class="col-md-4 col-sm-6 skill"> <span class="chart" data-percent="60"> <span class="percent">60</span> </span>
+          <h4>CSS3</h4>
+        </div>
+        <div class="col-md-4 col-sm-6 skill"> <span class="chart" data-percent="40"> <span class="percent">40</span> </span>
+          <h4>jQuery</h4>
+        </div>
+        <div class="col-md-4 col-sm-6 skill"> <span class="chart" data-percent="40"> <span class="percent">40</span> </span>
+          <h4>WordPress</h4>
+        </div>
+        <div class="col-md-4 col-sm-6 skill"> <span class="chart" data-percent="40"> <span class="percent">40</span> </span>
+          <h4>PHP 7</h4>
+        </div>
+        <div class="col-md-4 col-sm-6 skill"> <span class="chart" data-percent="40"> <span class="percent">40</span> </span>
+          <h4>SQL</h4>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio Section -->
+  <section id="portfolio">
+    <div class="container">
+
+      <div class="section-title text-center center">
+        <h2>Portfolio</h2>
+        <hr>
+      </div>
+
+      <div class="row">
+        <div class="portfolio-items">
+
+          {% for post in posts %}
+          
+              <div class="col-sm-6 col-md-3 col-lg-3 web">
+                  <div class="portfolio-item">
+                      <div class="hover-bg">
+                          <a href="/post/{{ post.id }}?page=1">
+                              <div class="hover-text">
+                                <h4>{{ post.title }}</h4>
+                              </div>
+                              <img src="img/portfolio/post-{{ post.id }}.jpg" class="img-responsive" alt="Project Title"> 
+                          </a> 
+                      </div>
+                  </div>
+              </div>
+
+          {% else %}
+          {% endfor %}
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Achievements Section -->
+  <section id="achievements" class="text-center">
+    <div class="container">
+      <div class="section-title center">
+        <h2>Quelques Chiffres</h2>
+        <hr>
+      </div>
+      <div class="row">
+        <div class="col-md-3 col-sm-3 wow fadeInDown" data-wow-delay="200ms">
+          <div class="achievement-box"> <span class="count">5</span>
+            <h4>Clients Satisfaits</h4>
           </div>
-          <div class="col-md-4 col-sm-6 skill"> <span class="chart" data-percent="60"> <span class="percent">60</span> </span>
-            <h4>CSS3</h4>
+        </div>
+        <div class="col-md-3 col-sm-3 wow fadeInDown" data-wow-delay="400ms">
+          <div class="achievement-box"> <span class="count">+999</span>
+            <h4>Lignes de code</h4>
           </div>
-          <div class="col-md-4 col-sm-6 skill"> <span class="chart" data-percent="40"> <span class="percent">40</span> </span>
-            <h4>jQuery</h4>
+        </div>
+        <div class="col-md-3 col-sm-3 wow fadeInDown" data-wow-delay="600ms">
+          <div class="achievement-box"> <span class="count">5</span>
+            <h4>Projets réalisés</h4>
           </div>
-          <div class="col-md-4 col-sm-6 skill"> <span class="chart" data-percent="40"> <span class="percent">40</span> </span>
-            <h4>WordPress</h4>
-          </div>
-          <div class="col-md-4 col-sm-6 skill"> <span class="chart" data-percent="40"> <span class="percent">40</span> </span>
-            <h4>PHP 7</h4>
-          </div>
-          <div class="col-md-4 col-sm-6 skill"> <span class="chart" data-percent="40"> <span class="percent">40</span> </span>
-            <h4>SQL</h4>
+        </div>
+        <div class="col-md-3 col-sm-3 wow fadeInDown" data-wow-delay="800ms">
+          <div class="achievement-box"> <span class="count">+999</span>
+            <h4>Heures de travail</h4>
           </div>
         </div>
       </div>
     </div>
+  </section>
 
-    <!-- Portfolio Section -->
-    <div id="portfolio">
-      <div class="container">
-
-        <div class="section-title text-center center">
-          <h2>Portfolio</h2>
-          <hr>
+  <!-- Resume Section -->
+  <section id="resume" class="text-center">
+    <div class="container">
+      <div class="section-title center">
+        <h2>Formation</h2>
+        <hr>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <ul class="timeline">
+            <li>
+              <div class="timeline-image">
+                <h4>Nov 2017 <br>
+                  - <br>
+                  Présent </h4>
+              </div>
+              <div class="timeline-panel">
+                <div class="timeline-heading">
+                  <h4>Openclassrooms</h4>
+                  <h4 class="subheading">Développeur d’application PHP/Symfony</h4>
+                </div>
+                <div class="timeline-body">
+                  <p>Diplome RNCP - Développeur d’application –  (En cours)</p>
+                </div>
+              </div>
+            </li>
+            <li class="timeline-inverted">
+              <div class="timeline-image">
+                <h4>Oct 2016 <br>
+                  - <br>
+                  Fev 2017 </h4>
+              </div>
+              <div class="timeline-panel">
+                <div class="timeline-heading">
+                  <h4>Webforce3</h4>
+                  <h4 class="subheading">Développeur Intégrateur Web</h4>
+                </div>
+                <div class="timeline-body">
+                  <p>Certification RNCP - Techniques d’intégration WEB – Obtenu</p>
+                  <p>Certification RNCP - Techniques de développement WEB – Obtenu</p>
+                </div>
+              </div>
+            </li>
+          </ul>
         </div>
-
-        <div class="row">
-          <div class="portfolio-items">
-
-            {% for post in posts %}
+      </div>
+    </div>
+    <div class="container">
+      <div class="section-title center">
+        <h2>Expérience</h2>
+        <hr>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <ul class="timeline">
             
-                <div class="col-sm-6 col-md-3 col-lg-3 web">
-                    <div class="portfolio-item">
-                        <div class="hover-bg">
-                            <a href="/post/{{ post.id }}?page=1">
-                                <div class="hover-text">
-                                  <h4>{{ post.title }}</h4>
-                                </div>
-                                <img src="img/portfolio/post-{{ post.id }}.jpg" class="img-responsive" alt="Project Title"> 
-                            </a> 
-                        </div>
-                    </div>
+            <!-- Experience Section-->           
+            <li>
+              <div class="timeline-image">
+                <h4>2014 <br>
+                  - <br>
+                  2016 </h4>
+              </div>
+              <div class="timeline-panel">
+                <div class="timeline-heading">
+                  <h4>Veolia</h4>
+                  <h4 class="subheading">Agent de Réseau Eau Potable</h4>
                 </div>
-
-            {% else %}
-            {% endfor %}
-
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Achievements Section -->
-    <div id="achievements" class="text-center">
-      <div class="container">
-        <div class="section-title center">
-          <h2>Quelques Chiffres</h2>
-          <hr>
-        </div>
-        <div class="row">
-          <div class="col-md-3 col-sm-3 wow fadeInDown" data-wow-delay="200ms">
-            <div class="achievement-box"> <span class="count">5</span>
-              <h4>Clients Satisfaits</h4>
-            </div>
-          </div>
-          <div class="col-md-3 col-sm-3 wow fadeInDown" data-wow-delay="400ms">
-            <div class="achievement-box"> <span class="count">+999</span>
-              <h4>Lignes de code</h4>
-            </div>
-          </div>
-          <div class="col-md-3 col-sm-3 wow fadeInDown" data-wow-delay="600ms">
-            <div class="achievement-box"> <span class="count">5</span>
-              <h4>Projets réalisés</h4>
-            </div>
-          </div>
-          <div class="col-md-3 col-sm-3 wow fadeInDown" data-wow-delay="800ms">
-            <div class="achievement-box"> <span class="count">+999</span>
-              <h4>Heures de travail</h4>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Resume Section -->
-    <div id="resume" class="text-center">
-      <div class="container">
-        <div class="section-title center">
-          <h2>Formation</h2>
-          <hr>
-        </div>
-        <div class="row">
-          <div class="col-lg-12">
-            <ul class="timeline">
-              <li>
-                <div class="timeline-image">
-                  <h4>Nov 2017 <br>
-                    - <br>
-                    Présent </h4>
-                </div>
-                <div class="timeline-panel">
-                  <div class="timeline-heading">
-                    <h4>Openclassrooms</h4>
-                    <h4 class="subheading">Développeur d’application PHP/Symfony</h4>
-                  </div>
-                  <div class="timeline-body">
-                    <p>Diplome RNCP - Développeur d’application –  (En cours)</p>
-                  </div>
-                </div>
-              </li>
-              <li class="timeline-inverted">
-                <div class="timeline-image">
-                  <h4>Oct 2016 <br>
-                    - <br>
-                    Fev 2017 </h4>
-                </div>
-                <div class="timeline-panel">
-                  <div class="timeline-heading">
-                    <h4>Webforce3</h4>
-                    <h4 class="subheading">Développeur Intégrateur Web</h4>
-                  </div>
-                  <div class="timeline-body">
-                    <p>Certification RNCP - Techniques d’intégration WEB – Obtenu</p>
-                    <p>Certification RNCP - Techniques de développement WEB – Obtenu</p>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="container">
-        <div class="section-title center">
-          <h2>Expérience</h2>
-          <hr>
-        </div>
-        <div class="row">
-          <div class="col-lg-12">
-            <ul class="timeline">
-              
-              <!-- Experience Section-->
-              
-              <li>
-                <div class="timeline-image">
-                  <h4>2014 <br>
-                    - <br>
-                    2016 </h4>
-                </div>
-                <div class="timeline-panel">
-                  <div class="timeline-heading">
-                    <h4>Veolia</h4>
-                    <h4 class="subheading">Agent de Réseau Eau Potable</h4>
-                  </div>
-                  <div class="timeline-body">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.</p>
-                  </div>
-                </div>
-              </li>
-              <li class="timeline-inverted">
-                <div class="timeline-image">
-                  <h4>2011 <br>
-                    - <br>
-                    2013 </h4>
-                </div>
-                <div class="timeline-panel">
-                  <div class="timeline-heading">
-                    <h4>Interim</h4>
-                    <h4 class="subheading">Plombier Chauffagiste</h4>
-                  </div>
-                  <div class="timeline-body">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.</p>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div class="timeline-image">
-                  <h4>2007 <br>
-                    - <br>
-                    20011 </h4>
-                </div>
-                <div class="timeline-panel">
-                  <div class="timeline-heading">
-                    <h4>Goron, Samsic</h4>
-                    <h4 class="subheading">Agent de Sécurité</h4>
-                  </div>
-                  <div class="timeline-body">
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.</p>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Contact Section -->
-    <div id="contact" class="text-center">
-      <div class="container">
-        <div class="section-title center">
-          <h2>Contact</h2>
-          <hr>
-        </div>
-        <div class="col-md-8 col-md-offset-2">
-          <div class="col-md-4"> <i class="fa fa-map-marker fa-2x"></i>
-            <p>Paris, France</p>
-          </div>
-          <div class="col-md-4"> <i class="fa fa-envelope-o fa-2x"></i>
-            <p>julienlombard.fr@gmail.com</p>
-          </div>
-          <div class="col-md-4"> <i class="fa fa-phone fa-2x"></i>
-            <p> 06 58 73 92 80</p>
-          </div>
-          <div class="clearfix"></div>
-        </div>
-        <div class="col-md-8 col-md-offset-2">
-          <h3>Me Contacter</h3>
-          <form name="sentMessage" id="contactForm" novalidate>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <input type="text" id="name" class="form-control" placeholder="Nom" required="required">
-                  <p class="help-block text-danger"></p>
+                <div class="timeline-body">
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.</p>
                 </div>
               </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <input type="email" id="email" class="form-control" placeholder="Email" required="required">
-                  <p class="help-block text-danger"></p>
+            </li>
+            <li class="timeline-inverted">
+              <div class="timeline-image">
+                <h4>2011 <br>
+                  - <br>
+                  2013 </h4>
+              </div>
+              <div class="timeline-panel">
+                <div class="timeline-heading">
+                  <h4>Interim</h4>
+                  <h4 class="subheading">Plombier Chauffagiste</h4>
+                </div>
+                <div class="timeline-body">
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.</p>
                 </div>
               </div>
-            </div>
-            <div class="form-group">
-              <textarea name="message" id="message" class="form-control" rows="4" placeholder="Message" required></textarea>
-              <p class="help-block text-danger"></p>
-            </div>
-            <div id="success"></div>
-            <button type="submit" class="btn btn-default">Envoyer</button>
-          </form>
-          <div class="social">
-            <ul>
-              <li><a href="https://github.com/julienLombard"><i class="fa fa-github"></i></a></li>
-              <li><a href="https://www.linkedin.com/in/julien-lombard-fr"><i class="fa fa-linkedin"></i></a></li>
-            </ul>
-          </div>
+            </li>
+            <li>
+              <div class="timeline-image">
+                <h4>2007 <br>
+                  - <br>
+                  20011 </h4>
+              </div>
+              <div class="timeline-panel">
+                <div class="timeline-heading">
+                  <h4>Goron, Samsic</h4>
+                  <h4 class="subheading">Agent de Sécurité</h4>
+                </div>
+                <div class="timeline-body">
+                  <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.</p>
+                </div>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="text-center">
+    <div class="container">
+      <div class="section-title center">
+        <h2>Contact</h2>
+        <hr>
+      </div>
+      <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-4"> <i class="fa fa-map-marker fa-2x"></i>
+          <p>Paris, France</p>
+        </div>
+        <div class="col-md-4"> <i class="fa fa-envelope-o fa-2x"></i>
+          <p>julienlombard.fr@gmail.com</p>
+        </div>
+        <div class="col-md-4"> <i class="fa fa-phone fa-2x"></i>
+          <p> 06 58 73 92 80</p>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      <div class="col-md-8 col-md-offset-2">
+        <h3>Me Contacter</h3>
+        <form name="sentMessage" id="contactForm" novalidate>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <input type="text" id="name" class="form-control" placeholder="Nom" required="required">
+                <p class="help-block text-danger"></p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <input type="email" id="email" class="form-control" placeholder="Email" required="required">
+                <p class="help-block text-danger"></p>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <textarea name="message" id="message" class="form-control" rows="4" placeholder="Message" required></textarea>
+            <p class="help-block text-danger"></p>
+          </div>
+          <div id="success"></div>
+          <button type="submit" class="btn btn-default">Envoyer</button>
+        </form>
+        <div class="social">
+          <ul>
+            <li><a href="https://github.com/julienLombard"><i class="fa fa-github"></i></a></li>
+            <li><a href="https://www.linkedin.com/in/julien-lombard-fr"><i class="fa fa-linkedin"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
 {% endblock %}

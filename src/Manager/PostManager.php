@@ -11,11 +11,11 @@ use Model\Post;
 */
 class PostManager extends Manager
 {
-    public function getPagination($page, ?int $offset, ?int $length, ?string $property, ?string $order, ?string $property2, ?int $id) 
+    public function getPagination($page, ?int $offset, ?int $length, ?string $property, ?string $order, ?string $property2, ?string $var) 
     {
         $offset = ($page-1)*$length;
 
-        $results = $this->findAll($offset, $length, $property, $order, $property = null, $id = null );
+        $results = $this->findAll($offset, $length, $property, $order, $property2, $var, null, null);
 
         return $results;
     }
