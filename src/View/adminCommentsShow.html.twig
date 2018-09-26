@@ -33,7 +33,7 @@
                 {{ (comment.reported == 1) ? ' - <span class="red">Commentaire Signalé!</span>' : '' }}
               </p>
               <p>"{{ comment.content }}"</p>
-              <p>{{ comment.author }} - publication: {{ comment.publicationDate|date('d/m/Y') }} - modification: {{ comment.modificationDate|date('d/m/Y') }}</p>
+              <p>{{ comment.author }} - publication: {{ comment.publicationDate|date('d/m/Y') }}{{ (comment.modificationDate == null) ? 'non' : ' - modification: ' ~ comment.modificationDate|date('d/m/Y') }}</p>
               <p class="text-center">
                 <a class="btn btn-primary" href="/admin/confirm-delete-comment/{{ post.id }}/{{ comment.id }}"><i class="fa fa-trash"></i> Effacer</a> 
                 <a class="btn btn-primary" href="/admin/edit-comment/{{ post.id }}/{{ comment.id }}"><i class="fa fa-edit"></i> modifier</a> 

@@ -130,7 +130,7 @@ hr {
 .navbar-custom .nav li a:focus, .navbar-custom .nav li a:active {
 	outline: 0;
 	background-color: transparent;
-	color: #7bc3d1;
+	color: #da5f57;
 }
 .navbar-custom .nav li.active {
 	outline: 0;
@@ -418,7 +418,7 @@ ol.type li a:hover {
 	margin-left: 10px;
 }
 #admin img {
-	border-radius: 50%;
+	/* border-radius: 50%; */
 	width: 200px;
 	height: 200px;
 	display: inline-block;
@@ -467,6 +467,9 @@ ol.type li a:hover {
 }
 .red {
 	color: red;
+}
+.white {
+	color: white;
 }
 #comment {
 	padding: 100px 0;

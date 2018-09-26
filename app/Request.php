@@ -111,7 +111,6 @@ class Request
      */
     public function getPath()
     {
-        // return $this->server["REQUEST_URI"];
         return $this->server["PATH_INFO"];
     }
 }

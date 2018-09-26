@@ -101,8 +101,7 @@ class AdminController extends Controller
         return $this->render("adminPostsList.html.twig", [
             "posts" => $posts, 
             "page" => $page, 
-            "pageCount" => ceil($manager->countAllPost()/4)]);
-        
+            "pageCount" => ceil($manager->countAllPost()/4)]);    
 
     }
 

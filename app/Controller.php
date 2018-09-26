@@ -43,6 +43,7 @@ class Controller
 
 		$loader = new \Twig_Loader_Filesystem('../src/View');
 		$this->twig = new \Twig_Environment($loader, array('cache' => false,));
+		$this->twig->addExtension(new \Twig_Extensions_Extension_Text());
 
 	}
 

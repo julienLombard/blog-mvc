@@ -73,6 +73,7 @@
                           <a href="/post/{{ post.id }}?page=1">
                               <div class="hover-text">
                                 <h4>{{ post.title }}</h4>
+                                <p>{{ post.content| truncate(60, false, '...')  }}</p>
                               </div>
                               <img src="img/portfolio/post-{{ post.id }}.jpg" class="img-responsive" alt="Project Title"> 
                           </a> 
@@ -233,10 +234,18 @@
 
   <!-- Contact Section -->
   <section id="contact" class="text-center">
+
+    <!-- Contact informations -->
     <div class="container">
       <div class="section-title center">
         <h2>Contact</h2>
         <hr>
+        {% if alert == 1 %}
+          <p class="white">Votre message a bien été expédié !</p>
+        {% elseif alert == 2 %}
+          <p class="white">Veillez remplir tous les champs du formulaire !!!</p>
+        {% else %}
+        {% endif %}
       </div>
       <div class="col-md-8 col-md-offset-2">
         <div class="col-md-4"> <i class="fa fa-map-marker fa-2x"></i>
@@ -250,19 +259,21 @@
         </div>
         <div class="clearfix"></div>
       </div>
+
+      <!--Form Contact -->
       <div class="col-md-8 col-md-offset-2">
         <h3>Me Contacter</h3>
-        <form action="/send-mail" method="post" name="sentMessage" id="contactForm" novalidate>
+        <form action="/home-send-mail#contact" method="post" name="sentMessage" id="contactForm" novalidate>
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <input type="text" id="name" class="form-control" placeholder="Nom" required="required">
+                <input type="text" name="name" id="name" class="form-control" placeholder="Nom" required="required">
                 <p class="help-block text-danger"></p>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <input type="email" id="email" class="form-control" placeholder="Email" required="required">
+                <input type="email" name="email" id="email" class="form-control" placeholder="Email" required="required">
                 <p class="help-block text-danger"></p>
               </div>
             </div>

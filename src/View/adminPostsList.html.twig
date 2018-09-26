@@ -25,6 +25,7 @@
                       <a href="/admin/post/{{ post.id }}#post">
                           <div class="hover-text">
                             <h4>{{ post.title }}</h4>
+                            <p>{{ post.content| truncate(60, false, '...')  }}</p>
                           </div>
                           <img src="{{ app.request.basepath }}/img/portfolio/post-{{ post.id }}.jpg" class="img-responsive" alt="Project Title"> 
                       </a> 

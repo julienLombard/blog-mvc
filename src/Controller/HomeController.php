@@ -34,6 +34,7 @@ class HomeController extends Controller
     {
         // get $_POST
         $post = $this->getRequest()->getPost();
+        $alert = 0;
 
         // Contact Form
         if (!empty($post['name'])    &&
@@ -43,6 +44,7 @@ class HomeController extends Controller
             $name = $post['name'];
             $email= $post['email'];
             $message = $post['message'];
+            $alert = 1;
 
             // Create the email and send the message
             $to = 'julienlombard.Fr@gmail.com'; // Add your email address inbetween the '' replacing yourname@yourdomain.com - This is where the form will send a message to.
@@ -51,10 +53,44 @@ class HomeController extends Controller
             $headers = "De: noreply@yourdomain.com\n"; // This is the email address the generated message will be from. We recommend using something like noreply@yourdomain.com.
             $headers .= "Répondre à: $email";	
             mail($to,$email_subject,$email_body,$headers);
+
+        } elseif (empty($post['name'])    ||
+                empty($post['email'])   ||
+                empty($post['message'])) 
+        {
+                $alert = 2;
         }
 
+        // Get Database, Manager and find all Post
+        $database = $this->getDatabase();
+        $manager = $database->getManager(Post::class);
+        $posts = $manager->findAll(0,8, "publicationDate", "DESC","", null, null, null);
+
         // Redirect Route
-        return $this->redirect("home");
+        return $this->render("home.html.twig", ["posts" => $post, "alert" => $alert]);
+    }
+
+    /**
+    * @return \App\Response\Response
+    */
+    public function postsList()
+    {          
+        // get $_GET for page's number
+        $page = $this->getRequest()->getGet()['page'] ?? 1;
+
+        // get Database and PostManager
+        $database = $this->getDatabase();
+        $manager = $database->getManager(Post::class);
+        
+        // Pagination
+        $posts = $manager->getPagination($page, 0, 4, "publicationDate", "DESC", "", null);
+        
+        // View
+        return $this->render("homePostsList.html.twig", [
+            "posts" => $posts, 
+            "page" => $page, 
+            "pageCount" => ceil($manager->countAllPost()/4)]);    
+
     }
 
     /**

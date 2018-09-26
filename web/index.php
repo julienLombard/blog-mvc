@@ -16,11 +16,11 @@ $router = new Router($request);
 
 // Router Test
 $router->add(new Route("home", "/home", [], "Controller\HomeController", "index", false));
-$router->add(new Route("home_portfolio", "/home#portfolio", [], "Controller\HomeController", "index", false));
+$router->add(new Route("home_posts_list", "/posts", [], "Controller\HomeController", "postsList", false));
 $router->add(new Route("home_post_show", "/post/:id", ["id" => "\d+"], "Controller\HomeController", "showPost", false));
 $router->add(new Route("home_comment_create", "/create-comment-post/:id", ["id" => "\d+"], "Controller\HomeController", "createComment", false));
 $router->add(new Route("home_comment_reported", "/reported-comment/:post/:id", ["post" => "\d+", "id" => "\d+"], "Controller\HomeController", "reportedComment", false));
-$router->add(new Route("home_send_mail", "/send-mail", [], "Controller\HomeController", "sendMail"));
+$router->add(new Route("home_send_mail", "/home-send-mail", [], "Controller\HomeController", "sendMail", false));
 
 $router->add(new Route("admin", "/admin", [], "Controller\AdminController", "showData", false));
 $router->add(new Route("admin_user_connection", "/connection", [], "Controller\AdminController", "connection", false));
@@ -48,7 +48,6 @@ $router->add(new Route("admin_comment_delete", "/admin/delete-comment/:post/:id"
 
 
 $route = $router->find($request);
-// $route = $router->find();
 
 $response = $route->call($request, $router);
 $response->send();
