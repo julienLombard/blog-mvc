@@ -3,6 +3,7 @@ namespace App\Router;
 
 use App\Request;
 use App\Router\Route;
+use Symfony\Component\Yaml\Yaml;
 
 /**
 * Class Router
@@ -91,6 +92,18 @@ class Router
         if (isset($this->routes[$routeName]))
         {
             return $this->routes[$routeName];
+        }
+    }
+
+    /**
+     * @param string $file
+     */
+    public function loadYaml($file)
+    {
+        // loading routing.yml file
+        $routes = Yaml::parseFile($file);
+        foreach($routes as $name => $route){
+            $this->add(new Route($name, $route["path"], $route["parameters"], $route["controller"], $route["action"], $route["security"], $route["args"] ?? null));
         }
     }
 }
