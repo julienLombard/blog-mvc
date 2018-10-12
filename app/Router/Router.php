@@ -60,21 +60,17 @@ class Router
     {
     	foreach ($this->routes as $route) 
     	{
-
             if ($route->match($this->request->getPath())) 
     		{
                 if ($route->getSecurity() == true) 
                 {
-                    if ($route->isLogged($request) == true) {
+                    if ($route->isGranted($request) == true) {
 
                         return $route;
-
                     } else {
-
-                        return $this->routes["admin_user_connection"];
-
-                    }
-                    
+                        
+                        return $this->routes[0];
+                    }                   
                 } else {
 
                     return $route;

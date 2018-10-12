@@ -156,9 +156,10 @@ class Route
 	}
 
 	/**
+	* @param Request $request
 	* @return boolean
 	*/
-	public function isLogged(Request $request) {
+	public function isGranted(Request $request) {
 
         if ($this->getSecurity() == true) {
 

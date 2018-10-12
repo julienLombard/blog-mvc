@@ -1,3 +1,10 @@
+0:
+    name: user_redirection
+    path: /connection
+    parameters: {}
+    controller: Controller\AdminController
+    action: connection
+    security: False
 home:
     name: home
     path: /home

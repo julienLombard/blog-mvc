@@ -16,8 +16,7 @@ class CommentManager extends Manager
         $offset = ($page-1)*$length;
 
         $results = $this->findAll($offset, $length, $property, $order, $property2, $var, $property3, $var2);
-        // var_dump($results);
-        // exit;
+
         return $results;
     }
 

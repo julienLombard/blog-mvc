@@ -68,7 +68,6 @@ class Manager
                         break;
                 }
                 $obj->{sprintf("set%s", ucfirst($columns[$column]["property"]))}($value);
-                // var_dump($column . " => " . $value);
             }
             return $obj;
         }
@@ -258,7 +257,6 @@ class Manager
                 implode(",", $sets),
                 $modelMetadata["primaryKey"]
                 );
-        // var_dump($query, $data);
 
         $statement = $this->database->getPdo()->prepare($query);
         $statement->execute($data);
