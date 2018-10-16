@@ -1,196 +1,208 @@
-0:
-    name: user_redirection
-    path: /connection
-    parameters: {}
-    controller: Controller\AdminController
-    action: connection
-    security: False
 home:
     name: home
     path: /home
     parameters: {}
-    controller: Controller\HomeController
+    controller: Controller\FrontOffice\PostController
     action: index
     security: False
 home_posts_list:
     name: home_posts_list
     path: /posts
     parameters: {}
-    controller: Controller\HomeController
+    controller: Controller\FrontOffice\PostController
     action: postsList
     security: False
 home_post_show:
     name: home_post_show
     path: /post/:id
     parameters: {id: '[\d]+'}
-    controller: Controller\HomeController
+    controller: Controller\FrontOffice\PostController
     action: showPost
     security: False
+home_send_mail:
+    name: home_send_mail
+    path: /home-send-mail
+    parameters: {}
+    controller: Controller\FrontOffice\PostController
+    action: sendMail
+    security: False
+
+
+
 home_comment_create:
     name: home_comment_create
     path: /create-comment-post/:id
     parameters: {id: '[\d]+'}
-    controller: Controller\HomeController
+    controller: Controller\FrontOffice\CommentController
     action: createComment
     security: False
 home_comment_reported:
     name: home_comment_reported
     path: /reported-comment/:post/:id
     parameters: {id: '[\d]+'}
-    controller: Controller\HomeController
+    controller: Controller\FrontOffice\CommentController
     action: reportedComment
     security: False
-home_send_mail:
-    name: home_send_mail
-    path: /home-send-mail
-    parameters: {}
-    controller: Controller\HomeController
-    action: sendMail
-    security: False
+
+
+
 admin:
     name: admin
     path: /admin
     parameters: {}
-    controller: Controller\AdminController
-    action: showData
+    controller: Controller\BackOffice\UserController
+    action: showBackOffice
     security: False
 admin_user_connection:
     name: admin_user_connection
     path: /connection
     parameters: {}
-    controller: Controller\AdminController
+    controller: Controller\BackOffice\UserController
     action: connection
     security: False
 admin_user_logout:
     name: admin_user_logout
     path: /logout
     parameters: {}
-    controller: Controller\AdminController
+    controller: Controller\BackOffice\UserController
     action: logout
     security: True
+0:
+    name: user_redirection
+    path: /connection
+    parameters: {}
+    controller: Controller\BackOffice\UserController
+    action: connection
+    security: False
+
+
+
 admin_posts_list:
     name: admin_posts_list
     path: /admin/posts
     parameters: {}
-    controller: Controller\AdminController
+    controller: Controller\BackOffice\PostController
     action: postsList
     security: True
 admin_post_showt:
     name: admin_post_showt
     path: /admin/post/:id
     parameters: {id: '[\d]+'}
-    controller: Controller\AdminController
+    controller: Controller\BackOffice\PostController
     action: showAdminPost
     security: True
 admin_post_create_form:
     name: admin_post_create_form
     path: /admin/create-post-form
     parameters: {}
-    controller: Controller\AdminController
+    controller: Controller\BackOffice\PostController
     action: createPostForm
     security: True
 admin_post_create:
     name: admin_post_create
     path: /admin/create-post
     parameters: {}
-    controller: Controller\AdminController
+    controller: Controller\BackOffice\PostController
     action: createPost
     security: True
 admin_post_edit:
     name: admin_post_edit
     path: /admin/edit-post/:id
     parameters: {id: '[\d]+'}
-    controller: Controller\AdminController
+    controller: Controller\BackOffice\PostController
     action: showEditPost
     security: True
 admin_post_update:
     name: admin_post_update
     path: /admin/update-post/:id
     parameters: {id: '[\d]+'}
-    controller: Controller\AdminController
+    controller: Controller\BackOffice\PostController
     action: updatePost
     security: True
 admin_post_confirm_delete:
     name: admin_post_confirm_delete
     path: /admin/confirm-delete-post/:id
     parameters: {id: '[\d]+'}
-    controller: Controller\AdminController
+    controller: Controller\BackOffice\PostController
     action: confirmDeletePost
     security: True
 admin_post_delete:
     name: admin_post_delete
     path: /admin/delete-post/:id
     parameters: {id: '[\d]+'}
-    controller: Controller\AdminController
+    controller: Controller\BackOffice\PostController
     action: deletePost
     security: True
+
+
+
 admin_comments_list:
     name: admin_comments_list
     path: /admin/comments
     parameters: {}
-    controller: Controller\AdminController
+    controller: Controller\BackOffice\CommentController
     action: commentsList
     security: True
 admin_comments_show:
     name: admin_comments_show
     path: /admin/comments-post/:id
     parameters: {id: '[\d]+'}
-    controller: Controller\AdminController
+    controller: Controller\BackOffice\CommentController
     action: showComments
     security: True
 admin_comments_show_invalidated:
     name: admin_comments_show_invalidated
     path: /admin/show-invalidated
     parameters: {}
-    controller: Controller\AdminController
+    controller: Controller\BackOffice\CommentController
     action: showInvalidated
     security: True
 admin_comments_show_reported:
     name: admin_comments_show_reported
     path: /admin/show-reported
     parameters: {}
-    controller: Controller\AdminController
+    controller: Controller\BackOffice\CommentController
     action: showReported
     security: True
 admin_comment_validate:
     name: admin_comment_validate
     path: /admin/validate-comment/:post/:id
     parameters: {post: '[\d]+', id: '[\d]+'}
-    controller: Controller\AdminController
+    controller: Controller\BackOffice\CommentController
     action: validateComment
     security: True
 admin_comment_moderate:
     name: admin_comment_moderate
     path: /admin/moderate-comment/:id
     parameters: {id: '[\d]+'}
-    controller: Controller\AdminController
+    controller: Controller\BackOffice\CommentController
     action: moderateComment
     security: True
 admin_comment_edit:
     name: admin_comment_edit
     path: /admin/edit-comment/:post/:id
     parameters: {post: '[\d]+', id: '[\d]+'}
-    controller: Controller\AdminController
+    controller: Controller\BackOffice\CommentController
     action: showEditComment
     security: True
 admin_comment_update:
     name: admin_comment_update
     path: /admin/update-comment/:post/:id
     parameters: {post: '[\d]+', id: '[\d]+'}
-    controller: Controller\AdminController
+    controller: Controller\BackOffice\CommentController
     action: updateComment
     security: True
 admin_comment_confirm_delete:
     name: admin_comment_confirm_delete
     path: /admin/confirm-delete-comment/:post/:id
     parameters: {post: '[\d]+', id: '[\d]+'}
-    controller: Controller\AdminController
+    controller: Controller\BackOffice\CommentController
     action: confirmDeleteComment
     security: True
 admin_comment_delete:
     name: admin_comment_confirm_delete
     path: /admin/delete-comment/:post/:id
     parameters: {post: '[\d]+', id: '[\d]+'}
-    controller: Controller\AdminController
+    controller: Controller\BackOffice\CommentController
     action: deleteComment
     security: True
