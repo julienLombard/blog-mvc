@@ -28,6 +28,14 @@ class CommentManager extends Manager
         return $statement->fetch(\PDO::FETCH_ASSOC)["total"];
     }
 
+    public function countValidByPost($id)
+    {
+        $statement = $this->database->getPdo()->prepare("SELECT COUNT(*) as total FROM comment WHERE post_id = :post_id AND validate = 1" );
+        $statement->execute(["post_id" => $id]);
+
+        return $statement->fetch(\PDO::FETCH_ASSOC)["total"];
+    }
+
     public function countAllComment($property, $nb)
     {
         $statement = $this->database->getPdo()->prepare("SELECT COUNT(*) as total FROM comment WHERE $property = $nb" );

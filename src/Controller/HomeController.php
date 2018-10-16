@@ -110,7 +110,7 @@ class HomeController extends Controller
 
         // Get Comments Manager and pagination
         $commentManager = $database->getManager(Comment::class);      
-        $comments = $commentManager->getPagination($page, 0, 8, "publicationDate", "ASC", "postId", $id, "validate", "1", null, null);
+        $comments = $commentManager->getPagination($page, 0, 8, "publicationDate", "ASC", "postId", $id, "validate", "1");
 
         // View
         return $this->render("homePostShow.html.twig", [
@@ -118,7 +118,7 @@ class HomeController extends Controller
             "post" => $post, 
             "comments" => $comments, 
             "page" => $this->getRequest()->getGet()['page'] ?? 1, 
-            "pageCount" => ceil($commentManager->countAllComment("validate",1)/8)]);
+            "pageCount" => ceil($commentManager->countValidByPost($id)/8)]);
     }
 
     /**
