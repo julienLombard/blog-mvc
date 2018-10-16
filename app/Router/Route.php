@@ -58,6 +58,48 @@ class Route
 		$this->args = [];
 	}
 	/**
+	 * @return string
+	 */
+	public function getName()
+	{
+	    return $this->name;
+	}
+	/**
+	 * @return string
+	 */
+	public function getPath()
+	{
+	    return $this->path;
+	}
+	/**
+	 * @return array
+	 */
+	public function getParameters()
+	{
+	    return $this->parameters;
+	}
+	/**
+	 * @return string
+	 */
+	public function getController()
+	{
+	    return $this->controller;
+	}
+	/**
+	 * @return string
+	 */
+	public function getAction()
+	{
+	    return $this->action;
+	}
+	/**
+	 * @return boolean
+	 */
+	public function getSecurity()
+	{
+	    return $this->security;
+	}
+	/**
 	* @return boolean
 	*/
 	public function match($requestUri)
@@ -111,48 +153,6 @@ class Route
 		$url = str_replace(":", "", $url);
 		
 		return $url;
-	}
-	/**
-	 * @return string
-	 */
-	public function getName()
-	{
-	    return $this->name;
-	}
-	/**
-	 * @return string
-	 */
-	public function getPath()
-	{
-	    return $this->path;
-	}
-	/**
-	 * @return array
-	 */
-	public function getParameters()
-	{
-	    return $this->parameters;
-	}
-	/**
-	 * @return string
-	 */
-	public function getController()
-	{
-	    return $this->controller;
-	}
-	/**
-	 * @return string
-	 */
-	public function getAction()
-	{
-	    return $this->action;
-	}
-	/**
-	 * @return boolean
-	 */
-	public function getSecurity()
-	{
-	    return $this->security;
 	}
 
 	/**

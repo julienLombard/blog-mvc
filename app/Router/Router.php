@@ -14,11 +14,11 @@ class Router
 	/**
 	* @var array
 	*/
-	private $routes;
+    private $routes;
 	/**
 	* @var Request
 	*/
-	private $request;
+    private $request; 
     /**
      * Request constructor.
      * @param Request $request
@@ -26,6 +26,17 @@ class Router
     public function __construct($request)
     {
     	$this->request = $request;
+    }
+    /**
+    * @param string $routeName
+    * @return Route
+    */
+    public function getRoute($routeName)
+    {
+        if (isset($this->routes[$routeName]))
+        {
+            return $this->routes[$routeName];
+        }
     }
     /**
     * @param Route $route
@@ -38,20 +49,6 @@ class Router
 			return $this->routes[$route->getName()] = $route;
 	    }
     }
-    // /**
-    // * @return Route
-    // */
-    // public function find()
-    // {
-    // 	foreach ($this->routes as $route) 
-    // 	{
-    // 		if ($route->match($this->request->getPath())) 
-    // 		{
-    // 			return $route;
-    // 		}
-    // 	}
-    // }
-
     /**
     * @param Request $request
     * @return Route
@@ -68,8 +65,13 @@ class Router
 
                         return $route;
                     } else {
+
+                        // Loading config file and Instantiating new Route
+                        $route = parse_ini_file(__DIR__."/../../config/redirect.ini");
+                        $route = new Route($route['name'], $route['path'], $route['parameters'], $route['controller'], $route['action'], $route['security']);
                         
-                        return $this->routes[0];
+                        // Redirect Route
+                        return $this->add($route);
                     }                   
                 } else {
 
@@ -78,19 +80,6 @@ class Router
     		}
     	}
     }
-
-    /**
-    * @param string $routeName
-    * @return Route
-    */
-    public function getRoute($routeName)
-    {
-        if (isset($this->routes[$routeName]))
-        {
-            return $this->routes[$routeName];
-        }
-    }
-
     /**
      * @param string $file
      */

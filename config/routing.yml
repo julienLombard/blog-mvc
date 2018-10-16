@@ -67,14 +67,6 @@ admin_user_logout:
     controller: Controller\BackOffice\UserController
     action: logout
     security: True
-0:
-    name: user_redirection
-    path: /connection
-    parameters: {}
-    controller: Controller\BackOffice\UserController
-    action: connection
-    security: False
-
 
 
 admin_posts_list:
