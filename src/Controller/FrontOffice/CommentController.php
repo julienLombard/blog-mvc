@@ -4,7 +4,6 @@ namespace Controller\FrontOffice;
 
 use App\Controller;
 use App\ORM\Database;
-// use Model\Post;
 use Model\Comment;
 
 /**
@@ -15,7 +14,7 @@ class CommentController extends Controller
 {
 
     /**
-    * @param $id
+    * @param integer $id
     * @return \App\Response\RedirectResponse
     */
     public function createComment($id) 
@@ -42,8 +41,8 @@ class CommentController extends Controller
     }
 
     /**
-    * @param $post
-    * @param $id
+    * @param integer $post
+    * @param integer $id
     * @return \App\Response\RedirectResponse
     */
     public function reportedComment($post, $id) 

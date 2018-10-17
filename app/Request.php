@@ -30,6 +30,7 @@ class Request
      * @var array
      */
     private $server;
+
     /**
      * Request constructor.
      * @param array $post
@@ -48,14 +49,7 @@ class Request
         $this->request = $request;
         $this->server = $server;
     }
-    /**
-     * @return Request
-     */
-    public static function createFromGlobals()
-    {
-        session_start();
-        return new Request($_POST, $_GET, $_COOKIE, $_SESSION, $_REQUEST, $_SERVER);
-    }
+
     /**
      * @return array
      */
@@ -63,6 +57,7 @@ class Request
     {
         return $this->post;
     }
+
     /**
      * @return array
      */
@@ -70,6 +65,7 @@ class Request
     {
         return $this->get;
     }
+
     /**
      * @return array
      */
@@ -77,6 +73,7 @@ class Request
     {
         return $this->cookie;
     }
+
     /**
      * @return array
      */
@@ -84,6 +81,7 @@ class Request
     {
         return $this->session;
     }
+
     /**
      * @return array
      */
@@ -91,6 +89,7 @@ class Request
     {
         return $this->request;
     }
+
     /**
      * @return array
      */
@@ -98,6 +97,7 @@ class Request
     {
         return $this->server;
     }
+
     /**
      * @param $key
      * @return array|false|string
@@ -106,11 +106,21 @@ class Request
     {
         return getenv($key);
     }
+    
     /**
      * @return string
      */
     public function getPath()
     {
         return $this->server["PATH_INFO"];
+    }
+
+    /**
+     * @return Request
+     */
+    public static function createFromGlobals()
+    {
+        session_start();
+        return new Request($_POST, $_GET, $_COOKIE, $_SESSION, $_REQUEST, $_SERVER);
     }
 }

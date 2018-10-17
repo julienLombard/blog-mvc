@@ -6,7 +6,6 @@ use App\Controller;
 use App\ORM\Database;
 use Model\User;
 use Model\Post;
-// use Model\Comment;
 
 /**
  * Class PostController
@@ -63,7 +62,7 @@ class PostController extends Controller
     }
 
     /**
-    * @return \App\Response\Response
+    * @return \App\Response\RedirectResponse
     */
     public function createPost() 
     {
@@ -102,7 +101,7 @@ class PostController extends Controller
 
     /**
      * @param $id
-     * @return \App\Response\RedirectResponse
+     * @return \App\Response\Response
      */
     public function updatePost($id)
     {
@@ -128,7 +127,7 @@ class PostController extends Controller
 
     /**
      * @param $id
-     * @return \App\Response\RedirectResponse
+     * @return \App\Response\Response
      */
     public function confirmDeletePost($id)
     {

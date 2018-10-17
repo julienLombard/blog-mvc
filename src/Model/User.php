@@ -64,14 +64,14 @@ class User extends Model
 		];
 	}
 
-	/**
-	* @param integer $id
-	* @return void
-	*/
-	public function setId(int $id)
-	{
-		$this->id = $id;
-	}
+	// /**
+	// * @param integer $id
+	// * @return void
+	// */
+	// public function setId(int $id)
+	// {
+	// 	$this->id = $id;
+	// }
 
 	/**
 	* @return integer

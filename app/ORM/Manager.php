@@ -41,6 +41,10 @@ class Manager
         $this->model = $model;
     }
 
+    /**
+    * @param integer $pkValue 
+    * @return Model
+    */
     public function find($pkValue)
     {
         $query = sprintf("SELECT * FROM %s WHERE %s = :pkValue", $this->model::metadata()["table"], $this->model::metadata()["primaryKey"]);
@@ -76,6 +80,17 @@ class Manager
         return null;
     }
 
+    /**
+    * @param integer $offset
+    * @param integer $length 
+    * @param string $property
+    * @param string $order
+    * @param string $property2
+    * @param string $var
+    * @param string $property3
+    * @param string $var2
+    * @return array
+    */
     public function findAll(?int $offset, ?int $length, ?string $property, ?string $order, ?string $property2, ?string $var, ?string $property3, ?string $var2)
     {
 

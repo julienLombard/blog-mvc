@@ -31,6 +31,22 @@ class Controller
 	private $database;
 
 	/**
+	* @return Database
+	*/
+	protected function getDatabase()
+	{
+		return $this->database;
+	}
+
+	/**
+	* @return Request
+	*/
+	protected function getRequest()
+	{
+		return $this->request;
+	}
+
+	/**
 	* Controller constructor.
 	* @param Request $request
 	* @param Router $router
@@ -73,20 +89,5 @@ class Controller
 
 		return new Response($content);
 	}
-	
-	/**
-	* @return Database
-	*/
-	protected function getDatabase()
-	{
-		return $this->database;
-	}
 
-	/**
-	* @return Request
-	*/
-	protected function getRequest()
-	{
-		return $this->request;
-	}
 }

@@ -18,7 +18,8 @@ class Router
 	/**
 	* @var Request
 	*/
-    private $request; 
+    private $request;
+
     /**
      * Request constructor.
      * @param Request $request
@@ -27,6 +28,7 @@ class Router
     {
     	$this->request = $request;
     }
+
     /**
     * @param string $routeName
     * @return Route
@@ -38,6 +40,7 @@ class Router
             return $this->routes[$routeName];
         }
     }
+
     /**
     * @param Route $route
     * @return Router
@@ -49,6 +52,7 @@ class Router
 			return $this->routes[$route->getName()] = $route;
 	    }
     }
+
     /**
     * @param Request $request
     * @return Route
@@ -80,8 +84,10 @@ class Router
     		}
     	}
     }
+    
     /**
      * @param string $file
+     * @return Route
      */
     public function loadYaml($file)
     {

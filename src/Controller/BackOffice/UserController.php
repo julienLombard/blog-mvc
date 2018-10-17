@@ -5,8 +5,6 @@ namespace Controller\BackOffice;
 use App\Controller;
 use App\ORM\Database;
 use Model\User;
-// use Model\Post;
-// use Model\Comment;
 
 /**
  * Class UserController
@@ -17,6 +15,7 @@ class UserController extends Controller
 
     /**
     * @return \App\Response\Response
+    * @return \App\Response\RedirectResponse
     */
     public function connection() 
     {
@@ -34,6 +33,9 @@ class UserController extends Controller
         }
     }
 
+    /**
+    * @return \App\Response\RedirectResponse
+    */
     public function logout() 
     {
         session_destroy();
@@ -43,6 +45,7 @@ class UserController extends Controller
 
     /**
     * @return \App\Response\Response
+    * @return \App\Response\RedirectResponse
     */
     public function showBackOffice()
     {   

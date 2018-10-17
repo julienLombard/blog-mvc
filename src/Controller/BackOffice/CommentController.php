@@ -4,7 +4,6 @@ namespace Controller\BackOffice;
 
 use App\Controller;
 use App\ORM\Database;
-// use Model\User;
 use Model\Post;
 use Model\Comment;
 
@@ -66,7 +65,7 @@ class CommentController extends Controller
     /**
     * @param $post
     * @param $id
-    * @return \App\Response\Response
+    * @return \App\Response\RedirectResponse
     */
     public function validateComment($post, $id) 
     {
@@ -166,7 +165,7 @@ class CommentController extends Controller
     /**
     * @param $post
     * @param $id
-    * @return \App\Response\Response
+    * @return \App\Response\RedirectResponse
     */
     public function moderateComment($post, $id) 
     {

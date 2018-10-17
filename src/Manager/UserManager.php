@@ -11,6 +11,11 @@ use Model\User;
 */
 class UserManager extends Manager
 {
+    /**
+    * @param string $login
+    * @param string $password
+    * @return Model   
+    */
     public function getConnection(string $login, string $password) 
     {
         $statement = $this->database->getPdo()->prepare("SELECT * FROM user WHERE login = :login AND password = :password" );

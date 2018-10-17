@@ -23,10 +23,6 @@ class Post extends Model
 	/**
 	* @var string
 	*/
-	private $picture;
-	/**
-	* @var string
-	*/
 	private $content;
 	/**
 	* @var \DateTime
@@ -65,13 +61,7 @@ class Post extends Model
 				[
 					"type" => "string",
 					"property" => "title"
-				],
-
-				"picture" => 
-				[
-					"type" => "string",
-					"property" => "picture"
-				],				
+				],			
 
 				"content" => 
 				[
@@ -94,14 +84,14 @@ class Post extends Model
 		];
 	}
 
-	/**
-	* @param integer $id
-	* @return void
-	*/
-	public function setId(int $id)
-	{
-		$this->id = $id;
-	}
+	// /**
+	// * @param integer $id
+	// * @return void
+	// */
+	// public function setId(int $id)
+	// {
+	// 	$this->id = $id;
+	// }
 
 	/**
 	* @return integer
@@ -126,23 +116,6 @@ class Post extends Model
 	public function getTitle()
 	{
 		return $this->title;
-	}
-
-	/**
-	* @param string $picture
-	* @return void
-	*/
-	public function setPicture(string $picture)
-	{
-		$this->picture = $picture;
-	}
-
-	/**
-	* @return string
-	*/
-	public function getPicture()
-	{
-		return $this->picture;
 	}
 
 	/**
