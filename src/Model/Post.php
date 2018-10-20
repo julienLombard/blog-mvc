@@ -23,6 +23,10 @@ class Post extends Model
 	/**
 	* @var string
 	*/
+	private $author;
+	/**
+	* @var string
+	*/
 	private $content;
 	/**
 	* @var \DateTime
@@ -61,7 +65,13 @@ class Post extends Model
 				[
 					"type" => "string",
 					"property" => "title"
-				],			
+				],		
+				
+				"author" => 
+				[
+					"type" => "string",
+					"property" => "author"
+				],	
 
 				"content" => 
 				[
@@ -84,14 +94,14 @@ class Post extends Model
 		];
 	}
 
-	// /**
-	// * @param integer $id
-	// * @return void
-	// */
-	// public function setId(int $id)
-	// {
-	// 	$this->id = $id;
-	// }
+	/**
+	* @param integer $id
+	* @return void
+	*/
+	public function setId(int $id)
+	{
+		$this->id = $id;
+	}
 
 	/**
 	* @return integer
@@ -116,6 +126,23 @@ class Post extends Model
 	public function getTitle()
 	{
 		return $this->title;
+	}
+
+	/**
+	* @param string $author
+	* @return void
+	*/
+	public function setAuthor(string $author)
+	{
+		$this->author = $author;
+	}
+
+	/**
+	* @return string
+	*/
+	public function getAuthor()
+	{
+		return $this->author;
 	}
 
 	/**

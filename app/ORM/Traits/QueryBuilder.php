@@ -2,7 +2,7 @@
 
 namespace App\ORM\Traits;
 
-trait SetFindALL {
+trait QueryBuilder {
 
     public function limit(?int $offset, ?int $length) {
 

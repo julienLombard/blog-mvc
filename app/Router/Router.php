@@ -71,11 +71,9 @@ class Router
                     } else {
 
                         // Loading config file and Instantiating new Route
-                        $route = parse_ini_file(__DIR__."/../../config/redirect.ini");
-                        $route = new Route($route['name'], $route['path'], $route['parameters'], $route['controller'], $route['action'], $route['security']);
-                        
+                        $route = $this->loadRedirectYaml(__DIR__."/../../config/redirect.yml");                       
                         // Redirect Route
-                        return $this->add($route);
+                        return $route;
                     }                   
                 } else {
 
@@ -91,10 +89,25 @@ class Router
      */
     public function loadYaml($file)
     {
-        // loading routing.yml file
+        // loading yaml file
         $routes = Yaml::parseFile($file);
         foreach($routes as $name => $route){
+
             $this->add(new Route($name, $route["path"], $route["parameters"], $route["controller"], $route["action"], $route["security"], $route["args"] ?? null));
+        }
+    }
+
+    /**
+     * @param string $file
+     * @return Route
+     */
+    public function loadRedirectYaml($file)
+    {
+        // loading yaml file
+        $routes = Yaml::parseFile($file);
+        foreach($routes as $name => $route){
+
+            return $this->add(new Route($name, $route["path"], $route["parameters"], $route["controller"], $route["action"], $route["security"]));
         }
     }
 }

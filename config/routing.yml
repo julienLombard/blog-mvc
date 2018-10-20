@@ -1,3 +1,5 @@
+# ***FrontOffice***
+# PostController's Routes
 home:
     name: home
     path: /home
@@ -27,8 +29,8 @@ home_send_mail:
     action: sendMail
     security: False
 
-
-
+# ***FrontOffice***
+# CommentController's Routes
 home_comment_create:
     name: home_comment_create
     path: /create-comment-post/:id
@@ -45,7 +47,8 @@ home_comment_reported:
     security: False
 
 
-
+# ***BackOffice***
+# UserController's Routes
 admin:
     name: admin
     path: /admin
@@ -68,7 +71,8 @@ admin_user_logout:
     action: logout
     security: True
 
-
+# ***BackOffice***
+# PostController's Routes
 admin_posts_list:
     name: admin_posts_list
     path: /admin/posts
@@ -126,8 +130,8 @@ admin_post_delete:
     action: deletePost
     security: True
 
-
-
+# ***BackOffice***
+# CommentController's Routes
 admin_comments_list:
     name: admin_comments_list
     path: /admin/comments

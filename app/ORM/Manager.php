@@ -10,7 +10,7 @@ use App\ORM\Database;
 */
 class Manager
 {
-    use Traits\SetFindAll;
+    use Traits\QueryBuilder;
 
     /**
     * @var Database

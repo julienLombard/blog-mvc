@@ -3,12 +3,13 @@
 {% block body %}
 
   <!-- Post Section -->
-  <div id="post">
+  <section id="post">
     <div class="container">
       <div class="row section-title text-center center">
         <h2>{{ post.title }}</h2>
         <hr>
-        <p>publication: {{ post.publicationDate|date('d/m/Y') }}{{ (post.modificationDate == null) ? 'non' : ' - modification: ' ~ post.modificationDate|date('d/m/Y') }}</p>
+        <p>auteur: {{ post.author }}</p>
+        <p>publication: {{ post.publicationDate|date('d/m/Y') }}{{ (post.modificationDate == null) ? '' : ' - modification: ' ~ post.modificationDate|date('d/m/Y') }}</p>
         <div class="col-md-12 text-center"><img src="{{ app.request.basepath }}/img/portfolio/post-{{ post.id }}.jpg" class="img-responsive">
         </div>
         <div class="col-md-8 col-md-offset-2">
@@ -22,8 +23,8 @@
             </p>
           </div>
         </div>
-      </div>
-    </div>
-  </div> 
+      </div> <!-- End Row -->
+    </div> <!-- End Container -->
+  </section> <!-- End Post Section -->
     
 {% endblock %}
