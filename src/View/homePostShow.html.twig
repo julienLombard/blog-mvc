@@ -16,8 +16,18 @@
         </div>
         <div class="col-md-8 col-md-offset-2">
           <div class="post-text">
-            <p>{{ post.content }}</p>
-            <p class="text-center"><a class="btn btn-primary" href="#"><i class="fa fa-link"></i> Lien vers le site</a> <a class="btn btn-primary" href="/home#portfolio"><i class="fa fa-home"></i> Retour Portfolio</a></p>
+            <div>
+              {{ post.content|raw }}
+            </div>
+            <!-- Buttons -->
+            <p class="text-center">
+              <!-- Display Post's Link -->
+              {% if link != "" %}
+                <a class="btn btn-primary" href="#"><i class="fa fa-link"></i> Lien vers le site</a> 
+              {% else %}
+              {% endif %}
+              <a class="btn btn-primary" href="/home#portfolio"><i class="fa fa-home"></i> Retour Portfolio</a>
+            </p>
           </div>
         </div>
       </div>

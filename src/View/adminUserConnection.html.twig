@@ -11,6 +11,10 @@
     </div>
 
     <div class="col-md-8 col-md-offset-2">
+      <!-- Form Alert Display -->
+      {% if alert == 1 %}
+        <p class="red"> Mauvais identifiants ou mot de passe !</p>
+      {% endif %}
 
       <!-- Connection Form -->
       <form action="/admin" method="post">

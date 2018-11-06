@@ -39,6 +39,7 @@ class Database
     {
         $managerClass = $model::getManager();
         $this->managers[$managerClass] = $this->managers[$managerClass] ?? new $managerClass($this, $model);
+        
         return $this->managers[$managerClass];
     }
 

@@ -105,14 +105,17 @@ class Route
 	*/
 	public function match($requestUri)
 	{
-
+		// new path with regex that replace the parameters
 		$pattern = preg_replace_callback("/:(\w+)/", array($this, "checkParameters"), $this->path);
+		// escapes "/" for regex check
 		$pattern = preg_replace("~/~", "\/", $pattern);
 
+		// if request does not match with regex, return False
 		if(!preg_match("/^$pattern$/i", $requestUri, $matches))
 		{
 			return false;
 		}
+		// Otherwise fills an array of arguments with the values of each parameter of the route
 		$this->args = array_combine(array_keys($this->parameters), array_slice($matches, 1));
 		return true;
 
@@ -140,9 +143,12 @@ class Route
 	*/
 	public function call(Request $request, Router $router)
 	{
+		
+		// Controller instantiation
 		$controller = $this->controller;
 		$controller = new $controller($request, $router);
 
+		// Call the [$foo->, $bar ]() method with arguments 
 		return call_user_func_array([$controller, $this->action], $this->args);
 	}
 
@@ -152,6 +158,7 @@ class Route
 	*/
 	public function generateUrl($args)
 	{
+		// replaces each parameter of the path with args, then deleting ":"
 		$url = str_replace(array_keys($args), $args, $this->path);
 		$url = str_replace(":", "", $url);
 		
@@ -164,16 +171,10 @@ class Route
 	*/
 	public function isGranted(Request $request) 
 	{
-
-        if ($this->getSecurity() == true) {
-
-            if (isset($request->getSession()['login'])) {
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            return true;
-        }
+		if (isset($request->getSession()['login'])) {
+			return true;
+		} else {
+			return false;
+		}
     }
 }

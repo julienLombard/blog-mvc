@@ -4,6 +4,11 @@ namespace App\ORM\Traits;
 
 trait QueryBuilder {
 
+    /**
+    * @param int $offset
+    * @param int $length
+    * @return string
+    */
     public function limit(?int $offset, ?int $length) {
 
         if($offset !== null && $length !== null) 
@@ -15,6 +20,11 @@ trait QueryBuilder {
         }
     }
 
+    /**
+    * @param string $property
+    * @param string $order
+    * @return string
+    */
     public function orderBy(?string $property, ?string $order) {
 
         if($property !== null && $order !== null) 
@@ -32,6 +42,11 @@ trait QueryBuilder {
         }
     }
 
+    /**
+    * @param string $property2
+    * @param string $var
+    * @return string
+    */
     public function where(?string $property2, ?string $var) {
 
         if($property2 !== null && $var !== null) 
@@ -49,6 +64,11 @@ trait QueryBuilder {
         }
     }
 
+    /**
+    * @param string $property3
+    * @param string $var2
+    * @return string
+    */
     public function and(?string $property3, ?string $var2) {
 
         if($property3 !== null && $var2 !== null) 
@@ -66,6 +86,13 @@ trait QueryBuilder {
         }
     }
 
+    /**
+    * @param string $where
+    * @param null|string $and
+    * @param null|string $orderBy
+    * @param null|string $limit
+    * @return array
+    */
     public function fetchAll($where, $and = null, $orderBy = null, $limit = null) {
 
         $query = sprintf("SELECT * FROM %s %s %s %s %s",  $this->model::metadata()["table"], $where, $and, $orderBy, $limit);
@@ -76,6 +103,10 @@ trait QueryBuilder {
         return $statement->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    /**
+    * @param array $results
+    * @return array
+    */
     public function hydrate($results) {
 
         $data = [];
