@@ -3,9 +3,13 @@ Professional Blog PHP MVC POO
 
 ## Installation (1/1)
 
-1- composer.json file
+1- Composer.json file
 
-2- autoload
+2- Autoload
+
+3- Libraries
+
+4- Database
 
 ## Step-1 : composer.json file
 
