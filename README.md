@@ -70,3 +70,8 @@ First add the following lines in your composer.json file after the `require` ent
     }
 }
 ```
+Then enter the command `composer update`in your command console.
+
+After that, a `autoload.php` file is created in a new `vendor` folder. 
+
+Add the `vendor` folder in the `.gitignore` file.
