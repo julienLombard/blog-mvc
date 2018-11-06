@@ -9,7 +9,7 @@ Professional Blog PHP MVC POO
 
 3- Libraries
 
-4- Database
+[4- Database] (https://github.com/julienLombard/blog-mvc/blob/master/README.md#step-4--database)
 
 ## Step-1 : composer.json file
 
