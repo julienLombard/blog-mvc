@@ -1,2 +1,2 @@
 # blog-mvc
-Concevoir un blog PHP MVC POO
+professional blog PHP MVC POO
