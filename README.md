@@ -6,15 +6,12 @@ Professional Blog PHP MVC POO
 
 # Step-1 : composer init
 
-This command will guide you through creating your composer.json config.
+<addr>This command will guide you through creating your composer.json config.
 
 Package name [julien/blog-mvc-master]: jlombard/blog-mvc-master   
 Description []: Professional Blog PHP MVC POO
-
 Author [, n to skip]: JLOMBARD <julienlombard.fr@gmail.com>
-
 Minimum Stability []: dev
-
 Package Type (e.g. library, project, metapackage, composer-plugin) []:
 
 License []: MIT
@@ -38,4 +35,4 @@ Would you like to define your dev dependencies (require-dev) interactively [yes]
     "require": {}
 }
 
-Do you confirm generation [yes]? yes
+Do you confirm generation [yes]? yes</addr>
