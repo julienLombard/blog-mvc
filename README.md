@@ -3,6 +3,8 @@ Professional Blog PHP MVC POO
 
 ## Installation (1/1)
 
+1- composer.json file
+2- autoload
 
 ## Step-1 : composer.json file
 
@@ -40,4 +42,28 @@ Would you like to define your dev dependencies (require-dev) interactively [yes]
 }
 
 Do you confirm generation [yes]? yes
+```
+
+## Step-2 : autoload
+
+```
+{
+    "name": "jlombard/blog-mvc-master",
+    "description": "Professional Blog PHP MVC POO",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "JLOMBARD",
+            "email": "julienlombard.fr@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "App\\": "app",
+            "": "src"
+        }
+    }
+}
 ```
