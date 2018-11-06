@@ -4,6 +4,7 @@ Professional Blog PHP MVC POO
 ## Installation (1/1)
 
 1- composer.json file
+
 2- autoload
 
 ## Step-1 : composer.json file
