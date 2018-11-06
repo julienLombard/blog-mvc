@@ -5,7 +5,7 @@ Professional Blog PHP MVC POO
 
 
 # Step-1 : composer init
-'''
+```
 This command will guide you through creating your composer.json config.
 
 Package name [julien/blog-mvc-master]: jlombard/blog-mvc-master   
@@ -36,4 +36,4 @@ Would you like to define your dev dependencies (require-dev) interactively [yes]
 }
 
 Do you confirm generation [yes]? yes
-'''
+```
