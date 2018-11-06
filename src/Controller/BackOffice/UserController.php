@@ -64,7 +64,7 @@ class UserController extends Controller
 
             // Match login & password
             if (($post['login'] === $connection['login']) &&
-                ($post['password'] === $connection['password'])){
+                (md5($post['password']) === $connection['password'])){
                 
                 // Define session's login name
                 $_SESSION['login'] = $session['login'] ?? $post['login'];

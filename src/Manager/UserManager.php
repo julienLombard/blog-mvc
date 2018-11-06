@@ -18,7 +18,7 @@ class UserManager extends Manager
     */
     public function getConnection(string $login, string $password) 
     {
-        $statement = $this->database->getPdo()->prepare("SELECT * FROM user WHERE login = :login AND password = :password" );
+        $statement = $this->database->getPdo()->prepare("SELECT * FROM user WHERE login = :login AND password = md5(:password)" );
         $statement->execute(["login" => $login, "password" => $password]);
 
         return $result = $statement->fetch();
