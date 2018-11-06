@@ -40,13 +40,55 @@ class Route
 	*/
 	private $args;
 	/**
-	 * Route constructor.
-	 * @param string $path
-	 * @param array $parameters
-	 * @param string $controller
-	 * @param string $action
-	 * @param string $security
-	 */
+	* @return string
+	*/
+	public function getName()
+	{
+	    return $this->name;
+	}
+	/**
+	* @return string
+	*/
+	public function getPath()
+	{
+	    return $this->path;
+	}
+	/**
+	* @return array
+	*/
+	public function getParameters()
+	{
+	    return $this->parameters;
+	}
+	/**
+	* @return string
+	*/
+	public function getController()
+	{
+	    return $this->controller;
+	}
+	/**
+	* @return string
+	*/
+	public function getAction()
+	{
+	    return $this->action;
+	}
+	/**
+	* @return boolean
+	*/
+	public function getSecurity()
+	{
+	    return $this->security;
+	}
+	/**
+	* Route constructor.
+	* @param string $path
+	* @param array $parameters
+	* @param string $controller
+	* @param string $action
+	* @param string $security
+	*/
 	public function __construct($name, $path, array $parameters, $controller, $action, $security)
 	{
 		$this->name = $name;
@@ -58,6 +100,7 @@ class Route
 		$this->args = [];
 	}
 	/**
+	* @param $requestUri
 	* @return boolean
 	*/
 	public function match($requestUri)
@@ -75,20 +118,21 @@ class Route
 
 	}
     /**
-     * @param $match
-     * @return string
-     */
-     private function checkParameters($match)
-     {
-     	if (isset($this->parameters[$match[1]])) 
-     	{
-     		return sprintf("(%s)", $this->parameters[$match[1]]);
-     	} 
-     	else 
-     	{
-     		return '([^/]+)';
-     	}
-     }
+    * @param $match
+    * @return string
+    */
+	private function checkParameters($match)
+	{
+		if (isset($this->parameters[$match[1]])) 
+		{
+			return sprintf("(%s)", $this->parameters[$match[1]]);
+		} 
+		else 
+		{
+			return '([^/]+)';
+		}
+	}
+	 
     /**
     * @param Request $request
     * @param Router $router
@@ -101,6 +145,7 @@ class Route
 
 		return call_user_func_array([$controller, $this->action], $this->args);
 	}
+
 	/**
 	* @param array $args
 	* @return string $url
@@ -112,53 +157,13 @@ class Route
 		
 		return $url;
 	}
-	/**
-	 * @return string
-	 */
-	public function getName()
-	{
-	    return $this->name;
-	}
-	/**
-	 * @return string
-	 */
-	public function getPath()
-	{
-	    return $this->path;
-	}
-	/**
-	 * @return array
-	 */
-	public function getParameters()
-	{
-	    return $this->parameters;
-	}
-	/**
-	 * @return string
-	 */
-	public function getController()
-	{
-	    return $this->controller;
-	}
-	/**
-	 * @return string
-	 */
-	public function getAction()
-	{
-	    return $this->action;
-	}
-	/**
-	 * @return boolean
-	 */
-	public function getSecurity()
-	{
-	    return $this->security;
-	}
 
 	/**
+	* @param Request $request
 	* @return boolean
 	*/
-	public function isLogged(Request $request) {
+	public function isGranted(Request $request) 
+	{
 
         if ($this->getSecurity() == true) {
 

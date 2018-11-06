@@ -31,6 +31,22 @@ class Controller
 	private $database;
 
 	/**
+	* @return Database
+	*/
+	protected function getDatabase()
+	{
+		return $this->database;
+	}
+
+	/**
+	* @return Request
+	*/
+	protected function getRequest()
+	{
+		return $this->request;
+	}
+
+	/**
 	* Controller constructor.
 	* @param Request $request
 	* @param Router $router
@@ -43,6 +59,7 @@ class Controller
 
 		$loader = new \Twig_Loader_Filesystem('../src/View');
 		$this->twig = new \Twig_Environment($loader, array('cache' => false,));
+		$this->twig->addExtension(new \Twig_Extensions_Extension_Text());
 
 	}
 
@@ -72,20 +89,5 @@ class Controller
 
 		return new Response($content);
 	}
-	
-	/**
-	* @return Database
-	*/
-	protected function getDatabase()
-	{
-		return $this->database;
-	}
 
-	/**
-	* @return Request
-	*/
-	protected function getRequest()
-	{
-		return $this->request;
-	}
 }

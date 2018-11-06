@@ -3,6 +3,7 @@ namespace App\Router;
 
 use App\Request;
 use App\Router\Route;
+use Symfony\Component\Yaml\Yaml;
 
 /**
 * Class Router
@@ -13,11 +14,12 @@ class Router
 	/**
 	* @var array
 	*/
-	private $routes;
+    private $routes;
 	/**
 	* @var Request
 	*/
-	private $request;
+    private $request;
+
     /**
      * Request constructor.
      * @param Request $request
@@ -25,61 +27,6 @@ class Router
     public function __construct($request)
     {
     	$this->request = $request;
-    }
-    /**
-    * @param Route $route
-    * @return Router
-    */
-    public function add(Route $route)
-    {
-    	if (!isset($this->routes[$route->getName()]))
-	    {
-			return $this->routes[$route->getName()] = $route;
-	    }
-    }
-    // /**
-    // * @return Route
-    // */
-    // public function find()
-    // {
-    // 	foreach ($this->routes as $route) 
-    // 	{
-    // 		if ($route->match($this->request->getPath())) 
-    // 		{
-    // 			return $route;
-    // 		}
-    // 	}
-    // }
-
-    /**
-    * @param Request $request
-    * @return Route
-    */
-    public function find(Request $request)
-    {
-    	foreach ($this->routes as $route) 
-    	{
-
-            if ($route->match($this->request->getPath())) 
-    		{
-                if ($route->getSecurity() == true) 
-                {
-                    if ($route->isLogged($request) == true) {
-
-                        return $route;
-
-                    } else {
-
-                        return $this->routes["admin_user_connection"];
-
-                    }
-                    
-                } else {
-
-                    return $route;
-                }
-    		}
-    	}
     }
 
     /**
@@ -91,6 +38,76 @@ class Router
         if (isset($this->routes[$routeName]))
         {
             return $this->routes[$routeName];
+        }
+    }
+
+    /**
+    * @param Route $route
+    * @return Router
+    */
+    public function add(Route $route)
+    {
+    	if (!isset($this->routes[$route->getName()]))
+	    {
+			return $this->routes[$route->getName()] = $route;
+	    }
+    }
+
+    /**
+    * @param Request $request
+    * @return Route
+    */
+    public function find(Request $request)
+    {
+    	foreach ($this->routes as $route) 
+    	{
+            if ($route->match($this->request->getPath())) 
+    		{
+                if ($route->getSecurity() == true) 
+                {
+                    if ($route->isGranted($request) == true) {
+
+                        return $route;
+                    } else {
+
+                        // Loading config file and Instantiating new Route
+                        $route = $this->loadRedirectYaml(__DIR__."/../../config/redirect.yml");                       
+                        // Redirect Route
+                        return $route;
+                    }                   
+                } else {
+
+                    return $route;
+                }
+    		}
+    	}
+    }
+    
+    /**
+     * @param string $file
+     * @return Route
+     */
+    public function loadYaml($file)
+    {
+        // loading yaml file
+        $routes = Yaml::parseFile($file);
+        foreach($routes as $name => $route){
+
+            $this->add(new Route($name, $route["path"], $route["parameters"], $route["controller"], $route["action"], $route["security"], $route["args"] ?? null));
+        }
+    }
+
+    /**
+     * @param string $file
+     * @return Route
+     */
+    public function loadRedirectYaml($file)
+    {
+        // loading yaml file
+        $routes = Yaml::parseFile($file);
+        foreach($routes as $name => $route){
+
+            return $this->add(new Route($name, $route["path"], $route["parameters"], $route["controller"], $route["action"], $route["security"]));
         }
     }
 }

@@ -24,6 +24,25 @@ class Database
     private $managers;
 
     /**
+    * @return \PDO
+    */
+    public function getPdo()
+    {
+        return $this->pdo;
+    }
+
+    /**
+    * @param Model
+    * @return Manager
+    */
+    public function getManager($model)
+    {
+        $managerClass = $model::getManager();
+        $this->managers[$managerClass] = $this->managers[$managerClass] ?? new $managerClass($this, $model);
+        return $this->managers[$managerClass];
+    }
+
+    /**
     * @param Request $request
     * @return DatabaseInstance
     */
@@ -51,23 +70,5 @@ class Database
     public function __construct($host, $dbName, $user, $password)
     {
         $this->pdo = new \PDO("mysql:host=" . $host . ";dbname=" . $dbName . ";charset=utf8", $user, $password);
-    }
-
-    /**
-    * @return \PDO
-    */
-    public function getPdo()
-    {
-        return $this->pdo;
-    }
-
-    /**
-    * @return Manager
-    */
-    public function getManager($model)
-    {
-        $managerClass = $model::getManager();
-        $this->managers[$managerClass] = $this->managers[$managerClass] ?? new $managerClass($this, $model);
-        return $this->managers[$managerClass];
     }
 }

@@ -2,64 +2,74 @@
 
 {% block body %}
 
-<!-- Posts Section -->
-<div id="posts">
-  <div class="container">
+  <!-- Posts Section -->
+  <section id="portfolio">
 
-    <div class="section-title text-center center">
-      <h2>Liste des articles</h2>
-      <hr>
-        <p class="text-center">
-          <a class="btn btn-primary" href="/admin/create-post-form"><i class="fa fa-plus"></i>Ajouter article</a> 
-        </p>
+    <!-- Title -->
+    <div class="container">
+      <div class="row">
+        <div class="section-title text-center center">
+          <h2>Liste des articles</h2>
+          <hr>
+            <p class="text-center">
+              <a class="btn btn-primary" href="/admin/create-post-form"><i class="fa fa-plus"></i>Ajouter article</a> 
+            </p>
+        </div>
+      </div> <!-- End Row -->
     </div>
 
-    <div class="row">
-      <div class="posts-items">
+    <!-- Posts List -->
+    <div class="container">
+      <div class="row">
+        <div class="portfolio-items">
 
-        {% for post in posts %}
+          <!-- Posts Loop -->
+          {% for post in posts %}
 
-          <div class="col-sm-6 col-md-3 col-lg-3 web">
-              <div class="posts-item">
-                  <div class="hover-bg">
-                      <a href="/admin/post/{{ post.id }}#post">
-                          <div class="hover-text">
-                            <h4>{{ post.title }}</h4>
-                          </div>
-                          <img src="{{ app.request.basepath }}/img/portfolio/post-{{ post.id }}.jpg" class="img-responsive" alt="Project Title"> 
-                      </a> 
-                  </div>
-              </div>
-          </div>
+            <div class="col-sm-6 col-md-3 col-lg-3 web">
+                <div class="portfolio-items">
+                    <div class="hover-bg">
+                        <a href="/admin/post/{{ post.id }}#post">
+                            <div class="hover-text">
+                              <h4>{{ post.title }}</h4>
+                              <p>{{ post.content| truncate(60, false, '...')  }}</p>
+                            </div>
+                            <img src="{{ app.request.basepath }}/img/portfolio/post-{{ post.id }}.jpg" class="img-responsive" alt="Project Title"> 
+                        </a> 
+                    </div>
+                </div>
+            </div>
 
-        {% else %}
-        {% endfor %}
-      </div>
-    </div>
-    {# Pagination #}
-    <div class="row">
-      <nav aria-label="Page navigation example">
-        <ul class="pagination">
-          <li class="page-item">
-            <a class="page-link" href="/admin/posts?page=1" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-              <span class="sr-only">Previous</span>
-            </a>
-          </li>
-          {% for i in 1..pageCount %}
-            <li class="page-item"><a class="page-link" href="/admin/posts?page={{ i }}">{{ i }}</a></li>
           {% endfor %}
-          <li class="page-item">
-            <a class="page-link" href="/admin/posts?page={{ pageCount }}" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-              <span class="sr-only">Next</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-    
-  </div>
-</div>
+        </div>
+      </div> <!-- End Row -->
+
+      <!-- Pagination -->
+      <div class="row">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item">
+              <a class="page-link" href="/admin/posts?page=1" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+              </a>
+            </li>
+
+            <!-- Pagination Display  -->
+            {% for i in 1..pageCount %}
+              <li class="page-item"><a class="page-link" href="/admin/posts?page={{ i }}">{{ i }}</a></li>
+            {% endfor %}
+            <li class="page-item">
+              <a class="page-link" href="/admin/posts?page={{ pageCount }}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div> <!-- End Row Pagination -->
+      
+    </div> <!-- End Posts List -->
+  </section> <!-- End Posts Section -->
     
 {% endblock %}

@@ -10,6 +10,8 @@ use App\ORM\Database;
 */
 class Manager
 {
+    use Traits\QueryBuilder;
+
     /**
     * @var Database
     */
@@ -39,6 +41,10 @@ class Manager
         $this->model = $model;
     }
 
+    /**
+    * @param integer $pkValue 
+    * @return Model
+    */
     public function find($pkValue)
     {
         $query = sprintf("SELECT * FROM %s WHERE %s = :pkValue", $this->model::metadata()["table"], $this->model::metadata()["primaryKey"]);
@@ -68,92 +74,34 @@ class Manager
                         break;
                 }
                 $obj->{sprintf("set%s", ucfirst($columns[$column]["property"]))}($value);
-                // var_dump($column . " => " . $value);
             }
             return $obj;
         }
         return null;
     }
 
+    /**
+    * @param integer $offset
+    * @param integer $length 
+    * @param string $property
+    * @param string $order
+    * @param string $property2
+    * @param string $var
+    * @param string $property3
+    * @param string $var2
+    * @return array
+    */
     public function findAll(?int $offset, ?int $length, ?string $property, ?string $order, ?string $property2, ?string $var, ?string $property3, ?string $var2)
     {
-        if($offset !== null && $length !== null) 
-        {
-            $limit = sprintf("LIMIT %s, %s", $offset, $length);
-        } else 
-        {
-            $limit = "";
-        }
 
-        $orderBy = "";
-        if($property !== null && $order !== null) 
-        {
-            $columns = $this->model::metadata()["columns"];
-            foreach($columns as $column => $definition)
-            {
-                if($definition["property"] == $property)
-                {
-                    $orderBy = sprintf("ORDER BY %s %s", $column, $order);
-                }
-            } 
-        }
+        $limit = $this->limit($offset, $length);
+        $orderBy = $this->orderBy($property, $order);
+        $where = $this->where($property2, $var);
+        $and = $this->and($property3, $var2);
 
-        $where = "";
-        if($property2 !== null && $var !== null) 
-        {
-            $columns = $this->model::metadata()["columns"];
-            foreach($columns as $column => $definition)
-            {
-                if($definition["property"] == $property2)
-                {
-                    $where = sprintf("WHERE %s = %s", $column, $var);
-                }
-            } 
-        }
+        $results = $this->fetchAll($where, $and, $orderBy, $limit);
 
-        $and = "";
-        if($property3 !== null && $var2 !== null) 
-        {
-            $columns = $this->model::metadata()["columns"];
-            foreach($columns as $column => $definition)
-            {
-                if($definition["property"] == $property3)
-                {
-                    $and = sprintf("AND %s = %s", $column, $var2);
-                }
-            } 
-        }
-
-        $query = sprintf("SELECT * FROM %s %s %s %s %s",  $this->model::metadata()["table"], $where, $and, $orderBy , $limit);
-
-        $statement = $this->database->getPdo()->prepare($query);
-        $statement->execute();
-
-        $results = $statement->fetchAll(\PDO::FETCH_ASSOC);
-        $data = [];
-        foreach($results as $result) 
-        {
-            $obj = new $this->model();
-            $columns = $this->model::metadata()["columns"];
-            foreach($result as $column => $value) 
-            {
-                switch ($columns[$column]["type"]) 
-                {
-                    case 'integer':
-                        $value = (int) $value;                     
-                        break;                                      
-                    case 'datetime':
-                        if ($value) 
-                        {
-                            $value = \DateTime::createFromFormat("Y-m-d H:i:s", $value);
-                            break;
-                        }
-                        break;
-                }
-                $obj->{sprintf("set%s", ucfirst($columns[$column]["property"]))}($value);
-            }
-            $data[] = $obj;
-        }
+        $data = $this->hydrate($results);
         return $data;
     }
 
@@ -258,7 +206,6 @@ class Manager
                 implode(",", $sets),
                 $modelMetadata["primaryKey"]
                 );
-        // var_dump($query, $data);
 
         $statement = $this->database->getPdo()->prepare($query);
         $statement->execute($data);

@@ -13,14 +13,17 @@ class Response implements ResponseInterface
 	*/
 	private $content;
 	/**
-	 * Route constructor.
-	 * @param string $content
-	 */
+	* Route constructor.
+	* @param string $content
+	*/
 	public function __construct($content)
 	{
 		$this->content = $content;
 	}
 
+	/**
+	* @return string $content
+	*/
 	public function send()
 	{
 		echo $this->content;

@@ -1,0 +1,8 @@
+# ***Redirect Routes***
+user_redirection:
+    name: user_redirection
+    path: /connection
+    parameters: {}
+    controller: Controller\BackOffice\UserController
+    action: connection
+    security: False

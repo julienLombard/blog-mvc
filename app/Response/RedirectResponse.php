@@ -21,6 +21,9 @@ class RedirectResponse implements ResponseInterface
 		$this->url = $url;
 	}
 
+	/**
+	* @return string $url
+	*/
 	public function send() 
 	{
 		header("Location: " . $this->url);

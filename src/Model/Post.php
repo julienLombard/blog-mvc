@@ -23,7 +23,7 @@ class Post extends Model
 	/**
 	* @var string
 	*/
-	private $picture;
+	private $author;
 	/**
 	* @var string
 	*/
@@ -65,13 +65,13 @@ class Post extends Model
 				[
 					"type" => "string",
 					"property" => "title"
-				],
-
-				"picture" => 
+				],		
+				
+				"author" => 
 				[
 					"type" => "string",
-					"property" => "picture"
-				],				
+					"property" => "author"
+				],	
 
 				"content" => 
 				[
@@ -129,20 +129,20 @@ class Post extends Model
 	}
 
 	/**
-	* @param string $picture
+	* @param string $author
 	* @return void
 	*/
-	public function setPicture(string $picture)
+	public function setAuthor(string $author)
 	{
-		$this->picture = $picture;
+		$this->author = $author;
 	}
 
 	/**
 	* @return string
 	*/
-	public function getPicture()
+	public function getAuthor()
 	{
-		return $this->picture;
+		return $this->author;
 	}
 
 	/**

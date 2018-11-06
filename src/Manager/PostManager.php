@@ -11,6 +11,16 @@ use Model\Post;
 */
 class PostManager extends Manager
 {
+    /**
+    * @param integer $page
+    * @param integer $offset
+    * @param integer $length 
+    * @param string $property
+    * @param string $order
+    * @param string $property2
+    * @param string $var
+    * @return array
+    */
     public function getPagination($page, ?int $offset, ?int $length, ?string $property, ?string $order, ?string $property2, ?string $var) 
     {
         $offset = ($page-1)*$length;
@@ -20,6 +30,9 @@ class PostManager extends Manager
         return $results;
     }
 
+    /**
+    * @return integer
+    */
     public function countAllPost()
     {
         $statement = $this->database->getPdo()->prepare("SELECT COUNT(*) as total FROM post" );

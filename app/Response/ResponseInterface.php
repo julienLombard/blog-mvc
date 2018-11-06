@@ -8,5 +8,8 @@ namespace App\Response;
 */
 interface ResponseInterface 
 {
+	/**
+	* @return void
+	*/
 	public function send();
 }

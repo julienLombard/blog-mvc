@@ -1,4 +1,4 @@
-{% extends 'adminTemplate.html.twig' %}
+{% extends 'homeTemplate_2.html.twig' %}
 
 {% block body %}
 
@@ -7,26 +7,26 @@
 
     <!-- Title -->
     <div class="container">
-      <div class="section-title text-center center">
-        <h2>Liste des commentaires par article</h2>
-        <hr>
-        <a class="btn btn-primary" href="/admin/show-invalidated"><i class="fa fa-check"></i>Commentaires non validés</a> 
-        <a class="btn btn-primary" href="/admin/show-reported"><i class="fa fa-exclamation-triangle"></i>Commentaires signalés</a>
-      </div>
-    </div> 
+      <div class="row">
+        <div class="section-title text-center center">
+          <h2>Liste des articles</h2>
+          <hr>
+        </div>
+      </div> <!-- End Row -->
+    </div>
 
     <!-- Posts List -->
     <div class="container">
       <div class="row">
         <div class="portfolio-items">
 
-          <!-- End Posts Loop -->
+          <!-- Posts Loop -->
           {% for post in posts %}
 
             <div class="col-sm-6 col-md-3 col-lg-3 web">
                 <div class="portfolio-items">
                     <div class="hover-bg">
-                        <a href="/admin/comments-post/{{ post.id }}">
+                        <a href="/admin/post/{{ post.id }}#post">
                             <div class="hover-text">
                               <h4>{{ post.title }}</h4>
                               <p>{{ post.content| truncate(60, false, '...')  }}</p>
@@ -36,6 +36,7 @@
                     </div>
                 </div>
             </div>
+
           {% endfor %}
         </div>
       </div> <!-- End Row -->
@@ -45,28 +46,27 @@
         <nav aria-label="Page navigation example">
           <ul class="pagination">
             <li class="page-item">
-              <a class="page-link" href="/admin/comments?page=1" aria-label="Previous">
+              <a class="page-link" href="/admin/posts?page=1" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
                 <span class="sr-only">Previous</span>
               </a>
             </li>
 
-            <!-- Pagination Loop-->
+            <!-- Pagination Loop -->
             {% for i in 1..pageCount %}
-              <li class="page-item"><a class="page-link" href="/admin/comments?page={{ i }}">{{ i }}</a></li>
+              <li class="page-item"><a class="page-link" href="/admin/posts?page={{ i }}">{{ i }}</a></li>
             {% endfor %}
-
             <li class="page-item">
-              <a class="page-link" href="/admin/comments?page={{ pageCount }}" aria-label="Next">
+              <a class="page-link" href="/admin/posts?page={{ pageCount }}" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
                 <span class="sr-only">Next</span>
               </a>
             </li>
           </ul>
         </nav>
-      </div> <!-- End Row -->
+      </div> <!-- End Row Pagination -->
       
-    </div> <!-- End Container -->
-  </section> <!-- End Posts Section -->
+    </div> <!-- End Posts List Container -->
+  </section> <!-- End Post Section -->
     
 {% endblock %}
