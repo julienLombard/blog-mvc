@@ -134,3 +134,17 @@ composer require
 All libraries will then be automatically installed in the `vendor` folder.
 
 ## Step-4 : Database
+
+Par défault, la base de donnée configurée dans le fichier app\ORM\Database.php (ligne 54) est la suivante:
+
+```
+new Database("localhost","dev_blog", "root","");
+```
+
+Libre à vous d'en configurer une autre ou de garder celle-ci.
+
+Cette base de donnée est constituée de 3 tables 
+
+- comment
+- post
+- user
