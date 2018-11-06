@@ -112,7 +112,12 @@ class Request
      */
     public function getPath()
     {
-        return $this->server["PATH_INFO"];
+        // Return Request_uri only if the path is "/"
+        if ($this->server["REQUEST_URI"] == "/") {
+            return $this->server["REQUEST_URI"];
+        } else {
+            return $this->server["PATH_INFO"];  
+        }
     }
 
     /**

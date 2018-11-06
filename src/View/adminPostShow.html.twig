@@ -14,11 +14,18 @@
         </div>
         <div class="col-md-8 col-md-offset-2">
           <div class="post-text">
-            <p>{{ post.content }}</p>
+            <div>
+              {{ post.content|raw }}
+            </div>
             <p class="text-center">
+              <!-- Buttons -->
               <a class="btn btn-primary" href="/admin/confirm-delete-post/{{ post.id }}"><i class="fa fa-trash"></i> Effacer</a> 
-              <a class="btn btn-primary" href="/admin/edit-post/{{ post.id }}#post"><i class="fa fa-edit"></i> Modifier</a> 
-              <a class="btn btn-primary" href="#"><i class="fa fa-link"></i> Lien vers le site</a> 
+              <a class="btn btn-primary" href="/admin/edit-post/{{ post.id }}#post"><i class="fa fa-edit"></i> Modifier</a>
+              <!-- Display Post's Link -->
+              {% if link != "" %}
+                <a class="btn btn-primary" href="#"><i class="fa fa-link"></i> Lien vers le site</a> 
+              {% else %}
+              {% endif %}
               <a class="btn btn-primary" href="/admin/posts?page=1"><i class="fa fa-newspaper-o"></i> Retour articles</a>
             </p>
           </div>

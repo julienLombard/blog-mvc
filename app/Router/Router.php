@@ -62,17 +62,19 @@ class Router
     	foreach ($this->routes as $route) 
     	{
             if ($route->match($this->request->getPath())) 
-    		{
+    		{   
+                // test if the Route is securised
                 if ($route->getSecurity() == true) 
                 {
+                    // test if the User is granted
                     if ($route->isGranted($request) == true) {
 
                         return $route;
                     } else {
 
-                        // Loading config file and Instantiating new Route
+                        // loading config file and instantiating redirecting Route
                         $route = $this->loadRedirectYaml(__DIR__."/../../config/redirect.yml");                       
-                        // Redirect Route
+                       
                         return $route;
                     }                   
                 } else {

@@ -109,7 +109,7 @@ class PostController extends Controller
                 empty($post['email'])   ||
                 empty($post['message'])) 
         {
-                $alert = 2;
+            $alert = 2;
         }
 
         // Get Database, Manager and find all Post
@@ -118,6 +118,6 @@ class PostController extends Controller
         $posts = $manager->findAll(0,8, "publicationDate", "DESC","", null, null, null);
 
         // Redirect Route
-        return $this->render("home.html.twig", ["posts" => $post, "alert" => $alert]);
+        return $this->render("home.html.twig", ["posts" => $posts, "alert" => $alert]);
     }
 }

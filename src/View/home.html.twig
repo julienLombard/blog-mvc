@@ -74,7 +74,7 @@
                           <a href="/post/{{ post.id }}?page=1">
                               <div class="hover-text">
                                 <h4>{{ post.title }}</h4>
-                                <p>{{ post.content| truncate(60, false, '...')  }}</p>
+                                <p>{{ post.content|striptags| truncate(60, false, '...')  }}</p>
                               </div>
                               <img src="img/portfolio/post-{{ post.id }}.jpg" class="img-responsive" alt="Project Title"> 
                           </a> 
@@ -264,7 +264,7 @@
       <!--Form Contact -->
       <div class="col-md-8 col-md-offset-2">
         <h3>Me Contacter</h3>
-        <form action="/home-send-mail#contact" method="post" name="sentMessage" id="contactForm" novalidate>
+        <form action="/send#contact" method="post" name="sentMessage" id="contactForm" novalidate>
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">

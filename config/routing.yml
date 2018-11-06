@@ -1,5 +1,12 @@
 # ***FrontOffice***
 # PostController's Routes
+home_redirection:
+    name: home_redirection
+    path: /
+    parameters: {}
+    controller: Controller\FrontOffice\PostController
+    action: index
+    security: False
 home:
     name: home
     path: /home
@@ -23,7 +30,7 @@ home_post_show:
     security: False
 home_send_mail:
     name: home_send_mail
-    path: /home-send-mail
+    path: /send
     parameters: {}
     controller: Controller\FrontOffice\PostController
     action: sendMail
@@ -55,7 +62,7 @@ admin:
     parameters: {}
     controller: Controller\BackOffice\UserController
     action: showBackOffice
-    security: False
+    security: True
 admin_user_connection:
     name: admin_user_connection
     path: /connection

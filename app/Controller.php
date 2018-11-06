@@ -57,7 +57,9 @@ class Controller
 		$this->router = $router;
 		$this->database = Database::getInstance($request);
 
+		// Twig Loader instanciation
 		$loader = new \Twig_Loader_Filesystem('../src/View');
+		// Twig Environnement instanciation
 		$this->twig = new \Twig_Environment($loader, array('cache' => false,));
 		$this->twig->addExtension(new \Twig_Extensions_Extension_Text());
 
@@ -69,9 +71,10 @@ class Controller
 	* @return RedirectResponse
 	*/
 	protected function redirect($routeName, $args = [])
-	{
-		$route = $this->router->getRoute($routeName);
-		
+	{	
+		// get Route by name
+		$route = $this->router->getRoute($routeName);		
+		// generate Url with Route's arguments
 		$url = $route->generateUrl($args);
 
 		return new RedirectResponse($url);
@@ -83,8 +86,10 @@ class Controller
 	* @return Response
 	*/
 	protected function render($filename, $data = [])
-	{
+	{	
+		// loadig View
 		$view = $this->twig->load($filename);
+		// gets the content of the view by passing $data
 		$content = $view->render($data);
 
 		return new Response($content);
