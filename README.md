@@ -4,9 +4,9 @@ Professional Blog PHP MVC POO
 ## Installation (1/1)
 
 
-## Step-1 : composer.json
+## Step-1 : composer.json file
 
-To generate the composer.json file, first enter the command `composer init` in your command console.
+To generate the composer.json file, start to enter the command `composer init` in your command console.
 
 ```
 This command will guide you through creating your composer.json config.
