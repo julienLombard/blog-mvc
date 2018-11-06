@@ -35,4 +35,4 @@ Would you like to define your dev dependencies (require-dev) interactively [yes]
     "require": {}
 }
 
-Do you confirm generation [yes]? yes</addr>
+Do you confirm generation [yes]? yes <addr>
