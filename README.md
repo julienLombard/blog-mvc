@@ -47,7 +47,7 @@ Do you confirm generation [yes]? yes
 
 ## Step-2 : autoload
 
-First add the following lines in your composer.json file:
+First add the following lines in your composer.json file after the `require` entry:
 
 ```
 {
