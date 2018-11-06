@@ -8,12 +8,11 @@ Professional Blog PHP MVC POO
 ```
 This command will guide you through creating your composer.json config.
 
-Package name [julien/blog-mvc-master]: jlombard/blog-mvc-master   
+Package name (<vendor>/<name>) [julien/blog-mvc-master]: jlombard/blog-mvc-master
 Description []: Professional Blog PHP MVC POO
 Author [, n to skip]: JLOMBARD <julienlombard.fr@gmail.com>
 Minimum Stability []: dev
 Package Type (e.g. library, project, metapackage, composer-plugin) []:
-
 License []: MIT
 
 Define your dependencies.
