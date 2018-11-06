@@ -1,7 +1,9 @@
 # blog-mvc
 Professional Blog PHP MVC POO
 
-# Step-1: composer init
+# Installation
+
+# Step-1 : composer init
 
 This command will guide you through creating your composer.json config.
 
