@@ -15,6 +15,10 @@ Professional Blog PHP MVC POO
 
 To generate the composer.json file, start to enter the command `composer init` in your command console.
 
+```
+composer init
+```
+
 Then enter the following values:
 
 ```
@@ -76,6 +80,10 @@ First add the following lines in your composer.json file after the `require` ent
 ```
 Then enter the command `composer update` in your command console.
 
+```
+composer update
+```
+
 After that, a `autoload.php` file is created in a new `vendor` folder. 
 
 Add the `vendor` folder in the `.gitignore` file.
@@ -118,6 +126,10 @@ To install them, first add the following lines in the `require` entry:
 }
 ```
 Then enter the command `composer require` in your command console, and press enter when `Search for a package:` appears.
+
+```
+composer require
+```
 
 All libraries will then be automatically installed in the `vendor` folder.
 
