@@ -1,7 +1,7 @@
 # blog-mvc
 Professional Blog PHP MVC POO
 
-## Installation (1/1)
+## Installation
 
 1- Composer.json file
 
