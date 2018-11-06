@@ -4,8 +4,11 @@ Professional Blog PHP MVC POO
 ## Installation
 
 [1- Composer.json file](https://github.com/julienLombard/blog-mvc/blob/master/README.md#step-1--composerjson-file)
+
 [2- Autoload](https://github.com/julienLombard/blog-mvc/blob/master/README.md#step-2--autoload)
+
 [3- Libraries](https://github.com/julienLombard/blog-mvc/blob/master/README.md#step-3--libraries)
+
 [4- Database](https://github.com/julienLombard/blog-mvc/blob/master/README.md#step-4--database)
 
 ## Step-1 : composer.json file
@@ -132,16 +135,48 @@ All libraries will then be automatically installed in the `vendor` folder.
 
 ## Step-4 : Database
 
-Par défault, la base de donnée configurée dans le fichier app\ORM\Database.php (ligne 54) est la suivante:
+By default, the database configured in the app \ ORM \ Database.php file (line 54) is as follows:
 
 ```
 new Database("localhost","dev_blog", "root","");
 ```
 
-Libre à vous d'en configurer une autre ou de garder celle-ci.
+You are free to configure another one or keep it.
 
-Cette base de donnée est constituée de 3 tables 
+This database consists of 3 tables:
 
 - comment
 - post
 - user
+
+The structures to respect for each table are as follows:
+
+````
+--
+comment
+--
+id : integer, not null,PK
+post_id : integer, not null,FK
+author : varchar (25), not null
+content : text, not null
+publication_date :timestamp, not null
+modification_date :timestamp, null
+validate : tinyint, not null
+reported : tinyint, null
+
+--
+post
+--
+id : integer, not null,PK
+title : varchar (255), not null
+author : varchar (25), not null
+content : text, not null
+publication_date : timestamp, not null
+modification_date : timestamp, null
+
+--
+user
+--
+id : integer, not null,PK
+login: varchar (25), not null
+password : varchar (50), not null 
