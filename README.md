@@ -1,7 +1,7 @@
 # blog-mvc
 Professional Blog PHP MVC POO
 
-# Installation ()
+# Installation (1/1)
 
 
 # Step-1 : composer init
