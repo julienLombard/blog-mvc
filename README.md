@@ -3,7 +3,7 @@ Professional Blog PHP MVC POO
 
 ## Installation
 
-1- Composer.json file
+1- [Composer.json file](https://github.com/julienLombard/blog-mvc/blob/master/README.md#step-1--composerjson-file)
 
 2- Autoload
 
