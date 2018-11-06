@@ -151,7 +151,7 @@ This database consists of 3 tables:
 
 The structures to respect for each table are as follows:
 
-````
+```
 --
 comment
 --
