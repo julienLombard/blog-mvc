@@ -21,7 +21,7 @@ To install them, in your command console, change the folder directory with the c
 cd <directory>
 ```
 
-Then, enter the command `composer install` in your command console.
+Then, enter the command `composer install`.
 
 ```
 composer install
