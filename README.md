@@ -5,7 +5,7 @@ Professional Blog PHP MVC POO
 
 [1- Generate autoload and download Libraries](https://github.com/julienLombard/blog-mvc/blob/master/README.md#step-1--generate-autoload-and-download-libraries)
 
-[2- Configure Database](https://github.com/julienLombard/blog-mvc/blob/master/README.md#step-2--Configure database)
+[2- Configure Database](https://github.com/julienLombard/blog-mvc/blob/master/README.md#step-2--configure-database)
 
 ## Step-1 : Generate autoload and download Libraries
 
@@ -15,7 +15,7 @@ This professional blog works with various third-party libraries:
 - twig / extensions to display a summary of articles
 - symfony / yaml for routes files
 
-To install them, in your command console, change the folder directory with the command `cd <directory>` 
+To install them and generate autoload file, change the folder directory with the command `cd <directory>` in your command console.
 
 ```
 cd <directory>
@@ -55,7 +55,7 @@ twig/extensions suggests installing symfony/translation (Allow the time_diff out
 Generating autoload files
 ```
 
-All libraries will then be automatically installed in the `vendor` folder.
+All libraries andd autoload file will then be automatically installed in the `vendor` folder.
 
 ## Step-2 : Configure Database
 
