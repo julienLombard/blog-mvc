@@ -15,7 +15,13 @@ This professional blog works with various third-party libraries:
 - twig / extensions to display a summary of articles
 - symfony / yaml for routes files
 
-To install them, enter the command `composer install` in your command console, and press enter when `Search for a package:` appears.
+To install them, in your command console, change the folder directory with the command `cd <directory>` 
+
+```
+cd <directory>
+```
+
+Then, enter the command `composer install` in your command console.
 
 ```
 composer install
