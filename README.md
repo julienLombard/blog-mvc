@@ -3,7 +3,7 @@ Professional Blog PHP MVC POO
 
 ## Installation
 
-[1- Generate autoload and download Libraries](https://github.com/julienLombard/blog-mvc/blob/master/README.md#step-1--Generate autoload and download Libraries)
+[1- Generate autoload and download Libraries](https://github.com/julienLombard/blog-mvc/blob/master/README.md#step-1--generate-autoload-and-download-libraries)
 
 [2- Configure Database](https://github.com/julienLombard/blog-mvc/blob/master/README.md#step-2--Configure database)
 
