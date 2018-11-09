@@ -3,11 +3,11 @@ Professional Blog PHP MVC POO
 
 ## Installation
 
-[1- Libraries](https://github.com/julienLombard/blog-mvc/blob/master/README.md#step-1--libraries)
+[1- Generate autoload and download Libraries](https://github.com/julienLombard/blog-mvc/blob/master/README.md#step-1--Generate autoload and download Libraries)
 
-[2- Database](https://github.com/julienLombard/blog-mvc/blob/master/README.md#step-2--database)
+[2- Configure Database](https://github.com/julienLombard/blog-mvc/blob/master/README.md#step-2--Configure database)
 
-## Step-1 : Libraries
+## Step-1 : Generate autoload and download Libraries
 
 This professional blog works with various third-party libraries:
 
@@ -57,7 +57,7 @@ Generating autoload files
 
 All libraries will then be automatically installed in the `vendor` folder.
 
-## Step-2 : Database
+## Step-2 : Configure Database
 
 By default, the database configured in the app \ ORM \ Database.php file (line 54) is as follows:
 
