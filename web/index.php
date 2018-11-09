@@ -6,6 +6,11 @@ require __DIR__.'/../vendor/autoload.php';
 use App\Request;
 use App\Router\Router;
 use App\Router\Route;
+use Symfony\Component\Dotenv\Dotenv;
+
+// Database access
+$dotenv = new Dotenv();
+$dotenv->load(__DIR__."/../config/.env");
 
 // Request
 $request = Request::createFromGlobals();

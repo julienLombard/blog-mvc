@@ -51,12 +51,12 @@ class Database
     {
         if(self::$databaseInstance === null) 
         {
-            self::$databaseInstance = new Database("localhost","dev_blog", "root","");
-                // $request->getEnv("DB_HOST"),
-                // $request->getEnv("DB_NAME"),
-                // $request->getEnv("DB_USER"),
-                // $request->getEnv("DB_PASSWORD")
-            // );
+            self::$databaseInstance = new Database(
+                $request->getEnv("DB_HOST"),
+                $request->getEnv("DB_NAME"),
+                $request->getEnv("DB_USER"),
+                $request->getEnv("DB_PASSWORD")
+            );
         }
         return self::$databaseInstance;
     }

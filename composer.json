@@ -21,5 +21,8 @@
             "App\\": "app",
             "": "src"
         }
+    },
+    "require-dev": {
+        "symfony/dotenv": "^4.2@dev"
     }
 }
