@@ -111,4 +111,4 @@ password : varchar (50), not null
 
 ```
 
-!!! To be able to access the administration part of the site, you will have to configure the login and password of the user from the database.
+Lastly, to be able to access the administration part of the site, you will have to configure the login and password of the user from the database.
