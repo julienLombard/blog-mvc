@@ -17,7 +17,7 @@ This professional blog works with various third-party libraries:
 - twig / extensions to display a summary of articles
 - symfony / yaml for routes files
 
-To install them and generate autoload file, change the folder directory with the command `cd <directory>` in your command console.
+To install them and generate autoload file, change the folder directory to the directory where the project is located by using the `cd <directory>` command on the command console.
 
 ```
 cd <directory>
