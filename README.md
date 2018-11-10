@@ -69,9 +69,9 @@ DB_USER=
 DB_PASSWORD=
 ```
 
-Then, rename the `.env.dist` file to `.env` file.
+Once done, rename the `.env.dist` file to `.env` file.
 
-This database consists of 3 tables:
+Then you must create the database consisting of 3 tables:
 
 - comment
 - post
@@ -111,4 +111,4 @@ password : varchar (50), not null
 
 ```
 
-To be able to access the administration part of the site, you will have to configure the login and password of the user from the database.
+!!! To be able to access the administration part of the site, you will have to configure the login and password of the user from the database.
