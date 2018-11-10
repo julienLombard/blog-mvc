@@ -5,7 +5,7 @@ Professional Blog PHP MVC POO
 
 [1- Generate autoload and download Libraries](https://github.com/julienLombard/blog-mvc/blob/master/README.md#step-1--generate-autoload-and-download-libraries)
 
-[2- Configure Database](https://github.com/julienLombard/blog-mvc/blob/master/README.md#step-2--configure-database)
+[2- Set Database](https://github.com/julienLombard/blog-mvc/blob/master/README.md#step-2--set-database)
 
 ## Step-1 : Generate autoload and download Libraries
 
@@ -57,15 +57,19 @@ Generating autoload files
 
 All libraries andd autoload file will then be automatically installed in the `vendor` folder.
 
-## Step-2 : Configure Database
+## Step-2 : Set Database
 
-By default, the database configured in the app \ ORM \ Database.php file (line 54) is as follows:
+First, to set the connection to the database, open the .env.dist file in the config folder for set your connection information:
 
 ```
-new Database("localhost","dev_blog", "root","");
+# .env
+DB_HOST=
+DB_NAME=
+DB_USER=
+DB_PASSWORD=
 ```
 
-You are free to configure another one or keep it.
+Then, rename the `.env.dist` file to `.env` file.
 
 This database consists of 3 tables:
 
