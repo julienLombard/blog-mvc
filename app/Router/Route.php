@@ -106,7 +106,7 @@ class Route
 	public function match($requestUri)
 	{
 		// new path with regex that replace the parameters
-		$pattern = preg_replace_callback("/:(\w+)/", array($this, "checkParameters"), $this->path);
+		$pattern = preg_replace_callback("/:(\w+)/", array($this, "checkParameters"), $this->path);		
 		// escapes "/" for regex check
 		$pattern = preg_replace("~/~", "\/", $pattern);
 
@@ -115,6 +115,7 @@ class Route
 		{
 			return false;
 		}
+
 		// Otherwise fills an array of arguments with the values of each parameter of the route
 		$this->args = array_combine(array_keys($this->parameters), array_slice($matches, 1));
 		return true;

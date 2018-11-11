@@ -48,7 +48,7 @@ home_comment_create:
 home_comment_reported:
     name: home_comment_reported
     path: /reported-comment/:post/:id
-    parameters: {id: '[\d]+'}
+    parameters: {post: '[\d]+', id: '[\d]+'}
     controller: Controller\FrontOffice\CommentController
     action: reportedComment
     security: False
