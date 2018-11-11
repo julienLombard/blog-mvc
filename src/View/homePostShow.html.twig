@@ -8,11 +8,12 @@
     <!-- Post -->
     <div class="container">
       <div class="row section-title text-center center">
-        <h2>{{ post.title }}</h2>
-        <hr>
-        <p>auteur: {{ post.author }}</p>
-        <p>publication: {{ post.publicationDate|date('d/m/Y') }}{{ (post.modificationDate == null) ? '' : ' - modification: ' ~ post.modificationDate|date('d/m/Y') }}</p>
-        <div class="col-md-12 text-center"><img src="{{ app.request.basepath }}/img/portfolio/post-{{ post.id }}.jpg" class="img-responsive">
+        <div class="col-md-12 text-center">
+          <h2>{{ post.title }}</h2>
+          <hr>
+          <p>auteur: {{ post.author }}</p>
+          <p>publication: {{ post.publicationDate|date('d/m/Y') }}{{ (post.modificationDate == null) ? '' : ' - modification: ' ~ post.modificationDate|date('d/m/Y') }}</p>
+          <img src="{{ app.request.basepath }}/img/portfolio/post-{{ post.id }}.jpg" class="img-responsive">
         </div>
         <div class="col-md-8 col-md-offset-2">
           <div class="post-text">

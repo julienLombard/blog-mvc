@@ -2,30 +2,37 @@
 
 {% block body %}
 
-  <!-- Posts Section -->
+  <!-- Posts List Section -->
   <section id="portfolio">
-
-    <!-- Title -->
     <div class="container">
-      <div class="section-title text-center center">
-        <h2>Liste des commentaires par article</h2>
+
+      <!-- Title -->
+      <div class="row section-title text-center center">
+        <h2>Commentaires</h2>
         <hr>
-        <a class="btn btn-primary" href="/admin/show-invalidated"><i class="fa fa-check"></i>Commentaires non validés</a> 
-        <a class="btn btn-primary" href="/admin/show-reported"><i class="fa fa-exclamation-triangle"></i>Commentaires signalés</a>
-      </div>
-    </div> 
+        <!-- Buttons -->
+        <div class="col-sm-6 col-md-offset-3 col-md-3 col-lg-offset-3 col-lg-3">
+          <p>
+          <a class="btn btn-primary" href="/admin/show-invalidated"><i class="fa fa-check"></i>Commentaires non validés</a>
+          </p>
+        </div>
+        <div class="col-sm-6 col-md-3 col-lg-3">
+          <p>
+          <a class="btn btn-primary" href="/admin/show-reported"><i class="fa fa-exclamation-triangle"></i>Commentaires signalés</a>
+          </p>
+        </div>
+      </div> <!-- End Row-->
 
-    <!-- Posts List -->
-    <div class="container">
+      <!-- Posts List -->
       <div class="row">
         <div class="portfolio-items">
 
-          <!-- End Posts Loop -->
+          <!-- Posts Loop -->
           {% for post in posts %}
-
-            <div class="col-sm-6 col-md-3 col-lg-3 web">
-                <div class="portfolio-items">
-                    <div class="hover-bg">
+          
+              <div class="col-sm-6 col-md-3 col-lg-3 web">
+                  <div class="portfolio-item">
+                      <div class="hover-bg">
                         <a href="/admin/comments-post/{{ post.id }}">
                             <div class="hover-text">
                               <h4>{{ post.title }}</h4>
@@ -33,11 +40,13 @@
                             </div>
                             <img src="{{ app.request.basepath }}/img/portfolio/post-{{ post.id }}.jpg" class="img-responsive" alt="Project Title"> 
                         </a> 
-                    </div>
-                </div>
-            </div>
+                      </div>
+                  </div>
+              </div>
+
           {% endfor %}
-        </div>
+
+        </div> 
       </div> <!-- End Row -->
 
       <!-- Pagination -->
@@ -65,8 +74,8 @@
           </ul>
         </nav>
       </div> <!-- End Row -->
-      
-    </div> <!-- End Container -->
-  </section> <!-- End Posts Section -->
+
+    </div> <!-- End Posts List Container -->
+  </section> <!-- End Portfolio Section -->
     
 {% endblock %}
