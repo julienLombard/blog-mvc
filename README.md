@@ -61,7 +61,7 @@ All libraries andd autoload file will then be automatically installed in the `ve
 
 ## Step-2 : Set Database connection
 
-First, to set the connection to the database, open the .env.dist file in the config folder for set your connection information:
+First, to set the connection to the database, open the config folder. Copy and rename the .env.dist file to an .dist file and set your connection information inside:
 
 ```
 # .env
@@ -71,7 +71,12 @@ DB_USER=
 DB_PASSWORD=
 ```
 
-Once done, rename the `.env.dist` file to `.env` file.
+Once done, add your `.env` file to the `.gitignore` file:
+
+```
+/vendor/
+/config/.env
+```
 
 ## Step-3 : Create Database
 
