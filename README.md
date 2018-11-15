@@ -80,7 +80,9 @@ Once done, add your `.env` file to the `.gitignore` file:
 
 ## Step-3 : Create Database
 
-Then you must create the database consisting of 3 tables:
+If you wish, a database file `blog_mvc.sql` is available in the `diagrams` folder. The default administrator login is `admin` and the password is `0000`.
+
+Otherwise you must create the database consisting of 3 tables:
 
 - comment
 - post
