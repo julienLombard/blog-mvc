@@ -96,6 +96,7 @@ comment
 --
 id : integer, not null,PK
 post_id : integer, not null,FK
+user_id : integer, not null,FK
 author : varchar (25), not null
 content : text, not null
 publication_date :timestamp, not null
@@ -109,6 +110,7 @@ post
 id : integer, not null,PK
 title : varchar (255), not null
 author : varchar (25), not null
+synopsis : varchar (100), not null
 content : text, not null
 publication_date : timestamp, not null
 modification_date : timestamp, null
@@ -119,6 +121,9 @@ user
 id : integer, not null,PK
 login: varchar (25), not null
 password : varchar (50), not null 
+register_date : timestamp, not nul
+validate : tinyint, not null
+administrator : tinyint, not null
 
 ```
 
