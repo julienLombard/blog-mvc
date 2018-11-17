@@ -77,6 +77,7 @@ class PostController extends Controller
         $post = new Post();
         $post->setTitle($formPost['title']);
         $post->setAuthor($formPost['author']);
+        $post->setSynopsis($formPost['synopsis']);
         $post->setContent($formPost['content']);
         $post->setPublicationDate(new \DateTime());
         $manager->insert($post);
@@ -118,6 +119,7 @@ class PostController extends Controller
         // Set and update Post
         $post->setTitle($formPost['title']);
         $post->setAuthor($formPost['author']);
+        $post->setSynopsis($formPost['synopsis']);
         $post->setContent($formPost['content']);
         $post->setModificationDate(new \DateTime());
         $manager->update($post);

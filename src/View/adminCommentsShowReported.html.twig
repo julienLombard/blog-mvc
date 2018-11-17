@@ -34,8 +34,8 @@
                 <p>"{{ comment.content }}"</p>
                 <p>Auteur: {{ comment.author }} - publication: {{ comment.publicationDate|date('d/m/Y') }}{{ (comment.modificationDate == null) ? '' : ' - modification: ' ~ comment.modificationDate|date('d/m/Y') }}</p>
                 <p class="text-center">
-                  <a class="btn btn-primary" href="/admin/moderate-comment/{{ comment.postId }}/{{ comment.id }}"><i class="fa fa-exclamation-triangle"></i> Modérer</a>
-                  <a class="btn btn-primary" href="/admin/validate-comment/{{ comment.postId }}/{{ comment.id }}"><i class="fa fa-check"></i> Valider</a>
+                  <a class="btn btn-primary" href="/admin/confirm-delete-comment/{{ comment.postId }}/{{ comment.id }}"><i class="fa fa-trash"></i> Effacer</a> 
+                  <a class="btn btn-primary" href="/admin/edit-comment/{{ comment.postId }}/{{ comment.id }}"><i class="fa fa-edit"></i> modifier</a>
                 </p>
                 <p class="text-center">
                   <a class="btn btn-primary" href="/admin/moderate-comment/{{ comment.postId }}/{{ comment.id }}"><i class="fa fa-exclamation-triangle"></i> Modérer</a>
@@ -59,7 +59,7 @@
               </a>
             </li>
 
-            <!-- Comments Display -->
+            <!-- Pagination Display -->
             {% if pageCount != 0 %}
               {% for i in 1..pageCount %}
                 <li class="page-item"><a class="page-link" href="/admin/show-reported?page={{ i }}">{{ i }}</a></li>

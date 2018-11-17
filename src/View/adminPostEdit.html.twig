@@ -13,33 +13,40 @@
       </div>
 
       <!-- Edit Form-->
-      <div class="col-md-8 col-md-offset-2">
-        <form action="/admin/update-post/{{ post.id }}" method="post">
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for"title">Titre :</label>
-                <input type="text" name="title" id="title" class="form-control" value="{{ post.title }}">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <form action="/admin/update-post/{{ post.id }}" method="post">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for"title">Titre :</label>
+                  <input type="text" name="title" id="title" class="form-control" value="{{ post.title }}">
+                </div>
               </div>
-              <div class="form-group">
-                <label for"author">Author :</label>
-                <input type="text" name="author" id="author" class="form-control" value="{{ post.author }}">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for"author">Author :</label>
+                  <input type="text" name="author" id="author" class="form-control" value="{{ post.author }}">
+                </div>
               </div>
+            </div> <!-- End Row -->
+            <div class="form-group">
+              <label for"synopsis">Synopsis :</label>
+              <textarea name="synopsis" id="synopsis" class="form-control" rows="2">{{ post.synopsis }}</textarea>
             </div>
-          </div> <!-- End Row -->
-          <div class="form-group">
-            <label for"content">Contenu :</label>
-            <textarea name="content" id="content" class="form-control" rows="4">{{ post.content }}</textarea>
-          </div>
-          <input type="submit" class="btn btn-default" value="Modifier"> 
-        </form>
+            <div class="form-group">
+              <label for"content">Contenu :</label>
+              <textarea name="content" id="content" class="form-control" rows="4">{{ post.content }}</textarea>
+            </div>
+            <input type="submit" class="btn btn-default" value="Modifier"> 
+          </form>
 
-        <!-- Back to list Button -->
-        <p>
-          <a class="btn btn-primary" href="/admin/post/{{ post.id }}"><i class="fa fa-newspaper-o"></i> Retour article</a>
-        </p>
-      </div>
-
+          <!-- Back to list Button -->
+          <p>
+            <a class="btn btn-primary" href="/admin/post/{{ post.id }}"><i class="fa fa-newspaper-o"></i> Retour article</a>
+          </p>
+        </div>
+      </div> <!-- End Row -->
     </div> <!-- End Container -->
   </section> <!-- End Edit Section-->
     

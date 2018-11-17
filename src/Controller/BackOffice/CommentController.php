@@ -203,7 +203,7 @@ class CommentController extends Controller
             "pageCount" => ceil($manager->countAllComment("validate",0)/8)]);      
     }
 
-        /**
+    /**
     * @return \App\Response\Response
     */
     public function showReported()

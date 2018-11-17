@@ -18,6 +18,9 @@
         <div class="col-md-8 col-md-offset-2">
           <div class="post-text">
             <div>
+              {{ post.synopsis|raw }}
+            </div>
+            <div>
               {{ post.content|raw }}
             </div>
             <!-- Buttons -->
@@ -87,33 +90,47 @@
         </nav>
       </div> <!-- End Pagination Row -->
 
-      <!-- Comment Form -->
-      <div  class="row">
-        <div class="col-md-8 col-md-offset-2 text-center center">
-          <h3>Poster un Commentaire</h3>
-          </br>
-          <hr>     
-          <form action="/create-comment-post/{{ post.id }}" method="post">
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <input type="hidden" name="postId" value="{{ post.id }}">
-                  <input type="hidden" name="pageNb" value="{{ page }}">
-                  <label for"author">Auteur :</label>
-                  <input type="text" name="author" id="author" class="form-control">
+      <!-- If valid User is -->
+      {% if session.validate == 1 %}
+        <!-- Comment Form -->
+        <div  class="row">
+          <div class="col-md-8 col-md-offset-2 text-center center">
+            <h3>Poster un Commentaire</h3>
+            </br>
+            <hr>     
+            <p>Utilisateur : {{ session.login }}</p>
+            <form action="/create-comment-post/{{ post.id }}" method="post">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input type="hidden" name="postId" value="{{ post.id }}">
+                    <input type="hidden" name="pageNb" value="{{ page }}">
+                    <label for"author">Auteur :</label>
+                    <input type="text" name="author" id="author" class="form-control">
+                    <input type="hidden" name="id" id="id" class="form-control" value="{{ session.id }}">
+                  </div>
                 </div>
-              </div>
 
+              </div>
+              <div class="form-group">
+                <label for"content">Commentaire :</label>
+                <textarea name="content" id="content" class="form-control" rows="4"></textarea>
+              </div>
+              <input type="submit" class="btn btn-default" value="Poster"> 
+            </form>
+            </br>
+          </div>
+        </div> <!-- End Comment Form Row -->
+      {% else %}
+          <div  class="row">
+            <div class="col-md-8 col-md-offset-2 text-center center">
+              <h3>Poster un Commentaire</h3>
+              </br>
+              <hr> 
+              <p><a href="/register">Inscription</a> - <a href="/connection">Connexion</a></p>
             </div>
-            <div class="form-group">
-              <label for"content">Commentaire :</label>
-              <textarea name="content" id="content" class="form-control" rows="4"></textarea>
-            </div>
-            <input type="submit" class="btn btn-default" value="Poster"> 
-          </form>
-          </br>
-        </div>
-      </div> <!-- End Comment Form Row -->
+          </div>
+      {% endif %}
 
     </div> <!-- End Comments List Container -->
   </section> <!-- End Post Section -->

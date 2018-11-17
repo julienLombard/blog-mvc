@@ -107,7 +107,7 @@ class Route
 	{
 		// new path with regex that replace the parameters
 		$pattern = preg_replace_callback("/:(\w+)/", array($this, "checkParameters"), $this->path);		
-		// escapes "/" for regex check
+		// escapes "/" for regex checking
 		$pattern = preg_replace("~/~", "\/", $pattern);
 
 		// if request does not match with regex, return False
@@ -149,7 +149,7 @@ class Route
 		$controller = $this->controller;
 		$controller = new $controller($request, $router);
 
-		// Call the [$foo->, $bar ]() method with arguments 
+		// Call the [$foo->, $bar ]() function with arguments 
 		return call_user_func_array([$controller, $this->action], $this->args);
 	}
 
@@ -172,7 +172,7 @@ class Route
 	*/
 	public function isGranted(Request $request) 
 	{
-		if (isset($request->getSession()['login'])) {
+		if ($request->getSession()['administrator'] == true) {
 			return true;
 		} else {
 			return false;

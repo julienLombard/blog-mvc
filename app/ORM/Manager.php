@@ -152,7 +152,6 @@ class Manager
                 implode(",", $columns),
                 implode(",", $parameters)
                 );
-        var_dump($query, $data);
 
         $statement = $this->database->getPdo()->prepare($query);
         $statement->execute($data);

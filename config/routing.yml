@@ -63,6 +63,13 @@ admin:
     controller: Controller\BackOffice\UserController
     action: showBackOffice
     security: True
+admin_user_register:
+    name: admin_user_register
+    path: /register
+    parameters: {}
+    controller: Controller\BackOffice\UserController
+    action: register
+    security: False
 admin_user_connection:
     name: admin_user_connection
     path: /connection
@@ -76,6 +83,27 @@ admin_user_logout:
     parameters: {}
     controller: Controller\BackOffice\UserController
     action: logout
+    security: false
+admin_members:
+    name: admin_members
+    path: /admin/members
+    parameters: {}
+    controller: Controller\BackOffice\UserController
+    action: showMembers
+    security: True
+admin_validate:
+    name: admin_validate_user
+    path: /admin/validate-user/:id
+    parameters: {id: '[\d]+'}
+    controller: Controller\BackOffice\UserController
+    action: validateUser
+    security: True
+admin_upgrade:
+    name: admin_upgrade_user
+    path: /admin/upgrade-user/:id
+    parameters: {id: '[\d]+'}
+    controller: Controller\BackOffice\UserController
+    action: upgradeUser
     security: True
 
 # ***BackOffice***

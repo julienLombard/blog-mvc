@@ -24,6 +24,18 @@ class User extends Model
 	* @var string
 	*/
 	private $password;
+	/**
+	* @var \DateTime
+	*/
+	private $registerDate;
+	/**
+	* @var integer
+	*/
+	private $validate;
+	/**
+	* @var integer
+	*/
+	private $administrator;
 
 	/**
 	* @return inheritdoc
@@ -39,7 +51,7 @@ class User extends Model
 	public static function metadata()
 	{
 		return [
-			"table" => "post",
+			"table" => "user",
 			"primaryKey" => "id",
 			"columns" => 
 			[
@@ -59,19 +71,37 @@ class User extends Model
 				[
 					"type" => "string",
 					"property" => "password"
+				],
+
+				"register_date" => 
+				[
+					"type" => "datetime",
+					"property" => "registerDate"
+				],
+
+				"validate" => 
+				[
+					"type" => "integer",
+					"property" => "validate"
+				],
+
+				"administrator" => 
+				[
+					"type" => "integer",
+					"property" => "administrator"
 				]
 			]
 		];
 	}
 
-	// /**
-	// * @param integer $id
-	// * @return void
-	// */
-	// public function setId(int $id)
-	// {
-	// 	$this->id = $id;
-	// }
+	/**
+	* @param integer $id
+	* @return void
+	*/
+	public function setId(int $id)
+	{
+		$this->id = $id;
+	}
 
 	/**
 	* @return integer
@@ -113,5 +143,56 @@ class User extends Model
 	public function getPassword()
 	{
 		return $this->password;
+	}
+
+	/**
+	* @param \DateTime $registerDate
+	* @return void
+	*/
+	public function setRegisterDate(\DateTime $registerDate)
+	{
+		$this->registerDate = $registerDate;
+	}
+
+	/**
+	* @return \DateTime
+	*/
+	public function getRegisterDate()
+	{
+		return $this->registerDate;
+	}
+
+	/**
+	* @param integer $validate
+	* @return void
+	*/
+	public function setValidate(int $validate)
+	{
+		$this->validate = $validate;
+	}
+
+	/**
+	* @return integer
+	*/
+	public function getValidate()
+	{
+		return $this->validate;
+	}
+
+	/**
+	* @param integer $administrator
+	* @return void
+	*/
+	public function setAdministrator(int $administrator)
+	{
+		$this->administrator = $administrator;
+	}
+
+	/**
+	* @return integer
+	*/
+	public function getAdministrator()
+	{
+		return $this->administrator;
 	}
 }

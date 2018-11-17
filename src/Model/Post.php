@@ -27,6 +27,10 @@ class Post extends Model
 	/**
 	* @var string
 	*/
+	private $synopsis;
+	/**
+	* @var string
+	*/
 	private $content;
 	/**
 	* @var \DateTime
@@ -72,6 +76,12 @@ class Post extends Model
 					"type" => "string",
 					"property" => "author"
 				],	
+
+				"synopsis" => 
+				[
+					"type" => "string",
+					"property" => "synopsis"
+				],
 
 				"content" => 
 				[
@@ -143,6 +153,23 @@ class Post extends Model
 	public function getAuthor()
 	{
 		return $this->author;
+	}
+
+	/**
+	* @param string $synopsis
+	* @return void
+	*/
+	public function setSynopsis(string $synopsis)
+	{
+		$this->synopsis = $synopsis;
+	}
+
+	/**
+	* @return string
+	*/
+	public function getSynopsis()
+	{
+		return $this->synopsis;
 	}
 
 	/**
