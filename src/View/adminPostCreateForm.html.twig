@@ -13,33 +13,42 @@
       </div>
 
       <!-- Create Form-->
-      <div class="col-md-8 col-md-offset-2">
-        <form action="/admin/create-post" method="post">
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for"title">Titre :</label>
-                <input type="text" name="title" id="title" class="form-control">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <form action="/admin/create-post" method="post">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for"title">Titre :</label>
+                  <input type="text" name="title" id="title" class="form-control">
+                </div>
               </div>
-              <div class="form-group">
-                <label for"author">Auteur :</label>
-                <input type="text" name="author" id="author" class="form-control">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for"author">Auteur :</label>
+                  <input type="text" name="author" id="author" class="form-control">
+                </div>
               </div>
+            </div>  
+
+            <div class="form-group">
+              <label for"synopsis">Synopsis :</label>
+              <textarea name="synopsis" id="synopsis" class="form-control" rows="2"></textarea>
             </div>
-          </div> <!-- End Row -->
+            <div class="form-group">
+              <label for"content">Contenu :</label>
+              <textarea name="content" id="content" class="form-control" rows="4"></textarea>
+            </div>
+            <input type="submit" class="btn btn-default" value="Ajouter">
+          </form>
+          
+          <!-- Back to list Button-->
+          <p>
+            <a class="btn btn-primary" href="/admin/posts?page=1"><i class="fa fa-newspaper-o"></i> Retour articles</a>
+          </p>
+        </div>
+      </div> <!-- End Row -->
 
-          <div class="form-group">
-            <label for"content">Contenu :</label>
-            <textarea name="content" id="content" class="form-control" rows="4"></textarea>
-          </div>
-          <input type="submit" class="btn btn-default" value="Ajouter">
-        </form>
-
-        <!-- Back to list Button-->
-        <p>
-          <a class="btn btn-primary" href="/admin/posts?page=1"><i class="fa fa-newspaper-o"></i> Retour articles</a>
-        </p>
-      </div>
     </div> <!-- End Container -->
   </section> <!-- End Create Section -->
     

@@ -60,6 +60,9 @@
               <li> <a class="page-scroll" href="/posts">Blog</a> </li>
               <li> <a class="page-scroll" href="/home#resume">Parcours</a> </li>
               <li> <a class="page-scroll" href="/home#contact">Contact</a> </li>
+              {% if session.validate == 1 %}
+                <li> <a class="page-scroll" href="/logout">Deconnect</a> </li>
+              {% endif %}
             </ul>
           </div>
         </div>
@@ -76,7 +79,7 @@
     <footer id="footer">
       <div class="container text-center">
         <div class="fnav">
-          <p>Copyright &copy; 2018 julien-lombard.eu - <a href="/connection">admin</a></p>
+          <p>Copyright &copy; 2018 julien-lombard.eu - <a href="/register">register</a> - <a href="/connection">admin</a></p>
         </div>
       </div>
     </footer>

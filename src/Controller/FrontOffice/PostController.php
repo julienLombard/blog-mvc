@@ -18,20 +18,26 @@ class PostController extends Controller
     */
     public function index()
     {
+        // get $_SESSION
+        $session = $this->getRequest()->getSession();
+
         // Get Database, Manager and find all Post
         $database = $this->getDatabase();
         $manager = $database->getManager(Post::class);
         $posts = $manager->findAll(0,8, "publicationDate", "DESC","", null, null, null);
 
         // View
-        return $this->render("home.html.twig", ["posts" => $posts]);
+        return $this->render("home.html.twig", ["posts" => $posts, "session" => $session]);
     }
 
     /**
     * @return \App\Response\Response
     */
     public function postsList()
-    {          
+    {       
+        // get $_SESSION
+        $session = $this->getRequest()->getSession();
+
         // get $_GET for page's number
         $page = $this->getRequest()->getGet()['page'] ?? 1;
 
@@ -46,7 +52,8 @@ class PostController extends Controller
         return $this->render("homePostsList.html.twig", [
             "posts" => $posts, 
             "page" => $page, 
-            "pageCount" => ceil($manager->countAllPost()/4)]);    
+            "pageCount" => ceil($manager->countAllPost()/4),
+            "session" => $session]);    
 
     }
 
@@ -56,6 +63,9 @@ class PostController extends Controller
     */
     public function showPost($id)
     {
+        // get $_SESSION
+        $session = $this->getRequest()->getSession();
+
         // get $_GET for page's number
         $page = $this->getRequest()->getGet()['page'] ?? 1;
 
@@ -75,7 +85,8 @@ class PostController extends Controller
             "post" => $post, 
             "comments" => $comments, 
             "page" => $this->getRequest()->getGet()['page'] ?? 1, 
-            "pageCount" => ceil($commentManager->countValidByPost($id)/8)]);
+            "pageCount" => ceil($commentManager->countValidByPost($id)/8),
+            "session" => $session]);
     }
 
     /**
@@ -83,6 +94,9 @@ class PostController extends Controller
     */
     public function sendMail()
     {
+        // get $_SESSION
+        $session = $this->getRequest()->getSession();
+
         // get $_POST
         $post = $this->getRequest()->getPost();
         $alert = 0;
@@ -92,9 +106,9 @@ class PostController extends Controller
             !empty($post['email'])   &&
             !empty($post['message'])) 
         {
-            $name = $post['name'];
-            $email= $post['email'];
-            $message = $post['message'];
+            $name = htmlspecialchars($post['name']);
+            $email= htmlspecialchars($post['email']);
+            $message = htmlspecialchars($post['message']);
             $alert = 1;
 
             // Create the email and send the message
@@ -118,6 +132,9 @@ class PostController extends Controller
         $posts = $manager->findAll(0,8, "publicationDate", "DESC","", null, null, null);
 
         // Redirect Route
-        return $this->render("home.html.twig", ["posts" => $posts, "alert" => $alert]);
+        return $this->render("home.html.twig", [
+            "posts" => $posts,
+            "alert" => $alert,
+            "session" => $session]);
     }
 }

@@ -21,6 +21,10 @@ class Comment extends Model
 	*/
 	private $postId;
 	/**
+	* @var integer
+	*/
+	private $userId;
+	/**
 	* @var string
 	*/
 	private $author;
@@ -73,6 +77,12 @@ class Comment extends Model
 				[
 					"type" => "integer",
 					"property" => "postId"
+				],
+
+				"user_id" => 
+				[
+					"type" => "integer",
+					"property" => "userId"
 				],
 
 				"author" => 
@@ -146,6 +156,23 @@ class Comment extends Model
 	public function getPostId()
 	{
 		return $this->postId;
+	}
+
+	/**
+	* @param integer $id
+	* @return void
+	*/
+	public function setUserId(int $userId)
+	{
+		$this->userId = $userId;
+	}
+
+	/**
+	* @return integer
+	*/
+	public function getUserId()
+	{
+		return $this->userId;
 	}
 
 	/**

@@ -61,7 +61,7 @@ All libraries andd autoload file will then be automatically installed in the `ve
 
 ## Step-2 : Set Database connection
 
-First, to set the connection to the database, open the .env.dist file in the config folder for set your connection information:
+First, to set the connection to the database, open the config folder. Copy and rename the .env.dist file to an .dist file and set your connection information inside:
 
 ```
 # .env
@@ -71,11 +71,18 @@ DB_USER=
 DB_PASSWORD=
 ```
 
-Once done, rename the `.env.dist` file to `.env` file.
+Once done, add your `.env` file to the `.gitignore` file:
+
+```
+/vendor/
+/config/.env
+```
 
 ## Step-3 : Create Database
 
-Then you must create the database consisting of 3 tables:
+If you wish, a database file `blog_mvc.sql` is available in the `diagrams` folder. The default administrator login is `admin` and the password is `0000`.
+
+Otherwise you must create the database consisting of 3 tables:
 
 - comment
 - post
@@ -89,6 +96,7 @@ comment
 --
 id : integer, not null,PK
 post_id : integer, not null,FK
+user_id : integer, not null,FK
 author : varchar (25), not null
 content : text, not null
 publication_date :timestamp, not null
@@ -102,6 +110,7 @@ post
 id : integer, not null,PK
 title : varchar (255), not null
 author : varchar (25), not null
+synopsis : varchar (100), not null
 content : text, not null
 publication_date : timestamp, not null
 modification_date : timestamp, null
@@ -112,6 +121,9 @@ user
 id : integer, not null,PK
 login: varchar (25), not null
 password : varchar (50), not null 
+register_date : timestamp, not nul
+validate : tinyint, not null
+administrator : tinyint, not null
 
 ```
 

@@ -30,9 +30,10 @@ class CommentController extends Controller
 
         // Set new Comment and insert it in database
         $comment = new Comment();
-        $comment->setPostId($formPost['postId']);
-        $comment->setAuthor($formPost['author']);
-        $comment->setContent($formPost['content']);
+        $comment->setPostId(htmlspecialchars($formPost['postId']));
+        $comment->setUserId(intVal($formPost['id']));
+        $comment->setAuthor(htmlspecialchars($formPost['author']));
+        $comment->setContent(htmlspecialchars($formPost['content']));
         $comment->setPublicationDate(new \DateTime());
         $manager->insert($comment);
         
