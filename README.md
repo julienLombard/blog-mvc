@@ -80,7 +80,7 @@ Once done, add your `.env` file to the `.gitignore` file:
 
 ## Step-3 : Create Database
 
-If you wish, a database file `blog_mvc.sql` is available in the `diagrams` folder. The default administrator login is `admin` and the password is `0000`.
+If you wish, a database file `blog_mvc.sql` is available in the `diagrams` folder. The default administrator login is `admin` and the password is `0000`. Pour change le mot de passe, To change the login and the password, you will have to modify it directly in the database.
 
 Otherwise you must create the database consisting of 3 tables:
 
