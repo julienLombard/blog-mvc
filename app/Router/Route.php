@@ -132,7 +132,8 @@ class Route
 			return sprintf("(%s)", $this->parameters[$match[1]]);
 		} 
 		else 
-		{
+		{	
+			// else return a regex by default
 			return '([^/]+)';
 		}
 	}
